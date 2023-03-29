@@ -2,30 +2,33 @@ import { createTheme, Theme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    heroText1: React.CSSProperties;
-    heroText2: React.CSSProperties;
-    product: React.CSSProperties;
-    buttonText: React.CSSProperties;
-    paragraph: React.CSSProperties;
+    H1: React.CSSProperties;
+    H2: React.CSSProperties;
+    H3: React.CSSProperties;
+    H4: React.CSSProperties;
+    H4Roboto: React.CSSProperties;
+    SmallRoboto: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
-    heroText1?: React.CSSProperties;
-    heroText2?: React.CSSProperties;
-    product?: React.CSSProperties;
-    buttonText?: React.CSSProperties;
-    paragraph: React.CSSProperties;
+    H1?: React.CSSProperties;
+    H2?: React.CSSProperties;
+    H3?: React.CSSProperties;
+    H4?: React.CSSProperties;
+    H4Roboto: React.CSSProperties;
+    SmallRoboto: React.CSSProperties;
   }
 }
 // Update the Typography's variant prop options
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    heroText1: true;
-    heroText2: true;
-    product: true;
-    buttonText: true;
-    paragraph: true;
+    H1: true;
+    H2: true;
+    H3: true;
+    H4: true;
+    H4Roboto: true;
+    SmallRoboto: true;
   }
 }
 
@@ -44,62 +47,19 @@ function getTheme(): Theme {
 
   theme = createTheme(theme, {
     typography: {
-      fontFamily: ['"Playfair Display"', '"Roboto"', '"sans-serif"'].join(","),
+      fontFamily: ['"Athena"', '"Roboto"', '"sans-serif"'].join(","),
       fontSize: "16px",
       allVariants: {
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
       },
-      h1: {
-        lineHeight: "50px",
-        fontSize: "40px",
-        fontWeight: "300",
-        fontFamily: "ivyjournal",
-        [theme.breakpoints.between("xs", "md")]: {
-          fontSize: "30px",
-          lineHeight: "34px",
-          fontWeight: "300",
-        },
-      },
-      h2: {
-        lineHeight: "37px",
-        fontSize: "30px",
-        fontWeight: "700",
-        fontFamily: "Playfair Display",
-        [theme.breakpoints.between("xs", "md")]: {
-          fontSize: "24px",
-          lineHeight: "30px",
-          fontWeight: "300",
-        },
-      },
-      h3: {
-        fontWeight: "700",
-        fontSize: "40px",
-        lineHeight: "49px",
-        fontFamily: "Playfair Display",
-        [theme.breakpoints.between("xs", "md")]: {
-          fontSize: "16px",
-          lineHeight: "27px",
-          fontWeight: "500",
-        },
-      },
-      h4: {
-        fontWeight: "500",
-        fontSize: "16px",
-        lineHeight: "27px",
-        fontFamily: "poppins",
-      },
-      buttonText: {
-        fontFamily: "ivyjournal",
-        fontWeight: "300",
-        fontSize: "36px",
-        lineHeight: "49px",
-      },
-      heroText1: {
-        fontFamily: "Playfair Display",
-        fontWeight: "700",
+
+      H1: {
+        fontFamily: "'Athena'",
+        fontStyle: "normal",
+        fontWeight: 400,
         fontSize: "100px",
-        lineHeight: "123px",
+        lineHeight: "120px",
         [theme.breakpoints.between("md", "lg")]: {
           fontSize: "81px",
           lineHeight: "95px",
@@ -113,41 +73,50 @@ function getTheme(): Theme {
           lineHeight: "42px",
         },
       },
-      heroText2: {
-        fontFamily: "Playfair Display",
-        fontWeight: "700",
-        fontSize: "65px",
-        lineHeight: "80px",
+      H2: {
+        fontFamily: "'Athena'",
+        fontStyle: "normal",
+        fontWeight: 400,
+        fontSize: "80px",
+        lineHeight: "96px",
       },
-      product: {
-        fontFamily: "Playfair Display",
-        fontWeight: "700",
-        fontSize: "15px",
-        lineHeight: "18px",
-        textTransform: "uppercase",
+      H3: {
+        fontFamily: "'Athena'",
+        fontStyle: "normal",
+        fontWeight: 400,
+        fontSize: "50px",
+        lineHeight: "60px",
       },
-      paragraph: {
-        fontFamily: "Roboto",
-        fontWeight: "400",
-        fontSize: "15px",
-        lineHeight: "18px",
+      H4: {
+        fontFamily: "'Athena'",
+        fontStyle: "normal",
+        fontWeight: 400,
+        fontSize: "25px",
+        lineHeight: "30px",
+      },
+      H4Roboto: {
+        fontFamily: "'Roboto'",
+        fontStyle: "normal",
+        fontWeight: 300,
+        fontSize: "25px",
+        lineHeight: "29px",
+      },
+      SmallRoboto: {
+        fontFamily: "'Roboto'",
+        fontStyle: "normal",
+        fontWeight: 300,
+        fontSize: "18px",
+        lineHeight: "21px",
       },
     },
     palette: {
-      primary: {
-        main: "#3D1212", //red
-        contrastText: "#DCD4D4", //
-      },
-      secondary: {
-        main: "#CCA041", //gold
-      },
       background: {
         default: "#FFFFFF",
         paper: "#000000",
       },
       text: {
-        primary: "#3D1212", //red
-        secondary: "#CCA041", //gold
+        primary: "#EC9FB6", 
+        secondary: "#DC9DB3", 
       },
     },
   });

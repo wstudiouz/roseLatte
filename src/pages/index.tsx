@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Typography variant="heroText1">Home page test</Typography>
+      <Typography variant="H1">Home page test</Typography>
     </>
   );
 }
