@@ -42,10 +42,6 @@ export default function Hero({
           position: "absolute",
           top: 0,
           left: 0,
-          " img": {
-            width: "100vw",
-            height: "100%",
-          },
         }}
         src={imageSrc}
         alt={title}
