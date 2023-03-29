@@ -2,20 +2,12 @@ import { createTheme, Theme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    H1: React.CSSProperties;
-    H2: React.CSSProperties;
-    H3: React.CSSProperties;
-    H4: React.CSSProperties;
     H4Roboto: React.CSSProperties;
     SmallRoboto: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
-    H1?: React.CSSProperties;
-    H2?: React.CSSProperties;
-    H3?: React.CSSProperties;
-    H4?: React.CSSProperties;
     H4Roboto: React.CSSProperties;
     SmallRoboto: React.CSSProperties;
   }
@@ -23,10 +15,6 @@ declare module "@mui/material/styles" {
 // Update the Typography's variant prop options
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    H1: true;
-    H2: true;
-    H3: true;
-    H4: true;
     H4Roboto: true;
     SmallRoboto: true;
   }
@@ -54,7 +42,7 @@ function getTheme(): Theme {
         MozOsxFontSmoothing: "grayscale",
       },
 
-      H1: {
+      h1: {
         fontFamily: "'Athena'",
         fontStyle: "normal",
         fontWeight: 400,
@@ -73,21 +61,21 @@ function getTheme(): Theme {
           lineHeight: "42px",
         },
       },
-      H2: {
+      h2: {
         fontFamily: "'Athena'",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "80px",
         lineHeight: "96px",
       },
-      H3: {
+      h3: {
         fontFamily: "'Athena'",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "50px",
         lineHeight: "60px",
       },
-      H4: {
+      h4: {
         fontFamily: "'Athena'",
         fontStyle: "normal",
         fontWeight: 400,
