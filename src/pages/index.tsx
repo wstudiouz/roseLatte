@@ -2,7 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import Header from "../components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Typography variant="H1">Home page test</Typography>
+      <Stack
+        sx={{
+          background:
+            "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+          height: "100vh",
+        }}
+      >
+        <Header />
+        <Typography variant="h1" sx={{ marginTop: "150px" }}>
+          Home page test
+        </Typography>
+      </Stack>
     </>
   );
 }
