@@ -9,10 +9,28 @@ interface HeroProps {
   height?: number;
 }
 
-export default function CustomImage({ sx, alt, src, width, height }: HeroProps) {
+export default function CustomImage({
+  sx,
+  alt,
+  src,
+  width,
+  height,
+}: HeroProps) {
   return (
-    <Stack sx={sx}>
-      <Image src={src} alt={alt || "this is picture"} width={width || 300} height={height || 300} priority/>
+    <Stack
+      sx={{
+        zIndex: 0,
+        ...sx,
+        img: { objectFit: "cover", width: "100vw", height: "100%" },
+      }}
+    >
+      <Image
+        src={src}
+        alt={alt || "this is picture"}
+        width={width || 300}
+        height={height || 300}
+        priority
+      />
     </Stack>
   );
 }

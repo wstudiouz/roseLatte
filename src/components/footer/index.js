@@ -1,5 +1,6 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import CustomImage from "../customComponents/customImage";
 
 export default function Footer() {
   const gridItemStyle = {
@@ -8,7 +9,7 @@ export default function Footer() {
     fontFamily: "'Athena'",
     textTransform: "capitalize",
     color: theme.palette.background.default,
-    margintop: { xs: "20px", md: 0 },
+    marginTop: { xs: "20px", md: 0 },
     " span": {
       marginTop: "20px",
       fontFamily: "'Roboto'",
@@ -20,9 +21,32 @@ export default function Footer() {
     <Stack
       sx={{
         width: "100%",
-        padding: { xs: "30px 15px", md: "75px 50px", background: "gray" },
+        padding: { xs: "30px 15px", md: "75px 50px" },
+        position: "relative",
       }}
     >
+      <CustomImage
+        src="/images/footerbg.png"
+        sx={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+      />
+      <CustomImage
+        src="/images/footerbgrest.png"
+        sx={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+      />
       <Typography
         variant="h3"
         sx={{
@@ -49,7 +73,7 @@ export default function Footer() {
         container
         sx={{
           margin: { xs: "20px 0", md: "40px 0" },
-          justifyContent: "space-between",
+          justifyContent: { xs: "left", md: "space-between" },
         }}
       >
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
