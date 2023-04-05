@@ -43,6 +43,7 @@ export default function Hero({
           top: 0,
           left: 0,
         }}
+        imageStyle={{ width: "100vw" }}
         src={imageSrc}
         alt={title}
         width={700}
