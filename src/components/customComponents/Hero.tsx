@@ -1,6 +1,6 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Typography } from "@mui/material";
-import { Stack, SxProps } from "@mui/system";
+import { Stack } from "@mui/system";
 import CustomImage from "./customImage";
 
 interface HeroProps {
@@ -51,6 +51,7 @@ export default function Hero({ bgImg, title, desc, right }: HeroProps) {
           width: "100%",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between",
           alignItems: "center",
           zIndex: 1,
         }}
@@ -63,24 +64,29 @@ export default function Hero({ bgImg, title, desc, right }: HeroProps) {
         {right ? (
           <Grid
             item
+            container
+            spacing={5}
             xs={9}
             sm={7}
             md={5}
             sx={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Box
-              component="hr"
-              sx={{
-                width: "100px",
-                height: "2px",
-                background: theme.palette.background.default,
-              }}
-            ></Box>
-            <Typography variant="H4Roboto">{desc}</Typography>
+            <Grid item xs={4}>
+              <Box
+                component="hr"
+                sx={{
+                  width: "100%",
+                  height: "2px",
+                  background: theme.palette.background.default,
+                }}
+              ></Box>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="H4Roboto">{desc}</Typography>
+            </Grid>
           </Grid>
         ) : (
           <>
