@@ -21,7 +21,7 @@ export default function CustomImage({
       sx={{
         zIndex: 0,
         ...sx,
-        img: { objectFit: "cover", width: "100vw", height: "100%" },
+        "& img": { objectFit: "cover", width: "100%", height: "100%" },
       }}
     >
       <Image
