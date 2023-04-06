@@ -2,7 +2,7 @@ import { theme } from "@/config/theme";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
-import CustomImage from "../customComponents/customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 interface HeroProps {
   title: string;
