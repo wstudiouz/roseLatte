@@ -1,7 +1,7 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import CustomImage from "../customComponents/customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 interface HeroProps {
   bgImg: string;
