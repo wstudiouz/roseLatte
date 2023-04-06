@@ -3,7 +3,9 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Typography } from "@mui/material";
+import FormComponent from "@/components/customComponent/ReusableForm";
 import Footer from "../components/footer";
+import Reviewer from "@/components/reviewer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +18,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Typography variant="h1">Home page test</Typography>
-      <Footer />
+      {/* <FormComponent title="Get your Seat" bg="https://picsum.photos/500/700" />
+      <Footer /> */}
+      <Reviewer
+        bgImg="/ds"
+        title="Great place, friendly atmosphere, very delicious food (especially Brownies). Also here you can buy flowers also. Totally recommend 10/10"
+      />
     </>
   );
 }

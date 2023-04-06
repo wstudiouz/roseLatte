@@ -100,11 +100,11 @@ function getTheme(): Theme {
     palette: {
       background: {
         default: "#FFFFFF",
-        paper: "#000000",
+        paper: "#FFFFFF",
       },
       text: {
-        primary: "#EC9FB6", 
-        secondary: "#DC9DB3", 
+        primary: "#EC9FB6",
+        secondary: "#DC9DB3",
       },
     },
   });
