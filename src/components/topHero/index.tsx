@@ -1,7 +1,7 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import CustomImage from "./customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 interface HeroProps {
   bgImg: string;
@@ -10,7 +10,7 @@ interface HeroProps {
   right?: boolean;
 }
 
-export default function Hero({ bgImg, title, desc, right }: HeroProps) {
+export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
   return (
     <Stack
       sx={{
@@ -56,25 +56,31 @@ export default function Hero({ bgImg, title, desc, right }: HeroProps) {
           zIndex: 1,
         }}
       >
-        <Grid item xs={10} sm={8} md={6}>
-          <Typography variant="h1" sx={{ textTransform: "uppercase" }}>
+        <Grid item xs={10} sm={7} md={5}>
+          <Typography
+            variant="h1"
+            sx={{
+              fontFamily: "'Athena'",
+              textTransform: "uppercase",
+              color: theme.palette.background.default,
+            }}
+          >
             {title}
           </Typography>
         </Grid>
         {right ? (
           <Grid
             item
-            container
-            spacing={5}
             xs={9}
             sm={7}
             md={5}
             sx={{
               display: "flex",
+              justifyContent: "left",
               alignItems: "center",
             }}
           >
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <Box
                 component="hr"
                 sx={{
@@ -84,8 +90,13 @@ export default function Hero({ bgImg, title, desc, right }: HeroProps) {
                 }}
               ></Box>
             </Grid>
-            <Grid item xs={4}>
-              <Typography variant="H4Roboto">{desc}</Typography>
+            <Grid item xs={4} sx={{ marginLeft: "50px" }}>
+              <Typography
+                variant="H4Roboto"
+                sx={{ color: theme.palette.background.default }}
+              >
+                {desc}
+              </Typography>
             </Grid>
           </Grid>
         ) : (

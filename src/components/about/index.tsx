@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import React from "react";
-import BeautifulCard from "../customComponents/BeautifulCard";
-import Hero from "../customComponents/Hero";
+import BeautifulCard from "../customComponent/BeautifulCard";
+import Hero from "../topHero";
 import Info from "./Info";
 import Kitchen from "./Kitchen";
 export default function About() {

@@ -1,6 +1,6 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import CustomImage from "../customComponents/customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 export default function Footer() {
   const gridItemStyle = {

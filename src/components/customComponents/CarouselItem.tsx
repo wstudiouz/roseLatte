@@ -1,7 +1,7 @@
 import { Stack } from "@mui/system";
 import Image from "next/image";
 import React, { FC, ReactElement } from "react";
-import CustomImage from "./customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 type ItemProps = {
   image: string;

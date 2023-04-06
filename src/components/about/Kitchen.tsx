@@ -1,9 +1,8 @@
 import { theme } from "@/config/theme";
 import { Grid, Typography } from "@mui/material";
-import { Stack, SxProps } from "@mui/system";
-import { ScrollParallax } from "react-just-parallax";
+import { Stack } from "@mui/system";
 import CarouselContainer from "../customComponents/CarouselContainer";
-import CustomImage from "../customComponents/customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 export default function Kitchen() {
   return (

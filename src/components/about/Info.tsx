@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import { Stack, SxProps } from "@mui/system";
+import { Stack } from "@mui/system";
 import { ScrollParallax } from "react-just-parallax";
-import CustomImage from "../customComponents/customImage";
+import CustomImage from "../customComponent/CustomImage";
 
 export default function Info() {
   return (
