@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import { Stack } from "@mui/system";
 import TopHero from "@/components/topHero";
-import Card from "@/components/coffee/foodCard/Card";
+import Card from "@/components/cafe/foodCard/Card";
 
 const CoffeePage: NextPage = () => {
   const items = [

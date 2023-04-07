@@ -32,6 +32,7 @@ export default function Item({
         },
         transition: "opacity 0.5s ease",
         cursor: "pointer",
+        marginTop: "15px",
         ...sx,
       }}
     >
