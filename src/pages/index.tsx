@@ -18,12 +18,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <FormComponent title="Get your Seat" bg="https://picsum.photos/500/700" />
-      <Footer /> */}
-      <Reviewer
+      <FormComponent
+        title="Get your Seat"
+        isFlowerShop
+        bg="https://picsum.photos/500/700"
+      />
+      <Footer />
+      {/* <Reviewer
         bgImg="/ds"
         title="Great place, friendly atmosphere, very delicious food (especially Brownies). Also here you can buy flowers also. Totally recommend 10/10"
-      />
+      /> */}
     </>
   );
 }
