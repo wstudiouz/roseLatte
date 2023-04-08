@@ -62,13 +62,26 @@ export default function BeautifulCard({
           >
             {title}
           </Typography>
-          <Grid item lg={9} sx={{ marginTop: "40px" }}>
-            <Typography
-              variant="SmallRoboto"
-              sx={{ color: theme.palette.text.secondary }}
-            >
-              {desc}
-            </Typography>
+          <Grid
+            item
+            lg={12}
+            sx={{
+              marginTop: "40px",
+              width: "100%",
+              display: "flex",
+              justifyContent: right ? "right" : "left",
+            }}
+          >
+            <Grid item lg={9}>
+              <Typography
+                variant="SmallRoboto"
+                sx={{
+                  color: theme.palette.text.secondary,
+                }}
+              >
+                {desc}
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

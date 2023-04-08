@@ -56,7 +56,7 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
           zIndex: 1,
         }}
       >
-        <Grid item xs={10} sm={7} md={5}>
+        <Grid item xs={10} sm={7} md={6}>
           <Typography
             variant="h1"
             sx={{
