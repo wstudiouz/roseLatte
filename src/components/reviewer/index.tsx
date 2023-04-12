@@ -23,13 +23,15 @@ export default function Reviewer({
   return (
     <Stack
       sx={{
-        width: active ? "410px" : "300px",
-        height: active ? "312px" : "269px",
+        width: "350px",
+        height: "280px",
         left: "515px",
         top: "3961px",
         border: "2px solid rgba(236, 159, 182, 0.35)",
-        padding: active ? "12px 61px 35px 61px" : "12px 22px 25px 22px",
+        padding: "12px 22px 25px 22px",
+        transform: active ? "scale(1.2)" : undefined,
         transition: "all 1s ease",
+        margin: "25px",
       }}
     >
       <Grid
@@ -46,7 +48,7 @@ export default function Reviewer({
             <Grid item xs={2} key={ind}>
               <CustomImage
                 src="/stars.svg"
-                sx={{ width: "25px", height: "25px" }}
+                sx={{ width: "25px", height: "25px", margin: "0 auto" }}
               />
             </Grid>
           ))}
@@ -72,7 +74,7 @@ export default function Reviewer({
         }}
       >
         <CustomImage
-          src="https://picsum.photos/75/75"
+          src={bgImg}
           sx={{
             width: "75px",
             height: "75px",

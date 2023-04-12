@@ -5,6 +5,9 @@ import TopHero from "@/components/topHero";
 import TopFlowers from "@/components/flowers/TopFlowers";
 import BeautifulCard from "@/components/customComponent/BeautifulCard";
 import Catalog from "@/components/flowers/catalog";
+import FormComponent from "@/components/customComponent/ReusableForm";
+import Reviewers from "@/components/flowers/Reviewers";
+import Footer from "@/components/footer";
 
 const FlowersPage: NextPage = () => {
   return (
@@ -24,6 +27,14 @@ const FlowersPage: NextPage = () => {
         right
       />
       <Catalog />
+      <FormComponent
+        title="Create your own bouquets"
+        bg="/images/flowersform.png"
+        isFlowerShop
+      />
+
+      <Reviewers />
+      <Footer />
     </Stack>
   );
 };

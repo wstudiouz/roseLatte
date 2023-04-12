@@ -9,7 +9,7 @@ export default function Catalogs() {
   return (
     <Stack
       sx={{
-        justifyContent: "left",
+        justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
         overflowX: "auto",

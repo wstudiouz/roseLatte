@@ -1,4 +1,4 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import CustomImage from "../../customComponent/CustomImage";
 import { theme } from "@/config/theme";
 import { Dispatch, SetStateAction } from "react";

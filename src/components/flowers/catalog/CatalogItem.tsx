@@ -21,16 +21,15 @@ export default function CatalogItem({
       variant="h4"
       sx={{
         height: "80px",
-        margin: "0 67px",
-        border: active ? "2px solid rgba(236, 159, 182, 0.35)" : "none",
-        padding: active ? "25px 37px" : 0,
+        margin: "0 37px",
+        border: `2px solid ${active ? "rgba(236, 159, 182, 0.35)" : "inherit"}`,
+        padding: "25px 37px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textTransform: "capitalize",
         color: theme.palette.text.primary,
         cursor: "pointer",
-        transition: "all 0.4s ease",
       }}
     >
       {title}

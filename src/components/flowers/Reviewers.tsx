@@ -1,19 +1,48 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
-import Catalogs from "./Catalogs";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import Reviewer from "../reviewer";
 import { theme } from "@/config/theme";
-import SliderItem from "./SliderItem";
 import { useState } from "react";
-import Popup from "./Popup";
 import { useSpringCarousel } from "react-spring-carousel";
-export default function Catalog() {
-  const [popup, setPopup] = useState<boolean>(false);
-  const flowers = [
-    { img: "/images/flower1.png", title: "spring bouquet", id: "item-1" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-2" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-3" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-4" },
+
+export default function Reviewers() {
+  const items = [
+    {
+      id: "human1",
+      name: "Diyora khasanova",
+      bgImg: "https://picsum.photos/70/70",
+      title:
+        "One of the best place in Prague, tasty food, friendly personal, nice atmosphere and the beeeest tiramisu.",
+    },
+    {
+      id: "human2",
+      name: "Diyora khasanova",
+      bgImg: "https://picsum.photos/71/71",
+      title:
+        "Great place, friendly atmosphere, very delicious food (especially Brownies). Also here you can buy flowers also. Totally recommend 10/10",
+    },
+    {
+      id: "human3",
+      name: "Aldiyar Rakhmetov",
+      bgImg: "https://picsum.photos/72/72",
+      title:
+        "One of the best place in Prague, tasty food, friendly personal, nice atmosphere and the beeeest tiramisu.",
+    },
+    {
+      id: "human4",
+      name: "Diyora khasanova",
+      bgImg: "https://picsum.photos/73/73",
+      title:
+        "One of the best place in Prague, tasty food, friendly personal, nice atmosphere and the beeeest tiramisu.",
+    },
+    {
+      id: "human5",
+      name: "Jaroslav Matvejev",
+      bgImg: "https://picsum.photos/74/74",
+      title:
+        "One of the best place in Prague, tasty food, friendly personal, nice atmosphere and the beeeest tiramisu.",
+    },
   ];
-  const [currentSlide, setCurrentSlide] = useState(flowers[0].id);
+  const [currentSlide, setCurrentSlide] = useState(items[0].id);
   const {
     carouselFragment,
     slideToPrevItem, // go back to previous slide
@@ -23,15 +52,15 @@ export default function Catalog() {
     itemsPerSlide: 3, // number of slides per view
     withLoop: true, // will loop
     initialStartingPosition: "center", // the active slide will be at the center
-    items: flowers.map((item) => {
+    items: items.map((item) => {
       return {
         ...item,
         renderItem: (
-          <SliderItem
-            bgImg={item.img}
+          <Reviewer
             title={item.title}
+            name={item.name}
+            bgImg={item.bgImg}
             active={currentSlide === item.id}
-            setPopup={setPopup}
           />
         ),
       };
@@ -45,7 +74,9 @@ export default function Catalog() {
   return (
     <Stack
       sx={{
-        padding: "100px",
+        width: "100%",
+        height: "auto",
+        padding: "100px 76px",
         background:
           "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
       }}
@@ -53,15 +84,20 @@ export default function Catalog() {
       <Typography
         variant="h2"
         sx={{
-          margin: "30px auto",
+          margin: "0 auto",
           textTransform: "capitalize",
           color: theme.palette.background.default,
         }}
       >
-        catalog of bouquets
+        reviews
       </Typography>
-      <Catalogs />
-      <Stack sx={{ marginTop: "50px", flexDirection: "column" }}>
+      <Stack
+        sx={{
+          width: "90%",
+          margin: "50px auto 0 auto",
+          flexDirection: "column",
+        }}
+      >
         <Stack
           sx={{
             overflowX: "clip",
@@ -103,11 +139,10 @@ export default function Catalog() {
               justifyContent: "center",
             }}
           >
-            {flowers.map((i, ind) => (
+            {items.map((i, ind) => (
               <Box
                 component="span"
                 key={ind}
-                onClick={() => setCurrentSlide(i.id)}
                 sx={{
                   margin: "0 15px",
                   width: "10px",
@@ -142,7 +177,6 @@ export default function Catalog() {
           </Stack>
         </Stack>
       </Stack>
-      {popup ? <Popup setPopup={setPopup} /> : <></>}
     </Stack>
   );
 }
