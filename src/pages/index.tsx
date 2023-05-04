@@ -1,13 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { Roboto } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Typography } from "@mui/material";
 import FormComponent from "@/components/customComponent/ReusableForm";
+import { Stack, Typography } from "@mui/material";
 import Footer from "../components/footer";
+import Header from "../components/header";
 import Reviewer from "@/components/reviewer";
 
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({ src: "../assets/fonts/Athena.ttf" });
 
 export default function Home() {
   return (
@@ -18,12 +21,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <FormComponent title="Get your Seat" bg="https://picsum.photos/500/700" />
-      <Footer /> */}
-      <Reviewer
-        bgImg="/ds"
-        title="Great place, friendly atmosphere, very delicious food (especially Brownies). Also here you can buy flowers also. Totally recommend 10/10"
-      />
+      <Stack
+        sx={{
+          background:
+            "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+          height: "100vh",
+        }}
+      >
+        <Header />
+        <Typography variant="h1" sx={{ marginTop: "150px" }}>
+          Home page test
+        </Typography>
+      </Stack>
     </>
   );
 }
