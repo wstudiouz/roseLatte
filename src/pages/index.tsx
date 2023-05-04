@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Roboto } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Stack, Typography } from "@mui/material";
+import Footer from "../components/footer";
 import Header from "../components/header";
 
 const myFont = localFont({ src: "../assets/fonts/Athena.ttf" });
