@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { Roboto } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Stack, Typography } from "@mui/material";
 import Header from "../components/header";
 
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({ src: "../assets/fonts/Athena.ttf" });
 
 export default function Home() {
   return (

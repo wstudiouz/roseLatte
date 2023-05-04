@@ -35,7 +35,7 @@ function getTheme(): Theme {
 
   theme = createTheme(theme, {
     typography: {
-      fontFamily: ['"Athena"', '"Roboto"', '"sans-serif"'].join(","),
+      fontFamily: ["Athena", "Roboto", '"sans-serif"'].join(","),
       fontSize: "16px",
       allVariants: {
         WebkitFontSmoothing: "antialiased",
@@ -43,7 +43,7 @@ function getTheme(): Theme {
       },
 
       h1: {
-        fontFamily: "'Athena'",
+        fontFamily: "Athena",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "100px",
@@ -62,35 +62,33 @@ function getTheme(): Theme {
         },
       },
       h2: {
-        fontFamily: "'Athena'",
+        fontFamily: "Athena",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "80px",
         lineHeight: "96px",
       },
       h3: {
-        fontFamily: "'Athena'",
+        fontFamily: "Athena",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "50px",
         lineHeight: "60px",
       },
       h4: {
-        fontFamily: "'Athena'",
+        fontFamily: "Athena",
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "25px",
         lineHeight: "30px",
       },
       H4Roboto: {
-        fontFamily: "'Roboto'",
         fontStyle: "normal",
         fontWeight: 300,
         fontSize: "25px",
         lineHeight: "29px",
       },
       SmallRoboto: {
-        fontFamily: "'Roboto'",
         fontStyle: "normal",
         fontWeight: 300,
         fontSize: "18px",
@@ -103,8 +101,8 @@ function getTheme(): Theme {
         paper: "#000000",
       },
       text: {
-        primary: "#EC9FB6", 
-        secondary: "#DC9DB3", 
+        primary: "#EC9FB6",
+        secondary: "#DC9DB3",
       },
     },
   });

@@ -5,6 +5,7 @@ import Card from "../../../public/images/card.svg";
 import { theme } from "@/config/theme";
 import { useState } from "react";
 import HeaderBottom from "./HeaderBottom";
+import { COLORS } from "@/ts/Consts";
 
 const Header = () => {
   const [active, setActive] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const Header = () => {
       : "translate(-50%, -50%)",
     width: { xs: "35px", md: "50px" },
     height: "2px",
-    backgroundColor: "#000000",
+    backgroundColor: COLORS.BLACK,
     willChange: "transform",
     WebkitTransition: "all .5s ease",
     transition: "all .5s ease",
@@ -50,12 +51,13 @@ const Header = () => {
             flexDirection: "row",
           }}
         >
-          <Image src={Logo} alt="logo" width={189} height={59} />
+          <Image src={Logo} color="black" alt="logo" width={189} height={59} />
           <Typography
             variant="H4Roboto"
             sx={{
               textTransform: "uppercase",
-              color: active ? "red" : theme.palette.background.default,
+              color: active ? COLORS.BLACK : COLORS.WHITE,
+              transition: "color 0.5s ease",
             }}
           >
             Flowers
@@ -81,6 +83,7 @@ const Header = () => {
               cursor: "pointer",
               WebkitTransition: "all .5s ease",
               transition: "all .5s ease",
+              boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
               "&:after": BurgerLine,
               "&:before": {
                 ...BurgerLine,
@@ -93,8 +96,7 @@ const Header = () => {
                   : "translate(-50%, -50%)",
               },
               "&:hover": {
-                WebkitTransform: active ? "rotate(180deg)" : 0,
-                transform: active ? "rotate(180deg)" : 0,
+                transform: active ? "scale(1.05)" : 0,
               },
             }}
           ></Stack>
@@ -112,7 +114,8 @@ const Header = () => {
             variant="H4Roboto"
             sx={{
               textTransform: "uppercase",
-              color: theme.palette.background.default,
+              color: active ? COLORS.BLACK : COLORS.WHITE,
+              transition: "color 0.5s ease",
             }}
           >
             Bar
