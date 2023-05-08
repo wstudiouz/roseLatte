@@ -17,14 +17,18 @@
     "@types/node": "18.15.10",
     "@types/react": "18.0.30",
     "@types/react-dom": "18.0.11",
+    "detect-it": "^4.0.1",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "gsap": "^3.11.5",
+    "mouse-follower": "^1.1.2",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-just-parallax": "^3.1.14",
     "react-spring-carousel": "^2.0.19",
+    "sass": "^1.62.1",
     "typescript": "5.0.2",
     "yup": "^1.0.2"
   }

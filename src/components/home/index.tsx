@@ -1,8 +1,9 @@
 import { Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import Hero from "./Hero";
+import { HeaderContext } from "@/context/headerContext";
 export default function Home() {
-  const [active, setActive] = React.useState<boolean>(false);
+  const { openHeader } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
@@ -10,23 +11,23 @@ export default function Home() {
         display: "flex",
         color: "#fff",
         flexDirection: "row",
+        justifyContent: "space-between",
       }}
     >
       <Hero
         title="Flower shop"
         link="flower"
-        imageSrc="/images/homeflower.png"
-        isActive={active}
+        imageSrc="/images/homeflower1.avif"
+        isHeaderActive={openHeader}
         first={true}
       />
 
       <Hero
         title="Coffee & Bistro"
         link="coffee"
-        imageSrc="/images/homecoffee.png"
-        isActive={active}
+        imageSrc="/images/homeCafe.jpg"
+        isHeaderActive={openHeader}
       />
-      
     </Stack>
   );
 }

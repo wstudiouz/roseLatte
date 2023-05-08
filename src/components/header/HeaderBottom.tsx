@@ -1,5 +1,6 @@
-import { COLORS } from "@/ts/Consts";
+import { COLORS, Z_INDEX } from "@/ts/Consts";
 import { Box, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 interface ComponentProps {
   active: boolean;
@@ -11,31 +12,31 @@ export default function HeaderBottom({ active }: ComponentProps) {
     position: "relative",
     display: "inline-block",
     WebkitTransition: "all 0.5s ease-in-out",
-    transition: "all 0.5s ease-in-out",
+    transition: `all 0.5s ease-in-out ${active ? 0.3 : 0}s`,
     "&:hover": {
       opacity: 0.5,
       cursor: "pointer",
     },
     opacity: active ? 1 : 0,
     transform: active ? "translate(0px,0px)" : "translate(0px,60px)",
-    zIndex: 2,
   };
+  const router = useRouter();
   return (
     <>
       <Stack
         sx={{
           position: "fixed",
-          width: active ? "100%" : 0,
+          width: active ? (router.pathname === "/" ? "50%" : "100%") : 0,
           top: "0",
           left: "50%",
           bottom: "0",
           WebkitTransform: "translateX(-50%)",
           transform: "translateX(-50%)",
           backgroundColor: COLORS.WHITE_BACKGROUNDW,
-          zIndex: 0,
+          zIndex: Z_INDEX.bottomHeader,
           overflow: "hidden",
           boxShadow: "inset .5px 0 0 0 #103a3a, inset -.5px 0 0 0 #103a3a",
-          transition: "width 1s ease",
+          transition: `width 1s ease ${active ? 0 : 0.2}s`,
         }}
       >
         <Stack
@@ -48,7 +49,6 @@ export default function HeaderBottom({ active }: ComponentProps) {
             transform: "translate(-50%, -50%)",
             opacity: active ? 0.3 : 0,
             marginTop: "2.09vw",
-            zIndex: 1,
             transition: "opacity 0.5s ease",
             textAlign: "center",
           }}
@@ -63,9 +63,10 @@ export default function HeaderBottom({ active }: ComponentProps) {
               color: COLORS.BLACK,
               width: "90%",
               margin: "0 auto",
+              lineHeight: "80%",
             }}
           >
-            Rose Latte
+            Rose{router.pathname === "/" && <br />} Latte
           </Typography>
         </Stack>
       </Stack>
@@ -83,7 +84,7 @@ export default function HeaderBottom({ active }: ComponentProps) {
           WebkitJustifyContent: "center",
           msFlexPack: "center",
           justifyContent: "center",
-          zIndex: 2,
+          zIndex: Z_INDEX.botttomHeaderItem,
           width: "100vw",
           position: "fixed",
           top: 0,

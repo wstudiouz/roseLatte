@@ -1,14 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 import localFont from "next/font/local";
-import { Roboto } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { Typography } from "@mui/material";
-import FormComponent from "@/components/customComponent/ReusableForm";
-import { Stack, Typography } from "@mui/material";
-import Footer from "../components/footer";
-import Header from "../components/header";
-import Reviewer from "@/components/reviewer";
+import { Stack } from "@mui/material";
+import HomePage from "@/components/home";
+import React from "react";
 
 const myFont = localFont({ src: "../assets/fonts/Athena.ttf" });
 
@@ -28,10 +22,7 @@ export default function Home() {
           height: "100vh",
         }}
       >
-        <Header />
-        <Typography variant="h1" sx={{ marginTop: "150px" }}>
-          Home page test
-        </Typography>
+        <HomePage />
       </Stack>
     </>
   );

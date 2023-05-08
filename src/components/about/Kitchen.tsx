@@ -1,7 +1,7 @@
 import { theme } from "@/config/theme";
 import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import CarouselContainer from "../customComponents/CarouselContainer";
+// import CarouselContainer from "../customComponents/CarouselContainer";
 import CustomImage from "../customComponent/CustomImage";
 
 export default function Kitchen() {
@@ -25,7 +25,7 @@ export default function Kitchen() {
       </Typography>
       <Grid container spacing={3} sx={{ marginTop: "45px", zIndex: 1 }}>
         <Grid item xs={8}>
-          <CarouselContainer
+          {/* <CarouselContainer
             infinite
             activeIndex={0}
             items={[
@@ -33,7 +33,7 @@ export default function Kitchen() {
               "/images/familyPage.jpg",
               "/images/homeflower.png",
             ]}
-          />
+          /> */}
         </Grid>
         <Grid item xs={4}>
           <Typography

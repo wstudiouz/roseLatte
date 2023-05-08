@@ -3,21 +3,22 @@ import Image from "next/image";
 import Logo from "../../../public/images/logo.svg";
 import Card from "../../../public/images/card.svg";
 import { theme } from "@/config/theme";
-import { useState } from "react";
+import { useContext } from "react";
 import HeaderBottom from "./HeaderBottom";
-import { COLORS } from "@/ts/Consts";
+import { COLORS, Z_INDEX } from "@/ts/Consts";
+import { HeaderContext } from "@/context/headerContext";
 
 const Header = () => {
-  const [active, setActive] = useState<boolean>(false);
+  const { openHeader, setOpenHeader } = useContext(HeaderContext);
   const BurgerLine = {
     content: '""',
     position: "absolute",
     top: "50%",
     left: "50%",
-    WebkitTransform: active
+    WebkitTransform: openHeader
       ? "translate(-50%, -50%) rotate(45deg)"
       : "translate(-50%, -50%)",
-    transform: active
+    transform: openHeader
       ? "translate(-50%, -50%) rotate(45deg)"
       : "translate(-50%, -50%)",
     width: { xs: "35px", md: "50px" },
@@ -26,13 +27,13 @@ const Header = () => {
     willChange: "transform",
     WebkitTransition: "all .5s ease",
     transition: "all .5s ease",
-    marginTop: active ? 0 : "-5px",
+    marginTop: openHeader ? 0 : "-5px",
   };
   return (
     <Stack>
       <Stack
         sx={{
-          zIndex: 5,
+          zIndex: Z_INDEX.topHeader,
           width: "100%",
           padding: { xs: "15px 30px", md: "25px 75px" },
           justifyContent: "space-between",
@@ -56,8 +57,9 @@ const Header = () => {
             variant="H4Roboto"
             sx={{
               textTransform: "uppercase",
-              color: active ? COLORS.BLACK : COLORS.WHITE,
+              color: openHeader ? COLORS.BLACK : COLORS.WHITE,
               transition: "color 0.5s ease",
+              cursor: "pointer",
             }}
           >
             Flowers
@@ -73,7 +75,7 @@ const Header = () => {
           }}
         >
           <Stack
-            onClick={() => setActive(!active)}
+            onClick={() => setOpenHeader(!openHeader)}
             sx={{
               borderRadius: "50%",
               backgroundColor: "#fff",
@@ -87,16 +89,16 @@ const Header = () => {
               "&:after": BurgerLine,
               "&:before": {
                 ...BurgerLine,
-                marginTop: active ? 0 : "5px",
-                WebkitTransform: active
+                marginTop: openHeader ? 0 : "5px",
+                WebkitTransform: openHeader
                   ? "translate(-50%, -50%) rotate(-45deg)"
                   : "translate(-50%, -50%)",
-                transform: active
+                transform: openHeader
                   ? "translate(-50%, -50%) rotate(-45deg)"
                   : "translate(-50%, -50%)",
               },
               "&:hover": {
-                transform: active ? "scale(1.05)" : 0,
+                transform: openHeader ? "scale(1.05)" : 0,
               },
             }}
           ></Stack>
@@ -114,8 +116,9 @@ const Header = () => {
             variant="H4Roboto"
             sx={{
               textTransform: "uppercase",
-              color: active ? COLORS.BLACK : COLORS.WHITE,
+              color: openHeader ? COLORS.BLACK : COLORS.WHITE,
               transition: "color 0.5s ease",
+              cursor: "pointer",
             }}
           >
             Bar
@@ -141,7 +144,7 @@ const Header = () => {
           </Stack>
         </Stack>
       </Stack>
-      <HeaderBottom active={active} />
+      <HeaderBottom active={openHeader} />
     </Stack>
   );
 };
