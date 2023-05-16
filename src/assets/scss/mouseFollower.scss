@@ -91,10 +91,10 @@ $mf-color-text: #fff !default;
 
   &-text {
     position: absolute;
-    top: -25px;
-    left: -25px;
-    width: 50px;
-    height: 50px;
+    top: -35px;
+    left: -35px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,9 +118,9 @@ $mf-color-text: #fff !default;
 
   &-media {
     position: absolute;
-    width: 150px;
-    height: 150px;
-    margin: (-150px * 0.5) 0 0 (-150px * 0.5);
+    width: 200px;
+    height: 200px;
+    margin: (-200px * 0.5) 0 0 (-200px * 0.5);
 
     img,
     video {

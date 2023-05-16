@@ -23,15 +23,11 @@ export default function Reviewer({
   return (
     <Stack
       sx={{
-        width: "350px",
-        height: "280px",
-        left: "515px",
-        top: "3961px",
         border: "2px solid rgba(236, 159, 182, 0.35)",
         padding: "12px 22px 25px 22px",
-        transform: active ? "scale(1.2)" : undefined,
+        transform: active ? "scale(1.135)" : undefined,
         transition: "all 1s ease",
-        margin: "25px",
+        margin: "24px",
       }}
     >
       <Grid
@@ -71,6 +67,7 @@ export default function Reviewer({
           alignItems: "center",
           flexDirection: "row",
           marginTop: active ? "35px" : "20px",
+          transition: "margin 0.3s ease",
         }}
       >
         <CustomImage

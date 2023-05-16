@@ -8,7 +8,10 @@ import { theme } from "../config/theme";
 import createEmotionCache from "../config/createEmotionCache";
 import Layout from "@/components/Layout";
 import "../assets/scss/mouseFollower.scss";
-
+import { HeaderProvider } from "@/context/headerContext";
+import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/router";
+import Header from "../components/header";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -18,6 +21,7 @@ interface MyAppProps extends AppProps {
 
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const router = useRouter();
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -26,9 +30,14 @@ export default function App(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <HeaderProvider>
+          <Header />
+          <AnimatePresence mode="wait">
+            <Layout key={router.pathname}>
+              <Component {...pageProps} />
+            </Layout>
+          </AnimatePresence>
+        </HeaderProvider>
       </ThemeProvider>
     </CacheProvider>
   );

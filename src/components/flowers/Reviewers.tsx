@@ -76,9 +76,7 @@ export default function Reviewers() {
       sx={{
         width: "100%",
         height: "auto",
-        padding: "100px 76px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        padding: "100px",
       }}
     >
       <Typography
@@ -116,7 +114,10 @@ export default function Reviewers() {
             marginTop: "50px",
           }}
         >
-          <Stack onClick={slideToPrevItem} sx={{ width: "80px" }}>
+          <Stack
+            onClick={slideToPrevItem}
+            sx={{ width: "80px", marginLeft: "24px" }}
+          >
             <Box
               component="svg"
               width="81"
@@ -159,7 +160,10 @@ export default function Reviewers() {
               ></Box>
             ))}
           </Stack>
-          <Stack onClick={slideToNextItem} sx={{ width: "80px" }}>
+          <Stack
+            onClick={slideToNextItem}
+            sx={{ width: "80px", marginRight: "24px" }}
+          >
             <Box
               component="svg"
               width="81"

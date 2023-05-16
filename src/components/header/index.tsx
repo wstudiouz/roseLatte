@@ -3,10 +3,12 @@ import Image from "next/image";
 import Logo from "../../../public/images/logo.svg";
 import Card from "../../../public/images/card.svg";
 import { theme } from "@/config/theme";
-import { useContext } from "react";
+import { useCallback, useContext, useLayoutEffect, useState } from "react";
 import HeaderBottom from "./HeaderBottom";
 import { COLORS, Z_INDEX } from "@/ts/Consts";
 import { HeaderContext } from "@/context/headerContext";
+import { motion, useScroll } from "framer-motion";
+import Link from "next/link";
 
 const Header = () => {
   const { openHeader, setOpenHeader } = useContext(HeaderContext);
@@ -29,6 +31,26 @@ const Header = () => {
     transition: "all .5s ease",
     marginTop: openHeader ? 0 : "-5px",
   };
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  const update = useCallback(() => {
+    if (scrollY.get() > scrollY.getPrevious()) {
+      setHidden(true);
+    } else if (scrollY.get() < scrollY.getPrevious()) {
+      setHidden(false);
+    }
+  }, [scrollY]);
+
+  useLayoutEffect(() => {
+    return scrollY.onChange(() => update());
+  }, [scrollY, update]);
+
+  const variants = {
+    visible: { opacity: 1, y: 0 },
+    initial: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: -15 },
+  };
   return (
     <Stack>
       <Stack
@@ -42,6 +64,11 @@ const Header = () => {
           position: "fixed",
           top: 0,
         }}
+        initial="initial"
+        animate={hidden ? "hidden" : "visible"}
+        variants={variants}
+        transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.4 }}
+        component={motion.div}
       >
         <Stack
           sx={{
@@ -52,15 +79,26 @@ const Header = () => {
             flexDirection: "row",
           }}
         >
-          <Image src={Logo} color="black" alt="logo" width={189} height={59} />
+          <Stack component={Link} href="/">
+            <Image
+              src={Logo}
+              color="black"
+              alt="logo"
+              width={189}
+              height={59}
+            />
+          </Stack>
           <Typography
+            component={Link}
             variant="H4Roboto"
             sx={{
               textTransform: "uppercase",
               color: openHeader ? COLORS.BLACK : COLORS.WHITE,
               transition: "color 0.5s ease",
               cursor: "pointer",
+              textDecoration: "none",
             }}
+            href="/flowers"
           >
             Flowers
           </Typography>
@@ -114,11 +152,14 @@ const Header = () => {
         >
           <Typography
             variant="H4Roboto"
+            component={Link}
+            href="/cafe"
             sx={{
               textTransform: "uppercase",
               color: openHeader ? COLORS.BLACK : COLORS.WHITE,
               transition: "color 0.5s ease",
               cursor: "pointer",
+              textDecoration: "none",
             }}
           >
             Bar
@@ -144,7 +185,7 @@ const Header = () => {
           </Stack>
         </Stack>
       </Stack>
-      <HeaderBottom active={openHeader} />
+      <HeaderBottom active={openHeader} setActive={setOpenHeader} />
     </Stack>
   );
 };

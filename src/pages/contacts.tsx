@@ -1,13 +1,17 @@
+import Info from "@/components/about/Info";
+import Kitchen from "@/components/about/Kitchen";
+import BeautifulCard from "@/components/customComponent/BeautifulCard";
+import Hero from "../components/topHero";
 import { Stack } from "@mui/material";
 import React from "react";
-import BeautifulCard from "../customComponent/BeautifulCard";
-import Hero from "../topHero";
-import Info from "./Info";
-import Kitchen from "./Kitchen";
 export default function About() {
   return (
-    <Stack>
-      <Hero bgImg="/images/abouthero.png" title="how we started our business" />
+    <Stack
+      sx={{
+        color: "#fff",
+      }}
+    >
+      <Hero title="how we started our business" bgImg="/images/abouthero.png" />
       <Info />
       <BeautifulCard
         bgImg="/images/aboutfirsthuman.png"

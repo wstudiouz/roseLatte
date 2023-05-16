@@ -2,6 +2,7 @@ import { theme } from "@/config/theme";
 import { Box, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   bgImg: string;
@@ -30,20 +31,19 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
           height: "100%",
           left: 0,
           top: 0,
-          zIndex: -1,
         }}
         src={bgImg}
       />
-      <CustomImage
+      <Box
         sx={{
           position: "absolute",
           width: "100%",
           height: "100%",
           left: 0,
           top: 0,
-          zIndex: 0,
+          background:
+            "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(255,255,255,0) 100%)",
         }}
-        src="/images/aboutheroblur.png"
       />
       <Grid
         container
@@ -58,6 +58,15 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
       >
         <Grid item xs={10} sm={7} md={6}>
           <Typography
+            component={motion.h1}
+            initial={{ y: "50px", opacity: 0 }}
+            animate={{ y: "0px", opacity: 1 }}
+            transition={{
+              delay: 0.2,
+              duration: 0.7,
+              type: "spring",
+              stiffness: 100,
+            }}
             variant="h1"
             sx={{
               fontFamily: "'Athena'",
@@ -82,7 +91,14 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
           >
             <Grid item xs={3}>
               <Box
-                component="hr"
+                component={motion.hr}
+                initial={{ opacity: 0, width: "0%" }}
+                animate={{ opacity: 1, width: "100%" }}
+                transition={{
+                  delay: 0.2,
+                  duration: 0.7,
+                  ease: "linear",
+                }}
                 sx={{
                   width: "100%",
                   height: "2px",
@@ -92,6 +108,15 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
             </Grid>
             <Grid item xs={4} sx={{ marginLeft: "50px" }}>
               <Typography
+                component={motion.p}
+                initial={{ x: "50px", opacity: 0 }}
+                animate={{ x: "0px", opacity: 1 }}
+                transition={{
+                  delay: 0.2,
+                  duration: 0.7,
+                  type: "spring",
+                  stiffness: 100,
+                }}
                 variant="H4Roboto"
                 sx={{ color: theme.palette.background.default }}
               >

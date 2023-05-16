@@ -13,14 +13,7 @@ export default function Catalogs() {
         alignItems: "center",
         flexDirection: "row",
         overflowX: "auto",
-        marginBottom: "10px",
-        "&::-webkit-scrollbar": {
-          width: " 8px",
-          height: "8px",
-          backgroundColor: "#f5f5f5",
-          paddingTop: "10px",
-          borderRadius: "5px",
-        },
+        marginTop: "25px",
       }}
     >
       {catalogs.map((e, ind) => (

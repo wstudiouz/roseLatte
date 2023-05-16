@@ -67,7 +67,7 @@ export default function Hero({
           left: 0,
           right: 0,
           bottom: 0,
-          background: show ? "rgb(0 0 0 / 0%)" : "rgb(0 0 0 / 40%)",
+          background: show ? "rgb(0 0 0 / 0%)" : "rgb(0 0 0 / 45%)",
           transition: "background 1s ease",
           zIndex: Z_INDEX.homeOverlay,
         }}
@@ -78,6 +78,7 @@ export default function Hero({
           sx={{
             fontSize: isHeaderActive ? "40px" : "80px",
             transition: `font-size 1s ease ${isHeaderActive ? 0 : 0.2}s`,
+            cursor: "default",
           }}
         >
           {title}

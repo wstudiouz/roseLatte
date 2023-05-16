@@ -20,12 +20,12 @@ export default function SliderItem({
     <Stack
       onClick={() => setPopup(true)}
       sx={{
-        transform: active ? "scale(1.05)" : undefined,
-        height: "600px",
+        transform: active ? "scale(1.135)" : undefined,
+        height: "450px",
         position: "relative",
         transition: "all 0.4s ease",
         width: "100%",
-        margin: "24px",
+        mx: "24px",
       }}
     >
       <CustomImage

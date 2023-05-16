@@ -10,10 +10,13 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SxProps,
   Typography,
 } from "@mui/material";
 import CustomImage from "./CustomImage";
 import { theme } from "@/config/theme";
+import { COLORS } from "@/ts/Consts";
+import CustomInput from "./CustomInput";
 
 interface ComponentProps {
   isFlowerShop?: boolean;
@@ -55,12 +58,45 @@ export default function FormComponent({
     alert(JSON.stringify(data));
   };
   const categoryOptions = ["wedding", "boxes", "art", "composition", "mono"];
+
+  const inputStyle: SxProps = {
+    "& .MuiOutlinedInput-root": {
+      border: `1px solid ${COLORS.PINK}`,
+      color: `${COLORS.PINK} !important`,
+      borderRadius: "0",
+      fontWeight: "300",
+      fontSize: "18px",
+      lineHeight: "21px",
+      padding: "30px",
+      "&:focus": {
+        border: "0",
+      },
+      [theme.breakpoints.down("lg")]: {
+        fontSize: "18px",
+        lineHeight: "21px",
+      },
+      [theme.breakpoints.between("xs", "sm")]: {
+        fontSize: "16px",
+        lineHeight: "26px",
+      },
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderWidth: "0px !important",
+    },
+
+    marginTop: { xs: "16px", md: "0" },
+    width: "100%",
+    color: `${COLORS.PINK} !important`,
+    " input": {
+      p: 0,
+    },
+  };
   return (
-    <Grid container>
+    <Grid container sx={{ background: COLORS.WHITE_BACKGROUNDW }}>
       <Grid item xs={6}>
         <CustomImage src={bg} sx={{ width: "100%", height: "100vh" }} />
       </Grid>
-      <Grid item xs={6} sx={{ padding: "100px 93px" }}>
+      <Grid item xs={6} sx={{ padding: "100px 75px" }}>
         <Typography
           variant="h2"
           sx={{
@@ -76,33 +112,45 @@ export default function FormComponent({
           sx={{ display: "flex", flexDirection: "column" }}
         >
           <TextField
-            label="Name"
-            variant="outlined"
+            placeholder="Name"
             margin="normal"
+            variant="outlined"
+            sx={{
+              ...inputStyle,
+            }}
             {...register("name")}
             error={!!errors.name}
             helperText={errors.name?.message}
           />
           <TextField
-            label="Phone"
+            placeholder="Phone"
             variant="outlined"
             margin="normal"
+            sx={{
+              ...inputStyle,
+            }}
             {...register("phone")}
             error={!!errors.phone}
             helperText={errors.phone?.message}
           />
           <TextField
-            label="Email"
+            placeholder="Email"
             variant="outlined"
             margin="normal"
+            sx={{
+              ...inputStyle,
+            }}
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
           <TextField
-            label="Message"
+            placeholder="Message"
             variant="outlined"
             margin="normal"
+            sx={{
+              ...inputStyle,
+            }}
             {...register("message")}
             error={!!errors.message}
             helperText={errors.message?.message}

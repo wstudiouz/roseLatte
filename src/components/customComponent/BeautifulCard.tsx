@@ -2,6 +2,7 @@ import { theme } from "@/config/theme";
 import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "./CustomImage";
+import { COLORS } from "@/ts/Consts";
 
 interface ComponentProps {
   bgImg: string;
@@ -22,8 +23,8 @@ export default function BeautifulCard({
         width: "100%",
         height: "auto",
         minHeight: { md: "750px" },
-        padding: { xs: "30px 15px", md: "100px 20px" },
-        background: theme.palette.background.default,
+        padding: { xs: "30px 15px", md: "100px 124px" },
+        background: COLORS.WHITE_BACKGROUNDW,
         position: "relative",
       }}
     >
@@ -38,12 +39,12 @@ export default function BeautifulCard({
       />
       <Grid
         container
-        spacing={"55px"}
         direction="row"
-        justifyContent="center"
+        justifyContent="space-between"
         alignItems="center"
+        spacing={"55px"}
       >
-        <Grid item xs={12} sm={9} md={6} lg={5}>
+        <Grid item xs={12} sm={9} md={4} lg={5}>
           <CustomImage
             src={bgImg}
             sx={{
@@ -52,7 +53,7 @@ export default function BeautifulCard({
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={10} md={6} lg={5} sx={{ position: "relative" }}>
+        <Grid item xs={12} sm={10} md={8} lg={7} sx={{ position: "relative" }}>
           <Typography
             variant="h2"
             sx={{

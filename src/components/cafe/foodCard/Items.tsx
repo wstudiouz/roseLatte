@@ -28,8 +28,6 @@ export default function Items({
   return (
     <Stack
       sx={{
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
         padding: "25px 40px 40px 40px",
         height: "500px",
         ...sx,

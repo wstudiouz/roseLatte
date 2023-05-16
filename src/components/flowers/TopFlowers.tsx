@@ -8,8 +8,6 @@ export default function TopFlowers() {
         width: "100%",
         height: "auto",
         padding: "100px 76px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
       }}
     >
       <Grid container sx={{ justifyContent: "space-between" }}>

@@ -5,6 +5,7 @@ import SliderItem from "./SliderItem";
 import { useState } from "react";
 import Popup from "./Popup";
 import { useSpringCarousel } from "react-spring-carousel";
+import { COLORS } from "@/ts/Consts";
 export default function Catalog() {
   const [popup, setPopup] = useState<boolean>(false);
   const flowers = [
@@ -53,15 +54,15 @@ export default function Catalog() {
       <Typography
         variant="h2"
         sx={{
-          margin: "30px auto",
           textTransform: "capitalize",
-          color: theme.palette.background.default,
+          color: COLORS.WHITE,
+          textAlign: "center",
         }}
       >
         catalog of bouquets
       </Typography>
       <Catalogs />
-      <Stack sx={{ marginTop: "50px", flexDirection: "column" }}>
+      <Stack sx={{ marginTop: "75px", flexDirection: "column" }}>
         <Stack
           sx={{
             overflowX: "clip",
@@ -80,7 +81,10 @@ export default function Catalog() {
             marginTop: "50px",
           }}
         >
-          <Stack onClick={slideToPrevItem} sx={{ width: "80px" }}>
+          <Stack
+            onClick={slideToPrevItem}
+            sx={{ width: "80px", marginLeft: "24px" }}
+          >
             <Box
               component="svg"
               width="81"
@@ -124,7 +128,10 @@ export default function Catalog() {
               ></Box>
             ))}
           </Stack>
-          <Stack onClick={slideToNextItem} sx={{ width: "80px" }}>
+          <Stack
+            onClick={slideToNextItem}
+            sx={{ width: "80px", marginRight: "24px" }}
+          >
             <Box
               component="svg"
               width="81"

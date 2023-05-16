@@ -15,13 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Stack
-        sx={{
-          background:
-            "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
-          height: "100vh",
-        }}
-      >
+      <Stack>
         <HomePage />
       </Stack>
     </>

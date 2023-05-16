@@ -1,17 +1,19 @@
 import { COLORS, Z_INDEX } from "@/ts/Consts";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, SxProps, Typography } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 
 interface ComponentProps {
   active: boolean;
+  setActive: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function HeaderBottom({ active }: ComponentProps) {
-  const NavItems = {
+export default function HeaderBottom({ active, setActive }: ComponentProps) {
+  const NavItems: SxProps = {
     color: COLORS.BLACK,
     position: "relative",
     display: "inline-block",
-    WebkitTransition: "all 0.5s ease-in-out",
     transition: `all 0.5s ease-in-out ${active ? 0.3 : 0}s`,
     "&:hover": {
       opacity: 0.5,
@@ -19,6 +21,7 @@ export default function HeaderBottom({ active }: ComponentProps) {
     },
     opacity: active ? 1 : 0,
     transform: active ? "translate(0px,0px)" : "translate(0px,60px)",
+    textDecoration: "none",
   };
   const router = useRouter();
   return (
@@ -84,23 +87,48 @@ export default function HeaderBottom({ active }: ComponentProps) {
           WebkitJustifyContent: "center",
           msFlexPack: "center",
           justifyContent: "center",
-          zIndex: Z_INDEX.botttomHeaderItem,
           width: "100vw",
-          position: "fixed",
-          top: 0,
           height: "100vh",
+          position: "fixed",
+          zIndex: Z_INDEX.botttomHeaderItem,
+          top: "0",
+          visibility: active ? "visible" : "hidden",
         }}
       >
-        <Typography variant="h1" sx={NavItems}>
+        <Typography
+          component={Link}
+          href={"/flowers"}
+          variant="h1"
+          sx={NavItems}
+          onClick={() => setActive(false)}
+        >
           Flower Shop
         </Typography>
-        <Typography variant="h1" sx={NavItems}>
+        <Typography
+          component={Link}
+          onClick={() => setActive(false)}
+          href={"/cafe"}
+          variant="h1"
+          sx={NavItems}
+        >
           Coffee & Bistro
         </Typography>
-        <Typography variant="h1" sx={NavItems}>
+        <Typography
+          component={Link}
+          onClick={() => setActive(false)}
+          href={"/about"}
+          variant="h1"
+          sx={NavItems}
+        >
           About Us
         </Typography>
-        <Typography variant="h1" sx={NavItems}>
+        <Typography
+          component={Link}
+          onClick={() => setActive(false)}
+          href={"/contacts"}
+          variant="h1"
+          sx={NavItems}
+        >
           Contacts
         </Typography>
       </Stack>
