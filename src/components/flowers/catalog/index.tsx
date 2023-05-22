@@ -2,17 +2,22 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import Catalogs from "./Catalogs";
 import { theme } from "@/config/theme";
 import SliderItem from "./SliderItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "./Popup";
 import { useSpringCarousel } from "react-spring-carousel";
-import { COLORS } from "@/ts/Consts";
+import { COLORS, Z_INDEX } from "@/ts/Consts";
 export default function Catalog() {
   const [popup, setPopup] = useState<boolean>(false);
   const flowers = [
-    { img: "/images/flower1.png", title: "spring bouquet", id: "item-1" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-2" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-3" },
-    { img: "/images/flower1.png", title: "wedding with peony", id: "item-4" },
+    { title: "spring bouquet", id: "item-1", video: "/video/slider.mp4" },
+    { video: "/video/slider1.mp4", title: "wedding with peony", id: "item-2" },
+    { video: "/video/slider2.mp4", title: "wedding with peony", id: "item-3" },
+    {
+      video: "/video/slider1.mp4",
+      title: "wedding with peony",
+      id: "item-4",
+      img: "",
+    },
   ];
   const [currentSlide, setCurrentSlide] = useState(flowers[0].id);
   const {
@@ -20,9 +25,11 @@ export default function Catalog() {
     slideToPrevItem, // go back to previous slide
     slideToNextItem, // move to next slide
     useListenToCustomEvent, //custom hook to listen event when the slide changes
+    slideToItem,
   } = useSpringCarousel({
     itemsPerSlide: 3, // number of slides per view
     withLoop: true, // will loop
+    disableGestures: true,
     initialStartingPosition: "center", // the active slide will be at the center
     items: flowers.map((item) => {
       return {
@@ -30,14 +37,21 @@ export default function Catalog() {
         renderItem: (
           <SliderItem
             bgImg={item.img}
+            video={item.video}
             title={item.title}
             active={currentSlide === item.id}
+            setActive={currentSlide !== item.id ? setCurrentSlide : undefined}
+            itemId={item.id}
             setPopup={setPopup}
           />
         ),
       };
     }),
   });
+
+  useEffect(() => {
+    slideToItem(currentSlide);
+  }, [currentSlide, slideToItem]);
   useListenToCustomEvent((event) => {
     if (event.eventName === "onSlideStartChange") {
       setCurrentSlide(event?.nextItem?.id);
@@ -78,12 +92,12 @@ export default function Catalog() {
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
-            marginTop: "50px",
+            marginTop: "80px",
           }}
         >
           <Stack
             onClick={slideToPrevItem}
-            sx={{ width: "80px", marginLeft: "24px" }}
+            sx={{ width: "80px", marginLeft: "24px", cursor: "pointer" }}
           >
             <Box
               component="svg"
@@ -111,7 +125,6 @@ export default function Catalog() {
               <Box
                 component="span"
                 key={ind}
-                onClick={() => setCurrentSlide(i.id)}
                 sx={{
                   margin: "0 15px",
                   width: "10px",
@@ -130,7 +143,12 @@ export default function Catalog() {
           </Stack>
           <Stack
             onClick={slideToNextItem}
-            sx={{ width: "80px", marginRight: "24px" }}
+            sx={{
+              width: "80px",
+              marginRight: "24px",
+              cursor: "pointer",
+              zIndex: Z_INDEX.homeText,
+            }}
           >
             <Box
               component="svg"

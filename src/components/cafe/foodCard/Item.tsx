@@ -1,5 +1,7 @@
 import { theme } from "@/config/theme";
+import { COLORS } from "@/ts/Consts";
 import { List, ListItem, Stack, SxProps, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
 
 interface ComponentProps {
@@ -22,6 +24,8 @@ export default function Item({
   return (
     <Stack
       onMouseEnter={() => setImg(num)}
+      component={motion.div}
+      whileHover={{ x: 10, transition: { duration: 0.5 } }}
       sx={{
         justifyContent: "space-between",
         alignItems: "center",
@@ -40,7 +44,7 @@ export default function Item({
         <Typography
           variant="h4"
           sx={{
-            color: theme.palette.background.default,
+            color: COLORS.WHITE,
             textTransform: "capitalize",
           }}
         >

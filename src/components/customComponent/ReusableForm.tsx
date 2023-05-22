@@ -16,7 +16,6 @@ import {
 import CustomImage from "./CustomImage";
 import { theme } from "@/config/theme";
 import { COLORS } from "@/ts/Consts";
-import CustomInput from "./CustomInput";
 
 interface ComponentProps {
   isFlowerShop?: boolean;
@@ -60,6 +59,7 @@ export default function FormComponent({
   const categoryOptions = ["wedding", "boxes", "art", "composition", "mono"];
 
   const inputStyle: SxProps = {
+    margin: 0,
     "& .MuiOutlinedInput-root": {
       border: `1px solid ${COLORS.PINK}`,
       color: `${COLORS.PINK} !important`,
@@ -68,6 +68,7 @@ export default function FormComponent({
       fontSize: "18px",
       lineHeight: "21px",
       padding: "30px",
+      marginBottom: "25px",
       "&:focus": {
         border: "0",
       },
@@ -83,8 +84,6 @@ export default function FormComponent({
     "& .MuiOutlinedInput-notchedOutline": {
       borderWidth: "0px !important",
     },
-
-    marginTop: { xs: "16px", md: "0" },
     width: "100%",
     color: `${COLORS.PINK} !important`,
     " input": {
@@ -101,7 +100,8 @@ export default function FormComponent({
           variant="h2"
           sx={{
             textTransform: "capitalize",
-            color: theme.palette.text.secondary,
+            color: COLORS.PINK,
+            marginBottom: "20px",
           }}
         >
           {title}
@@ -148,6 +148,8 @@ export default function FormComponent({
             placeholder="Message"
             variant="outlined"
             margin="normal"
+            multiline
+            rows={3}
             sx={{
               ...inputStyle,
             }}
@@ -155,7 +157,7 @@ export default function FormComponent({
             error={!!errors.message}
             helperText={errors.message?.message}
           />
-          {isFlowerShop ? (
+          {/* {isFlowerShop ? (
             <>
               <InputLabel id="category-label">Category:</InputLabel>
               <Select
@@ -171,20 +173,20 @@ export default function FormComponent({
             </>
           ) : (
             <></>
-          )}
+          )} */}
           <Button
             type="submit"
             variant="outlined"
             sx={{
-              color: theme.palette.text.secondary,
-              width: "200px",
-              border: `1px solid ${theme.palette.text.secondary}`,
+              color: COLORS.PINK,
+              border: `1px solid ${COLORS.PINK}`,
               borderRadius: 0,
               outline: "none",
+              padding: "30px 45px",
               "&:hover": {
-                border: `1px solid ${theme.palette.text.secondary}`,
+                border: `1px solid ${COLORS.PINK}`,
               },
-              marginTop: "30px",
+              width: "fit-content",
             }}
           >
             Send message

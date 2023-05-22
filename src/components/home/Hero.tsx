@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import CustomImage from "../customComponent/CustomImage";
-import { Z_INDEX } from "@/ts/Consts";
+import { COLORS, Z_INDEX } from "@/ts/Consts";
 import { CursorManager } from "@/ts/CursorManager";
 
 interface HeroProps {
@@ -99,7 +99,7 @@ export default function Hero({
             width: "160px",
             height: "80px",
             margin: "0 auto",
-            border: `2px solid ${theme.palette.text.primary}`,
+            border: `2px solid ${COLORS.PINK}`,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

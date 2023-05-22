@@ -116,7 +116,7 @@ export default function Reviewers() {
         >
           <Stack
             onClick={slideToPrevItem}
-            sx={{ width: "80px", marginLeft: "24px" }}
+            sx={{ width: "80px", marginLeft: "24px", cursor: "pointer" }}
           >
             <Box
               component="svg"
@@ -162,7 +162,7 @@ export default function Reviewers() {
           </Stack>
           <Stack
             onClick={slideToNextItem}
-            sx={{ width: "80px", marginRight: "24px" }}
+            sx={{ width: "80px", marginRight: "24px", cursor: "pointer" }}
           >
             <Box
               component="svg"

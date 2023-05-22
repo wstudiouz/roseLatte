@@ -2,6 +2,7 @@ import { theme } from "@/config/theme";
 import { List, ListItem, Stack, SxProps, Typography } from "@mui/material";
 import Item from "./Item";
 import { Dispatch, SetStateAction } from "react";
+import { motion } from "framer-motion";
 
 interface ItemProps {
   title: string;

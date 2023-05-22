@@ -7,18 +7,21 @@ import Card from "@/components/cafe/foodCard/Card";
 const CoffeePage: NextPage = () => {
   const items = [
     {
+      id: 1,
       title: "qozon somsa",
       desc: ["yaxshi", "ajoyib"],
       sum: "100sum",
       pic: "https://picsum.photos/300",
     },
     {
+      id: 2,
       title: "qozon somsa",
       desc: ["yaxshi", "ajoyib"],
       sum: "100sum",
       pic: "https://picsum.photos/301",
     },
     {
+      id: 3,
       title: "qozon somsa",
       desc: ["yaxshi", "ajoyib", "very good"],
       sum: "100sum",
@@ -27,18 +30,21 @@ const CoffeePage: NextPage = () => {
   ];
   const items2 = [
     {
+      id: 1,
       title: "Tandir kabob",
       desc: ["yaxshi", "ajoyib"],
       sum: "100sum",
       pic: "https://picsum.photos/300",
     },
     {
+      id: 2,
       title: "Tandir kabob",
       desc: ["yaxshi", "ajoyib"],
       sum: "100sum",
       pic: "https://picsum.photos/301",
     },
     {
+      id: 3,
       title: "Tandir kabob",
       desc: ["yaxshi", "ajoyib", "very good"],
       sum: "100sum",
