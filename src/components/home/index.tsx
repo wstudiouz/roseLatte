@@ -17,7 +17,7 @@ export default function Home() {
       <Hero
         title="Flower shop"
         link="flower"
-        imageSrc="/images/homeflower1.avif"
+        imageSrc="/images/homeflower2.jpg"
         isHeaderActive={openHeader}
         first={true}
       />

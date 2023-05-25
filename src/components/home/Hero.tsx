@@ -85,6 +85,8 @@ export default function Hero({
         </Typography>
         <Typography
           variant="H4Roboto"
+          component={Link}
+          href={first ? "/flowers" : "/cafe"}
           onMouseEnter={() => {
             cursor?.removeImg();
             cursor?.setText("Learn more");
@@ -100,6 +102,9 @@ export default function Hero({
             height: "80px",
             margin: "0 auto",
             border: `2px solid ${COLORS.PINK}`,
+            color: COLORS.WHITE,
+            cursor: "pointer",
+            textDecoration: "none",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
