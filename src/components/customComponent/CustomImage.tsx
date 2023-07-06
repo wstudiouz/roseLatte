@@ -29,8 +29,8 @@ export default function CustomImage({
       <Image
         src={src}
         alt={alt || "this is picture"}
-        width={width || 300}
-        height={height || 300}
+        width={width || 1920}
+        height={height || 1080}
         style={{
           objectFit: "cover",
           width: "100%",

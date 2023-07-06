@@ -13,7 +13,7 @@ const FlowersPage: NextPage = () => {
     <Stack>
       <TopHero
         title="Fresh from our Flower Shop"
-        bgImg="/images/flowers1.jpeg"
+        bgImg="/images/flower1.jpg"
         right
         desc="The 1st Floristic Cafe & Bistro in Prague"
       />
