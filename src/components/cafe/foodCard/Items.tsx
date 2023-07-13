@@ -1,31 +1,22 @@
 import { theme } from "@/config/theme";
-import { List, ListItem, Stack, SxProps, Typography } from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import Item from "./Item";
-import { Dispatch, SetStateAction } from "react";
-import { motion } from "framer-motion";
-
-interface ItemProps {
-  title: string;
-  desc: string[];
-  sum: string;
-  sx?: SxProps;
-}
+import { Dispatch, SetStateAction, useContext } from "react";
+import {
+  FoodCategoryFoods,
+  FoodCategoryFoodsDataInnerAttributes,
+} from "@/ts/REST/api/generated";
+import { HeaderContext } from "@/context/headerContext";
 
 interface ComponentProps {
   title: string;
-  items: Array<ItemProps>;
-  active?: number;
+  items: FoodCategoryFoods;
   sx?: SxProps;
   setImg: Dispatch<SetStateAction<number>>;
 }
 
-export default function Items({
-  title,
-  active,
-  items,
-  sx,
-  setImg,
-}: ComponentProps) {
+export default function Items({ title, items, sx, setImg }: ComponentProps) {
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
@@ -45,16 +36,30 @@ export default function Items({
         {title}
       </Typography>
       <Stack sx={{ marginTop: "45px" }}>
-        {items.map((e, i) => (
-          <Item
-            key={i}
-            title={e.title}
-            num={i}
-            setImg={setImg}
-            desc={e.desc}
-            sum={e.sum}
-          />
-        ))}
+        {items &&
+          items?.data &&
+          items.data.map((e, i) => {
+            const itemTitle = e.attributes
+              ? e.attributes[
+                  `title_${lang}` as keyof FoodCategoryFoodsDataInnerAttributes
+                ]
+              : "";
+            const itemDesc = e.attributes
+              ? e.attributes[
+                  `desc_${lang}` as keyof FoodCategoryFoodsDataInnerAttributes
+                ]
+              : "";
+            return (
+              <Item
+                key={i}
+                title={String(itemTitle)}
+                num={i}
+                setImg={setImg}
+                desc={String(itemDesc)}
+                sum={e.attributes?.price ?? 0}
+              />
+            );
+          })}
       </Stack>
     </Stack>
   );

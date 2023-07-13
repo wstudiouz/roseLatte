@@ -1,13 +1,13 @@
 import { theme } from "@/config/theme";
 import { COLORS } from "@/ts/Consts";
-import { List, ListItem, Stack, SxProps, Typography } from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
 
 interface ComponentProps {
   title: string;
-  desc: string[];
-  sum: string;
+  desc: string;
+  sum: number;
   sx?: SxProps;
   num: number;
   setImg: Dispatch<SetStateAction<number>>;
@@ -52,29 +52,16 @@ export default function Item({
         </Typography>
 
         <Stack>
-          {desc.map((e, i) => (
-            <Typography
-              key={i}
-              variant="SmallRoboto"
-              sx={{
-                display: "flex",
-                justifyContent: "left",
-                alignItems: "center",
-                fontFamily: "'Roboto'",
-                "&:before": {
-                  content: "''",
-                  display: "block",
-                  width: "4px",
-                  height: "4px",
-                  background: theme.palette.text.secondary,
-                  borderRadius: "50%",
-                  marginRight: "10px",
-                },
-              }}
-            >
-              {e}
-            </Typography>
-          ))}
+          <Typography
+            variant="SmallRoboto"
+            sx={{
+              display: "flex",
+              justifyContent: "left",
+              alignItems: "center",
+              fontFamily: "'Roboto'",
+            }}
+            dangerouslySetInnerHTML={{ __html: desc }}
+          />
         </Stack>
       </Stack>
       <Typography
@@ -84,7 +71,7 @@ export default function Item({
           textTransform: "capitalize",
         }}
       >
-        {sum}
+        {sum}$
       </Typography>
     </Stack>
   );

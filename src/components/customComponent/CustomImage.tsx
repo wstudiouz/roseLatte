@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CSSProperties } from "react";
 
 interface HeroProps {
-  sx: SxProps;
+  sx?: SxProps;
   alt?: string;
   src: string;
   width?: number;

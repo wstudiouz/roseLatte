@@ -1,6 +1,9 @@
 import { theme } from "@/config/theme";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import CustomImage from "../customComponent/CustomImage";
+import translate from "@/ts/utils/translate";
+import { useContext } from "react";
+import { HeaderContext } from "@/context/headerContext";
 
 export default function Footer() {
   const gridItemStyle = {
@@ -17,6 +20,7 @@ export default function Footer() {
       fontWeight: 300,
     },
   };
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
@@ -77,28 +81,56 @@ export default function Footer() {
         }}
       >
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">Call us</Typography>
-          <Typography variant="SmallRoboto">+ 420 987 987 433</Typography>
+          <Typography variant="h4">
+            {translate("footer.callUs.title", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.callUs.phoneNumber", lang)}
+          </Typography>
         </Grid>
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">Customer Care</Typography>
-          <Typography variant="SmallRoboto">Order Information</Typography>
+          <Typography variant="h4">
+            {translate("footer.customerCare.title", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.customerCare.orderInformation", lang)}
+          </Typography>
         </Grid>
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">Our company</Typography>
-          <Typography variant="SmallRoboto">Find a boutique</Typography>
-          <Typography variant="SmallRoboto">Careers</Typography>
+          <Typography variant="h4">
+            {translate("footer.ourCompany.title", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.ourCompany.findBoutique", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.ourCompany.careers", lang)}
+          </Typography>
         </Grid>
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">Legal area</Typography>
-          <Typography variant="SmallRoboto">Terms of us</Typography>
-          <Typography variant="SmallRoboto">Privacy notice</Typography>
+          <Typography variant="h4">
+            {translate("footer.legalArea.title", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.legalArea.termsOfUse", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.legalArea.privacyNotice", lang)}
+          </Typography>
         </Grid>
         <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">Socail media</Typography>
-          <Typography variant="SmallRoboto">Instagram</Typography>
-          <Typography variant="SmallRoboto">Facebook</Typography>
-          <Typography variant="SmallRoboto">Twitter</Typography>
+          <Typography variant="h4">
+            {translate("footer.socialMedia.title", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.socialMedia.instagram", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.socialMedia.facebook", lang)}
+          </Typography>
+          <Typography variant="SmallRoboto">
+            {translate("footer.socialMedia.twitter", lang)}
+          </Typography>
         </Grid>
       </Grid>
       <Box

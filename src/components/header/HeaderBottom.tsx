@@ -1,8 +1,10 @@
+import { HeaderContext } from "@/context/headerContext";
 import { COLORS, Z_INDEX } from "@/ts/Consts";
+import translate from "@/ts/utils/translate";
 import { Box, Stack, SxProps, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 
 interface ComponentProps {
   active: boolean;
@@ -24,6 +26,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
     textDecoration: "none",
   };
   const router = useRouter();
+  const { lang } = useContext(HeaderContext);
   return (
     <>
       <Stack
@@ -102,7 +105,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
           sx={NavItems}
           onClick={() => setActive(false)}
         >
-          Flower Shop
+          {translate("header.shop", lang)}
         </Typography>
         <Typography
           component={Link}
@@ -111,7 +114,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
           variant="h1"
           sx={NavItems}
         >
-          Coffee & Bistro
+          {translate("header.cafe", lang)}
         </Typography>
         <Typography
           component={Link}
@@ -120,7 +123,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
           variant="h1"
           sx={NavItems}
         >
-          About Us
+          {translate("header.about", lang)}
         </Typography>
         <Typography
           component={Link}
@@ -129,7 +132,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
           variant="h1"
           sx={NavItems}
         >
-          Contacts
+          {translate("header.contact", lang)}
         </Typography>
       </Stack>
     </>

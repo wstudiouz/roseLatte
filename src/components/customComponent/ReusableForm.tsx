@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -16,6 +16,8 @@ import {
 import CustomImage from "./CustomImage";
 import { theme } from "@/config/theme";
 import { COLORS } from "@/ts/Consts";
+import translate from "@/ts/utils/translate";
+import { HeaderContext } from "@/context/headerContext";
 
 interface ComponentProps {
   isFlowerShop?: boolean;
@@ -35,12 +37,25 @@ export default function FormComponent({
     message: string;
     category?: string | undefined;
   };
-
+  const { lang } = useContext(HeaderContext);
   const schema = yup.object().shape({
-    name: yup.string().min(3).required(),
-    phone: yup.string().min(3).required(),
-    message: yup.string().min(3).required(),
-    email: yup.string().min(3).email().required(),
+    name: yup
+      .string()
+      .min(3, translate("form.namelabel", lang))
+      .required(translate("form.namelabel", lang)),
+    phone: yup
+      .string()
+      .min(3, translate("form.phonelabel", lang))
+      .required(translate("form.phonelabel", lang)),
+    message: yup
+      .string()
+      .min(3, translate("form.messagelabel", lang))
+      .required(translate("form.messagelabel", lang)),
+    email: yup
+      .string()
+      .min(3, translate("form.emaillabel", lang))
+      .email(translate("form.emaillabel", lang))
+      .required(translate("form.emaillabel", lang)),
   });
 
   const {
@@ -60,6 +75,7 @@ export default function FormComponent({
 
   const inputStyle: SxProps = {
     margin: 0,
+    marginBottom: "25px",
     "& .MuiOutlinedInput-root": {
       border: `1px solid ${COLORS.PINK}`,
       color: `${COLORS.PINK} !important`,
@@ -68,7 +84,6 @@ export default function FormComponent({
       fontSize: "18px",
       lineHeight: "21px",
       padding: "30px",
-      marginBottom: "25px",
       "&:focus": {
         border: "0",
       },
@@ -93,7 +108,7 @@ export default function FormComponent({
   return (
     <Grid container sx={{ background: COLORS.WHITE_BACKGROUNDW }}>
       <Grid item xs={6}>
-        <CustomImage src={bg} sx={{ width: "100%", height: "100vh" }} />
+        <CustomImage src={bg} sx={{ width: "100%", height: "100%" }} />
       </Grid>
       <Grid item xs={6} sx={{ padding: "100px 75px" }}>
         <Typography
@@ -112,47 +127,39 @@ export default function FormComponent({
           sx={{ display: "flex", flexDirection: "column" }}
         >
           <TextField
-            placeholder="Name"
+            placeholder={translate("form.name", lang)}
             margin="normal"
             variant="outlined"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("name")}
             error={!!errors.name}
             helperText={errors.name?.message}
           />
           <TextField
-            placeholder="Phone"
+            placeholder={translate("form.phone", lang)}
             variant="outlined"
             margin="normal"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("phone")}
             error={!!errors.phone}
             helperText={errors.phone?.message}
           />
           <TextField
-            placeholder="Email"
+            placeholder={translate("form.email", lang)}
             variant="outlined"
             margin="normal"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
           <TextField
-            placeholder="Message"
+            placeholder={translate("form.message", lang)}
             variant="outlined"
             margin="normal"
             multiline
             rows={3}
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("message")}
             error={!!errors.message}
             helperText={errors.message?.message}
@@ -189,7 +196,7 @@ export default function FormComponent({
               width: "fit-content",
             }}
           >
-            Send message
+            {translate("form.send", lang)}
           </Button>
         </Box>
       </Grid>

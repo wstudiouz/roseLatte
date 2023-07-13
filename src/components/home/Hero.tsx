@@ -1,10 +1,11 @@
-import { theme } from "@/config/theme";
 import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import CustomImage from "../customComponent/CustomImage";
 import { COLORS, Z_INDEX } from "@/ts/Consts";
 import { CursorManager } from "@/ts/CursorManager";
+import translate from "@/ts/utils/translate";
+import { HeaderContext } from "@/context/headerContext";
 
 interface HeroProps {
   title: string;
@@ -23,6 +24,7 @@ export default function Hero({
 }: HeroProps) {
   const [show, setShow] = useState<boolean>(false);
   const cursor = useMemo(() => CursorManager.instance.cursor, []);
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       onMouseEnter={() => {
@@ -110,10 +112,10 @@ export default function Hero({
             alignItems: "center",
           }}
         >
-          Learn more
+          {translate("header.more", lang)}
         </Typography>
       </Stack>
-      {first ? (
+      {first && (
         <Typography
           variant="H4Roboto"
           sx={{
@@ -125,10 +127,8 @@ export default function Hero({
             transition: `font-size 1s ease ${isHeaderActive ? 0 : 0.2}s`,
           }}
         >
-          The 1st Floristic Cafe & Bistro in Prague
+          {translate("header.first", lang)}
         </Typography>
-      ) : (
-        <></>
       )}
     </Stack>
   );

@@ -6,14 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-client-local": "openapi-generator-cli generate -i http://localhost:1337/api/docs/openapi.json -g typescript-axios -o src/ts/REST/api/generated --additional-properties=supportsES6=true,typescriptThreePlus=true --skip-validate-spec --type-mappings=datetime=string",
+    "gen-client": "openapi-generator-cli generate -i http://16.16.25.190:1337/api/docs/openapi.json -g typescript-axios -o src/ts/REST/api/generated --additional-properties=supportsES6=true,typescriptThreePlus=true --skip-validate-spec --type-mappings=datetime=string"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@hookform/resolvers": "^3.0.1",
+    "@mui/icons-material": "^5.14.0",
     "@mui/material": "^5.11.15",
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@types/node": "18.15.10",
     "@types/react": "18.0.30",
     "@types/react-dom": "18.0.11",

@@ -1,4 +1,5 @@
 const { Stack, Typography } = require("@mui/material");
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
 import Logo from "../../../public/images/logo.svg";
 import Card from "../../../public/images/card.svg";
@@ -9,9 +10,13 @@ import { COLORS, Z_INDEX } from "@/ts/Consts";
 import { HeaderContext } from "@/context/headerContext";
 import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
+import { Badge, Box, IconButton } from "@mui/material";
+import translate from "@/ts/utils/translate";
+import { useRouter } from "next/router";
 
 const Header = () => {
-  const { openHeader, setOpenHeader } = useContext(HeaderContext);
+  const { openHeader, setOpenHeader, lang, setLang, cards } =
+    useContext(HeaderContext);
   const BurgerLine = {
     content: '""',
     position: "absolute",
@@ -51,6 +56,15 @@ const Header = () => {
     initial: { opacity: 1, y: 0 },
     hidden: { opacity: 0, y: -15 },
   };
+
+  const handleLanguageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedValue = event.target.value;
+    localStorage.setItem("lang", selectedValue);
+    setLang(selectedValue);
+  };
+  const router = useRouter();
   return (
     <Stack>
       <Stack
@@ -100,7 +114,7 @@ const Header = () => {
             }}
             href="/flowers"
           >
-            Flowers
+            {translate("header.flower", lang)}
           </Typography>
         </Stack>
         <Stack
@@ -162,7 +176,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            Bar
+            {translate("header.bar", lang)}
           </Typography>
           <Stack
             sx={{
@@ -172,16 +186,47 @@ const Header = () => {
               flexDirection: "row",
             }}
           >
-            <Typography
-              variant="H4Roboto"
-              sx={{
-                textTransform: "uppercase",
-                color: theme.palette.background.default,
-              }}
-            >
-              En
-            </Typography>
-            <Image src={Card} alt="logo" width={26} height={30} />
+            {lang && (
+              <Box
+                component="select"
+                sx={{
+                  textTransform: "uppercase",
+                  border: "none",
+                  outline: "none",
+                  background: "none",
+                  color: theme.palette.background.default,
+                  fontSize: "25px",
+                }}
+                value={lang}
+                onChange={handleLanguageChange}
+                suppressHydrationWarning
+              >
+                <Box component="option" value="en" sx={{ color: "black" }}>
+                  En
+                </Box>
+                <Box component="option" value="cz" sx={{ color: "black" }}>
+                  Cz
+                </Box>
+              </Box>
+            )}
+            <IconButton aria-label="cart" onClick={() => router.push("/cards")}>
+              <Badge
+                badgeContent={cards.length}
+                color="info"
+                sx={{
+                  "& .MuiBadge-badge": {
+                    right: -3,
+                    top: 13,
+                    border: (theme) =>
+                      `2px solid ${theme.palette.background.paper}`,
+                    padding: "0 4px",
+                  },
+                  zIndex: -1,
+                }}
+              >
+                <Image src={Card} alt="logo" width={26} height={30} />
+              </Badge>
+            </IconButton>
           </Stack>
         </Stack>
       </Stack>

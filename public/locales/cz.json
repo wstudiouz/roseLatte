@@ -1,0 +1,71 @@
+{
+    "header":{
+        "flower": "květiny",
+        "bar": "bar",
+        "shop":"Květinářství",
+         "cafe":"Káva & bistro",
+         "about":"O nás",
+         "contact":"Kontakty",
+         "more":"Zjistěte více",
+         "first":"1. Floristic Cafe & Bistro v Praze"
+    },
+    "form":{
+        "flowerpage":"Vytvořte si vlastní kytice",
+        "cafepage":"Posaďte se",
+        "name":"jméno",
+        "namelabel":"nesprávné jméno, prosím napište správně",
+        "phone":"telefon",
+        "phonelabel":"špatný telefon, pište prosím správně",
+        "message":"zpráva",
+        "messagelabel":"chybná zpráva, pište prosím správně",
+        "email":"e-mail",
+        "emaillabel":"chybný e-mail, pište prosím správně",
+        "send":"odeslat zprávu"
+    },
+    "reviews":{
+        "title":"recenze"
+    },
+    "contact":{
+        "contact": "Kontaktujte nás",
+        "address": "Adresa",
+        "addressText": "Bělehradská 440/59, 120 00 Nusle",
+        "call": "Zavolejte nám",
+        "callText": "+420 987 987 433",
+        "socialMedia": "Sociální média",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "openingHours": "Otevírací hodiny",
+        "monFri": "Po – Pá",
+        "monFriHours": "8:00 – 19:00",
+        "satSun": "So – Ne",
+        "satSunHours": "8:30 – 19:00"
+      },
+      "footer": {
+        "callUs": {
+            "title": "Kontaktujte nás",
+            "phoneNumber": "+420 987 987 433"
+          },
+          "customerCare": {
+            "title": "Zákaznická péče",
+            "orderInformation": "Informace o objednávce"
+          },
+          "ourCompany": {
+            "title": "Naše společnost",
+            "findBoutique": "Najít butik",
+            "careers": "Kariéra"
+          },
+          "legalArea": {
+            "title": "Právní oblast",
+            "termsOfUse": "Podmínky použití",
+            "privacyNotice": "Ochrana osobních údajů"
+          },
+          "socialMedia": {
+            "title": "Sociální média",
+            "instagram": "Instagram",
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+          }
+      }
+      
+}

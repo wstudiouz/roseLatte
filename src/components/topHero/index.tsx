@@ -3,15 +3,25 @@ import { Box, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
 import { motion } from "framer-motion";
+import { CustomComponentsHeroComponent } from "@/ts/REST/api/generated";
+import { useContext } from "react";
+import { HeaderContext } from "@/context/headerContext";
 
 interface HeroProps {
   bgImg: string;
-  title: string;
+  title?: string;
   desc?: string;
   right?: boolean;
+  data?: CustomComponentsHeroComponent;
 }
 
-export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
+export default function TopHero({ bgImg, right, data }: HeroProps) {
+  const { lang } = useContext(HeaderContext);
+  const text =
+    data && data[`text_${lang}` as keyof CustomComponentsHeroComponent];
+  const desc =
+    data && data[`desc_${lang}` as keyof CustomComponentsHeroComponent];
+
   return (
     <Stack
       sx={{
@@ -74,7 +84,7 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
               color: theme.palette.background.default,
             }}
           >
-            {title}
+            {text}
           </Typography>
         </Grid>
         {right ? (
@@ -89,23 +99,25 @@ export default function TopHero({ bgImg, title, desc, right }: HeroProps) {
               alignItems: "center",
             }}
           >
-            <Grid item xs={3}>
-              <Box
-                component={motion.hr}
-                initial={{ opacity: 0, width: "0%" }}
-                animate={{ opacity: 1, width: "100%" }}
-                transition={{
-                  delay: 0.2,
-                  duration: 0.7,
-                  ease: "linear",
-                }}
-                sx={{
-                  width: "100%",
-                  height: "2px",
-                  background: theme.palette.background.default,
-                }}
-              ></Box>
-            </Grid>
+            {desc && (
+              <Grid item xs={3}>
+                <Box
+                  component={motion.hr}
+                  initial={{ opacity: 0, width: "0%" }}
+                  animate={{ opacity: 1, width: "100%" }}
+                  transition={{
+                    delay: 0.2,
+                    duration: 0.7,
+                    ease: "linear",
+                  }}
+                  sx={{
+                    width: "100%",
+                    height: "2px",
+                    background: theme.palette.background.default,
+                  }}
+                ></Box>
+              </Grid>
+            )}
             <Grid item xs={4} sx={{ marginLeft: "50px" }}>
               <Typography
                 component={motion.p}

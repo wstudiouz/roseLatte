@@ -3,6 +3,7 @@ import CustomImage from "../../customComponent/CustomImage";
 import {
   Dispatch,
   SetStateAction,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -11,32 +12,38 @@ import {
 import { CursorManager } from "@/ts/CursorManager";
 import { COLORS } from "@/ts/Consts";
 import { useAspectRatio, AspectRatioMode } from "@/ts/utils/Hooks";
+import { FlowerCatalogueDataAttributesFlowersDataInnerAttributesPricesInner } from "@/ts/REST/api/generated";
+import { Card, HeaderContext } from "@/context/headerContext";
 // import { AspectRatioMode, useAspectRatio } from "@qubixstudio/sphere";
 
 interface ComponentProps {
   bgImg?: string;
   video?: string;
-  itemId?: string;
-  title: string;
+  itemId?: number;
+  title_en: string;
+  title_cz: string;
   active?: boolean;
-  setPopup: Dispatch<SetStateAction<boolean>>;
-  setActive?: Dispatch<SetStateAction<string>>;
+  setPopup: Dispatch<SetStateAction<number>>;
+  setActive?: Dispatch<SetStateAction<number>>;
+  sizes: FlowerCatalogueDataAttributesFlowersDataInnerAttributesPricesInner[];
 }
 
 export default function SliderItem({
   bgImg,
-  title,
+  title_en,
+  title_cz,
   video,
   active,
   setPopup,
   setActive,
   itemId,
+  sizes,
 }: ComponentProps) {
+  const { cards, setCards, lang } = useContext(HeaderContext);
   const [hover, setHover] = useState<boolean>(true);
   const cursor = useMemo(() => CursorManager.instance.cursor, []);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const sizes = ["s", "m", "l", "xl"];
   useEffect(() => {
     if (video) {
       if (active) videoRef.current?.play();
@@ -49,6 +56,31 @@ export default function SliderItem({
     containerRef
   );
 
+  const handleAdd = () => {
+    if (itemId) {
+      const find = cards.find((item: Card) => item.id == itemId);
+      if (!find) {
+        const priceId = sizes[0]?.id;
+        if (priceId) {
+          setCards((prev) => [
+            ...prev,
+            {
+              id: itemId,
+              count: 1,
+              priceId,
+              prices: sizes,
+              img: bgImg,
+              title_en,
+              title_cz,
+            },
+          ]);
+        }
+      }
+    }
+  };
+  type TitlesType = { title_en: string; title_cz: string };
+  const titles: TitlesType = { title_cz, title_en };
+  const title = titles[`title_${lang}` as keyof TitlesType];
   return (
     <Stack
       ref={containerRef}
@@ -180,7 +212,7 @@ export default function SliderItem({
                       },
                     }}
                   >
-                    {e}
+                    {e.size}
                   </Typography>
                 ))}
             </Stack>
@@ -193,13 +225,17 @@ export default function SliderItem({
                 transition: `all 0.5s linear ${hover ? "0" : "0.75"}s`,
               }}
             >
-              Cost:{" "}
-              <Box
-                component={"span"}
-                sx={{ color: COLORS.PINK, textTransform: "uppercase" }}
-              >
-                2500 czk
-              </Box>
+              Costs:
+              {sizes &&
+                sizes.map((e, ind) => (
+                  <Box
+                    key={ind}
+                    component="span"
+                    sx={{ color: COLORS.PINK, textTransform: "uppercase" }}
+                  >
+                    {e.price} czk
+                  </Box>
+                ))}
             </Typography>
           </Stack>
           <Stack
@@ -217,7 +253,7 @@ export default function SliderItem({
             }}
           >
             <Typography
-              onClick={() => setPopup(true)}
+              onClick={() => setPopup(itemId ?? 0)}
               variant="SmallRoboto"
               sx={{
                 width: "45%",
@@ -240,6 +276,7 @@ export default function SliderItem({
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onClick={handleAdd}
             >
               Add Cart
             </Typography>

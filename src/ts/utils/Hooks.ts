@@ -47,3 +47,7 @@ export function useAspectRatio(
 
   return size;
 }
+
+export const useBaseUrl = (): string => {
+  return process.env.NEXT_PUBLIC_BACKEND_URL || "";
+};

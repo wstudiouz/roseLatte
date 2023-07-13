@@ -2,8 +2,9 @@ import { Stack, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import Hero from "./Hero";
 import { HeaderContext } from "@/context/headerContext";
+import translate from "@/ts/utils/translate";
 export default function Home() {
-  const { openHeader } = useContext(HeaderContext);
+  const { openHeader, lang } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
@@ -15,7 +16,7 @@ export default function Home() {
       }}
     >
       <Hero
-        title="Flower shop"
+        title={translate("header.shop", lang)}
         link="flower"
         imageSrc="/images/homeflower2.jpg"
         isHeaderActive={openHeader}
@@ -23,7 +24,7 @@ export default function Home() {
       />
 
       <Hero
-        title="Coffee & Bistro"
+        title={translate("header.cafe", lang)}
         link="coffee"
         imageSrc="/images/homeCafe.jpg"
         isHeaderActive={openHeader}
