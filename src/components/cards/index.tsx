@@ -1,12 +1,20 @@
-import { Stack } from "@mui/material";
-import React from "react";
-import TopHero from "../topHero";
-import ShoppingBag from "./ShoppingBag";
-export default function Cards() {
+import { HeaderContext } from "@/context/headerContext";
+import { useContext, Dispatch, SetStateAction } from "react";
+import CardsDrawer from "./Drawer";
+
+type Props = {
+  drawerOpen: boolean;
+  setDrawerOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export function ShoppingBag({ drawerOpen, setDrawerOpen }: Props) {
+  const { cards, setCards } = useContext(HeaderContext);
   return (
-    <Stack>
-      <TopHero bgImg="/images/coffeehero.png" />
-      <ShoppingBag />
-    </Stack>
+    <CardsDrawer
+      cards={cards}
+      setCards={setCards}
+      drawerOpen={drawerOpen}
+      setDrawerOpen={setDrawerOpen}
+    />
   );
 }

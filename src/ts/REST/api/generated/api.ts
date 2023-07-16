@@ -1964,6 +1964,31 @@ export interface ContactPageResponseDataObject {
 /**
  *
  * @export
+ * @interface CustomComponentsDescComponent
+ */
+export interface CustomComponentsDescComponent {
+  /**
+   *
+   * @type {number}
+   * @memberof CustomComponentsDescComponent
+   */
+  id?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof CustomComponentsDescComponent
+   */
+  text_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CustomComponentsDescComponent
+   */
+  text_cz?: string;
+}
+/**
+ *
+ * @export
  * @interface CustomComponentsHeroComponent
  */
 export interface CustomComponentsHeroComponent {
@@ -3295,22 +3320,16 @@ export interface Food {
   price: number;
   /**
    *
-   * @type {string}
-   * @memberof Food
-   */
-  desc_en: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Food
-   */
-  desc_cz: string;
-  /**
-   *
    * @type {FoodFoodCategory}
    * @memberof Food
    */
   food_category?: FoodFoodCategory;
+  /**
+   *
+   * @type {Array<CustomComponentsDescComponent>}
+   * @memberof Food
+   */
+  desc: Array<CustomComponentsDescComponent>;
   /**
    *
    * @type {string}
@@ -3461,22 +3480,16 @@ export interface FoodCategoryFoodsDataInnerAttributes {
   price?: number;
   /**
    *
-   * @type {string}
-   * @memberof FoodCategoryFoodsDataInnerAttributes
-   */
-  desc_en?: string;
-  /**
-   *
-   * @type {string}
-   * @memberof FoodCategoryFoodsDataInnerAttributes
-   */
-  desc_cz?: string;
-  /**
-   *
    * @type {FoodCategoryFoodsDataInnerAttributesFoodCategory}
    * @memberof FoodCategoryFoodsDataInnerAttributes
    */
   food_category?: FoodCategoryFoodsDataInnerAttributesFoodCategory;
+  /**
+   *
+   * @type {Array<FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner>}
+   * @memberof FoodCategoryFoodsDataInnerAttributes
+   */
+  desc?: Array<FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner>;
   /**
    *
    * @type {string}
@@ -3860,22 +3873,16 @@ export interface FoodFoodCategoryDataAttributesFoodsDataInnerAttributes {
   price?: number;
   /**
    *
-   * @type {string}
-   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributes
-   */
-  desc_en?: string;
-  /**
-   *
-   * @type {string}
-   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributes
-   */
-  desc_cz?: string;
-  /**
-   *
    * @type {AboutCreatedBy}
    * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributes
    */
   food_category?: AboutCreatedBy;
+  /**
+   *
+   * @type {Array<FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner>}
+   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributes
+   */
+  desc?: Array<FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner>;
   /**
    *
    * @type {string}
@@ -3906,6 +3913,31 @@ export interface FoodFoodCategoryDataAttributesFoodsDataInnerAttributes {
    * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributes
    */
   updatedBy?: AboutCreatedBy;
+}
+/**
+ *
+ * @export
+ * @interface FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+ */
+export interface FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner {
+  /**
+   *
+   * @type {number}
+   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+   */
+  id?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+   */
+  text_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+   */
+  text_cz?: string;
 }
 /**
  *
@@ -3990,22 +4022,16 @@ export interface FoodRequestData {
   price: number;
   /**
    *
-   * @type {string}
-   * @memberof FoodRequestData
-   */
-  desc_en: string;
-  /**
-   *
-   * @type {string}
-   * @memberof FoodRequestData
-   */
-  desc_cz: string;
-  /**
-   *
    * @type {FlowerRequestDataCatalogue}
    * @memberof FoodRequestData
    */
   food_category?: FlowerRequestDataCatalogue;
+  /**
+   *
+   * @type {Array<CustomComponentsDescComponent>}
+   * @memberof FoodRequestData
+   */
+  desc: Array<CustomComponentsDescComponent>;
 }
 /**
  *
@@ -4044,6 +4070,299 @@ export interface FoodResponseDataObject {
    * @memberof FoodResponseDataObject
    */
   attributes?: Food;
+}
+/**
+ *
+ * @export
+ * @interface Footer
+ */
+export interface Footer {
+  /**
+   *
+   * @type {FooterCallUsComponent}
+   * @memberof Footer
+   */
+  CallUs: FooterCallUsComponent;
+  /**
+   *
+   * @type {FooterLegalAreaComponent}
+   * @memberof Footer
+   */
+  LegalArea: FooterLegalAreaComponent;
+  /**
+   *
+   * @type {FooterSocialMediaComponent}
+   * @memberof Footer
+   */
+  SocialMedia?: FooterSocialMediaComponent;
+  /**
+   *
+   * @type {string}
+   * @memberof Footer
+   */
+  createdAt?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Footer
+   */
+  updatedAt?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Footer
+   */
+  publishedAt?: string;
+  /**
+   *
+   * @type {AboutHeroBottomComponentImg1DataAttributesFolderDataAttributesFilesDataInnerAttributesCreatedBy}
+   * @memberof Footer
+   */
+  createdBy?: AboutHeroBottomComponentImg1DataAttributesFolderDataAttributesFilesDataInnerAttributesCreatedBy;
+  /**
+   *
+   * @type {AboutCreatedBy}
+   * @memberof Footer
+   */
+  updatedBy?: AboutCreatedBy;
+}
+/**
+ *
+ * @export
+ * @interface FooterCallUsComponent
+ */
+export interface FooterCallUsComponent {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterCallUsComponent
+   */
+  id?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterCallUsComponent
+   */
+  title_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterCallUsComponent
+   */
+  title_cz?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterCallUsComponent
+   */
+  phone?: string;
+}
+/**
+ *
+ * @export
+ * @interface FooterLegalAreaComponent
+ */
+export interface FooterLegalAreaComponent {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterLegalAreaComponent
+   */
+  id?: number;
+  /**
+   *
+   * @type {Array<FooterLegalAreaComponentItemsInner>}
+   * @memberof FooterLegalAreaComponent
+   */
+  items?: Array<FooterLegalAreaComponentItemsInner>;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterLegalAreaComponent
+   */
+  title_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterLegalAreaComponent
+   */
+  title_cz?: string;
+}
+/**
+ *
+ * @export
+ * @interface FooterLegalAreaComponentItemsInner
+ */
+export interface FooterLegalAreaComponentItemsInner {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterLegalAreaComponentItemsInner
+   */
+  id?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterLegalAreaComponentItemsInner
+   */
+  text_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterLegalAreaComponentItemsInner
+   */
+  text_cz?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterLegalAreaComponentItemsInner
+   */
+  url?: string;
+}
+/**
+ *
+ * @export
+ * @interface FooterListResponse
+ */
+export interface FooterListResponse {
+  /**
+   *
+   * @type {Array<FooterListResponseDataItem>}
+   * @memberof FooterListResponse
+   */
+  data?: Array<FooterListResponseDataItem>;
+  /**
+   *
+   * @type {AboutLocalizationListResponseMeta}
+   * @memberof FooterListResponse
+   */
+  meta?: AboutLocalizationListResponseMeta;
+}
+/**
+ *
+ * @export
+ * @interface FooterListResponseDataItem
+ */
+export interface FooterListResponseDataItem {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterListResponseDataItem
+   */
+  id?: number;
+  /**
+   *
+   * @type {Footer}
+   * @memberof FooterListResponseDataItem
+   */
+  attributes?: Footer;
+}
+/**
+ *
+ * @export
+ * @interface FooterRequest
+ */
+export interface FooterRequest {
+  /**
+   *
+   * @type {FooterRequestData}
+   * @memberof FooterRequest
+   */
+  data: FooterRequestData;
+}
+/**
+ *
+ * @export
+ * @interface FooterRequestData
+ */
+export interface FooterRequestData {
+  /**
+   *
+   * @type {FooterCallUsComponent}
+   * @memberof FooterRequestData
+   */
+  CallUs: FooterCallUsComponent;
+  /**
+   *
+   * @type {FooterLegalAreaComponent}
+   * @memberof FooterRequestData
+   */
+  LegalArea: FooterLegalAreaComponent;
+  /**
+   *
+   * @type {FooterSocialMediaComponent}
+   * @memberof FooterRequestData
+   */
+  SocialMedia?: FooterSocialMediaComponent;
+}
+/**
+ *
+ * @export
+ * @interface FooterResponse
+ */
+export interface FooterResponse {
+  /**
+   *
+   * @type {FooterResponseDataObject}
+   * @memberof FooterResponse
+   */
+  data?: FooterResponseDataObject;
+  /**
+   *
+   * @type {object}
+   * @memberof FooterResponse
+   */
+  meta?: object;
+}
+/**
+ *
+ * @export
+ * @interface FooterResponseDataObject
+ */
+export interface FooterResponseDataObject {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterResponseDataObject
+   */
+  id?: number;
+  /**
+   *
+   * @type {Footer}
+   * @memberof FooterResponseDataObject
+   */
+  attributes?: Footer;
+}
+/**
+ *
+ * @export
+ * @interface FooterSocialMediaComponent
+ */
+export interface FooterSocialMediaComponent {
+  /**
+   *
+   * @type {number}
+   * @memberof FooterSocialMediaComponent
+   */
+  id?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterSocialMediaComponent
+   */
+  title_en?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FooterSocialMediaComponent
+   */
+  title_cz?: string;
+  /**
+   *
+   * @type {Array<FooterLegalAreaComponentItemsInner>}
+   * @memberof FooterSocialMediaComponent
+   */
+  Items?: Array<FooterLegalAreaComponentItemsInner>;
 }
 /**
  *
@@ -9687,6 +10006,478 @@ export class FoodCategoryApi extends BaseAPI {
   ) {
     return FoodCategoryApiFp(this.configuration)
       .putFoodCategoriesId(id, foodCategoryRequest, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * FooterApi - axios parameter creator
+ * @export
+ */
+export const FooterApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteFooter: async (
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/footer`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {string} [sort] Sort by attributes ascending (asc) or descending (desc)
+     * @param {boolean} [paginationWithCount] Return page/pageSize (default: true)
+     * @param {number} [paginationPage] Page number (default: 0)
+     * @param {number} [paginationPageSize] Page size (default: 25)
+     * @param {number} [paginationStart] Offset value (default: 0)
+     * @param {number} [paginationLimit] Number of entities to return (default: 25)
+     * @param {string} [fields] Fields to return (ex: title,author)
+     * @param {string} [populate] Relations to return
+     * @param {object} [filters] Filters to apply
+     * @param {string} [locale] Locale to apply
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getFooter: async (
+      sort?: string,
+      paginationWithCount?: boolean,
+      paginationPage?: number,
+      paginationPageSize?: number,
+      paginationStart?: number,
+      paginationLimit?: number,
+      fields?: string,
+      populate?: string,
+      filters?: object,
+      locale?: string,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/footer`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (sort !== undefined) {
+        localVarQueryParameter["sort"] = sort;
+      }
+
+      if (paginationWithCount !== undefined) {
+        localVarQueryParameter["pagination[withCount]"] = paginationWithCount;
+      }
+
+      if (paginationPage !== undefined) {
+        localVarQueryParameter["pagination[page]"] = paginationPage;
+      }
+
+      if (paginationPageSize !== undefined) {
+        localVarQueryParameter["pagination[pageSize]"] = paginationPageSize;
+      }
+
+      if (paginationStart !== undefined) {
+        localVarQueryParameter["pagination[start]"] = paginationStart;
+      }
+
+      if (paginationLimit !== undefined) {
+        localVarQueryParameter["pagination[limit]"] = paginationLimit;
+      }
+
+      if (fields !== undefined) {
+        localVarQueryParameter["fields"] = fields;
+      }
+
+      if (populate !== undefined) {
+        localVarQueryParameter["populate"] = populate;
+      }
+
+      if (filters !== undefined) {
+        localVarQueryParameter["filters"] = filters;
+      }
+
+      if (locale !== undefined) {
+        localVarQueryParameter["locale"] = locale;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {FooterRequest} footerRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    putFooter: async (
+      footerRequest: FooterRequest,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'footerRequest' is not null or undefined
+      assertParamExists("putFooter", "footerRequest", footerRequest);
+      const localVarPath = `/footer`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        footerRequest,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * FooterApi - functional programming interface
+ * @export
+ */
+export const FooterApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = FooterApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async deleteFooter(
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFooter(
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     *
+     * @param {string} [sort] Sort by attributes ascending (asc) or descending (desc)
+     * @param {boolean} [paginationWithCount] Return page/pageSize (default: true)
+     * @param {number} [paginationPage] Page number (default: 0)
+     * @param {number} [paginationPageSize] Page size (default: 25)
+     * @param {number} [paginationStart] Offset value (default: 0)
+     * @param {number} [paginationLimit] Number of entities to return (default: 25)
+     * @param {string} [fields] Fields to return (ex: title,author)
+     * @param {string} [populate] Relations to return
+     * @param {object} [filters] Filters to apply
+     * @param {string} [locale] Locale to apply
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getFooter(
+      sort?: string,
+      paginationWithCount?: boolean,
+      paginationPage?: number,
+      paginationPageSize?: number,
+      paginationStart?: number,
+      paginationLimit?: number,
+      fields?: string,
+      populate?: string,
+      filters?: object,
+      locale?: string,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<FooterResponse>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getFooter(
+        sort,
+        paginationWithCount,
+        paginationPage,
+        paginationPageSize,
+        paginationStart,
+        paginationLimit,
+        fields,
+        populate,
+        filters,
+        locale,
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     *
+     * @param {FooterRequest} footerRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async putFooter(
+      footerRequest: FooterRequest,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<FooterResponse>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.putFooter(
+        footerRequest,
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+  };
+};
+
+/**
+ * FooterApi - factory interface
+ * @export
+ */
+export const FooterApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = FooterApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteFooter(options?: any): AxiosPromise<number> {
+      return localVarFp
+        .deleteFooter(options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {string} [sort] Sort by attributes ascending (asc) or descending (desc)
+     * @param {boolean} [paginationWithCount] Return page/pageSize (default: true)
+     * @param {number} [paginationPage] Page number (default: 0)
+     * @param {number} [paginationPageSize] Page size (default: 25)
+     * @param {number} [paginationStart] Offset value (default: 0)
+     * @param {number} [paginationLimit] Number of entities to return (default: 25)
+     * @param {string} [fields] Fields to return (ex: title,author)
+     * @param {string} [populate] Relations to return
+     * @param {object} [filters] Filters to apply
+     * @param {string} [locale] Locale to apply
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getFooter(
+      sort?: string,
+      paginationWithCount?: boolean,
+      paginationPage?: number,
+      paginationPageSize?: number,
+      paginationStart?: number,
+      paginationLimit?: number,
+      fields?: string,
+      populate?: string,
+      filters?: object,
+      locale?: string,
+      options?: any
+    ): AxiosPromise<FooterResponse> {
+      return localVarFp
+        .getFooter(
+          sort,
+          paginationWithCount,
+          paginationPage,
+          paginationPageSize,
+          paginationStart,
+          paginationLimit,
+          fields,
+          populate,
+          filters,
+          locale,
+          options
+        )
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {FooterRequest} footerRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    putFooter(
+      footerRequest: FooterRequest,
+      options?: any
+    ): AxiosPromise<FooterResponse> {
+      return localVarFp
+        .putFooter(footerRequest, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * FooterApi - object-oriented interface
+ * @export
+ * @class FooterApi
+ * @extends {BaseAPI}
+ */
+export class FooterApi extends BaseAPI {
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof FooterApi
+   */
+  public deleteFooter(options?: AxiosRequestConfig) {
+    return FooterApiFp(this.configuration)
+      .deleteFooter(options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {string} [sort] Sort by attributes ascending (asc) or descending (desc)
+   * @param {boolean} [paginationWithCount] Return page/pageSize (default: true)
+   * @param {number} [paginationPage] Page number (default: 0)
+   * @param {number} [paginationPageSize] Page size (default: 25)
+   * @param {number} [paginationStart] Offset value (default: 0)
+   * @param {number} [paginationLimit] Number of entities to return (default: 25)
+   * @param {string} [fields] Fields to return (ex: title,author)
+   * @param {string} [populate] Relations to return
+   * @param {object} [filters] Filters to apply
+   * @param {string} [locale] Locale to apply
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof FooterApi
+   */
+  public getFooter(
+    sort?: string,
+    paginationWithCount?: boolean,
+    paginationPage?: number,
+    paginationPageSize?: number,
+    paginationStart?: number,
+    paginationLimit?: number,
+    fields?: string,
+    populate?: string,
+    filters?: object,
+    locale?: string,
+    options?: AxiosRequestConfig
+  ) {
+    return FooterApiFp(this.configuration)
+      .getFooter(
+        sort,
+        paginationWithCount,
+        paginationPage,
+        paginationPageSize,
+        paginationStart,
+        paginationLimit,
+        fields,
+        populate,
+        filters,
+        locale,
+        options
+      )
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {FooterRequest} footerRequest
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof FooterApi
+   */
+  public putFooter(footerRequest: FooterRequest, options?: AxiosRequestConfig) {
+    return FooterApiFp(this.configuration)
+      .putFooter(footerRequest, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

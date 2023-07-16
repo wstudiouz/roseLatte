@@ -2,8 +2,18 @@ import { theme } from "@/config/theme";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import CustomImage from "../customComponent/CustomImage";
 import translate from "@/ts/utils/translate";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@/context/headerContext";
+import {
+  FooterCallUsComponent,
+  FooterLegalAreaComponent,
+  FooterLegalAreaComponentItemsInner,
+  FooterListResponseDataItem,
+  FooterSocialMediaComponent,
+} from "@/ts/REST/api/generated";
+import { getter } from "@/ts/utils/Fetcher";
+import Link from "next/link";
+import { COLORS } from "@/ts/Consts";
 
 export default function Footer() {
   const gridItemStyle = {
@@ -21,6 +31,18 @@ export default function Footer() {
     },
   };
   const { lang } = useContext(HeaderContext);
+  const [data, setData] = useState<FooterListResponseDataItem>();
+  useEffect(() => {
+    const getValues = async () => {
+      const result = await getter(
+        "footer?populate=SocialMedia.Items,CallUs,LegalArea.items"
+      );
+      if (result.ok && result.data) {
+        setData(result.data);
+      }
+    };
+    getValues();
+  }, []);
   return (
     <Stack
       sx={{
@@ -77,61 +99,85 @@ export default function Footer() {
         container
         sx={{
           margin: { xs: "20px 0", md: "40px 0" },
-          justifyContent: { xs: "left", md: "space-between" },
+          justifyContent: { xs: "left" },
         }}
       >
-        <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">
-            {translate("footer.callUs.title", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.callUs.phoneNumber", lang)}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">
-            {translate("footer.customerCare.title", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.customerCare.orderInformation", lang)}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">
-            {translate("footer.ourCompany.title", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.ourCompany.findBoutique", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.ourCompany.careers", lang)}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">
-            {translate("footer.legalArea.title", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.legalArea.termsOfUse", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.legalArea.privacyNotice", lang)}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
-          <Typography variant="h4">
-            {translate("footer.socialMedia.title", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.socialMedia.instagram", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.socialMedia.facebook", lang)}
-          </Typography>
-          <Typography variant="SmallRoboto">
-            {translate("footer.socialMedia.twitter", lang)}
-          </Typography>
-        </Grid>
+        {data && data.attributes?.CallUs && (
+          <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
+            <Typography variant="h4">
+              {
+                data.attributes.CallUs[
+                  `title_${lang}` as keyof FooterCallUsComponent
+                ]
+              }
+            </Typography>
+            <Typography variant="SmallRoboto">
+              {data.attributes.CallUs.phone}
+            </Typography>
+          </Grid>
+        )}
+        {data && data.attributes?.LegalArea && (
+          <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
+            <Typography variant="h4">
+              {String(
+                data.attributes.LegalArea[
+                  `title_${lang}` as keyof FooterLegalAreaComponent
+                ]
+              )}
+            </Typography>
+            {data.attributes.LegalArea.items?.map((e, ind) => (
+              <Typography
+                key={ind}
+                variant="SmallRoboto"
+                sx={{
+                  "& a": {
+                    textDecoration: "none",
+                    color: COLORS.WHITE,
+                  },
+                }}
+              >
+                <Link href={e.url ?? ""} passHref>
+                  {
+                    e[
+                      `text_${lang}` as keyof FooterLegalAreaComponentItemsInner
+                    ]
+                  }
+                </Link>
+              </Typography>
+            ))}
+          </Grid>
+        )}
+        {data && data.attributes?.SocialMedia && (
+          <Grid item xs={6} sm={4} md={3} lg={2} sx={gridItemStyle}>
+            <Typography variant="h4">
+              {String(
+                data.attributes.SocialMedia[
+                  `title_${lang}` as keyof FooterSocialMediaComponent
+                ]
+              )}
+            </Typography>
+            {data.attributes.SocialMedia.Items?.map((e, ind) => (
+              <Typography
+                key={ind}
+                variant="SmallRoboto"
+                sx={{
+                  "& a": {
+                    textDecoration: "none",
+                    color: COLORS.WHITE,
+                  },
+                }}
+              >
+                <Link href={e.url ?? ""} passHref>
+                  {
+                    e[
+                      `text_${lang}` as keyof FooterLegalAreaComponentItemsInner
+                    ]
+                  }
+                </Link>
+              </Typography>
+            ))}
+          </Grid>
+        )}
       </Grid>
       <Box
         component="hr"

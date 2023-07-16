@@ -25,7 +25,6 @@ interface HeaderContext {
   cards: Card[];
   setCards: Dispatch<SetStateAction<Card[]>>;
 }
-
 export const HeaderContext = createContext<HeaderContext>({
   openHeader: false,
   setOpenHeader: () => {},

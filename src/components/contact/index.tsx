@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { getter } from "@/ts/utils/Fetcher";
 import FormComponent from "../customComponent/ReusableForm";
 import TopHero from "../topHero";
-import { ContactPageListResponseDataItem } from "@/ts/REST/api/generated";
+import {
+  ContactPageListResponseDataItem,
+  FooterListResponseDataItem,
+} from "@/ts/REST/api/generated";
 import BeautifulCard from "../customComponent/BeautifulCard";
 import ContactUs from "./ContactUs";
 export default function Contact() {
   const [data, setData] = useState<ContactPageListResponseDataItem>();
+  const [rigthTexts, setRightTexts] = useState<FooterListResponseDataItem>();
   const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -15,6 +19,12 @@ export default function Contact() {
       const result = await getter("contact-page?populate=Hero");
       if (result.ok && result.data) {
         setData(result.data);
+      }
+      const texts = await getter(
+        "footer?populate=SocialMedia.Items,CallUs,LegalArea.items"
+      );
+      if (texts.ok && texts.data) {
+        setRightTexts(texts.data);
       }
     };
     getValues();
@@ -38,7 +48,7 @@ export default function Contact() {
           data={data.attributes.Hero}
         />
       )}
-      <ContactUs />
+      {rigthTexts && <ContactUs data={rigthTexts} />}
       {data && data.attributes?.map && (
         <Box
           sx={{

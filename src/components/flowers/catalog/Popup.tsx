@@ -28,6 +28,7 @@ import {
   Increment,
   ViewCount,
 } from "@/components/customComponent/CountControl";
+import translate from "@/ts/utils/translate";
 
 interface ComponentProps {
   setPopup: Dispatch<SetStateAction<number>>;
@@ -84,7 +85,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
             ...prev,
             {
               id: itemId,
-              count: 1,
+              count: count,
               priceId,
               prices: item?.attributes?.Prices,
               img: url + item.attributes?.img?.data?.attributes?.url,
@@ -162,7 +163,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                 variant="h4"
                 sx={{ color: theme.palette.background.default }}
               >
-                Sizes:
+                {translate("cards.sizes", lang)}:
               </Typography>
               {item &&
                 item.attributes?.Prices &&
@@ -201,9 +202,17 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                   flexDirection: "row",
                 }}
               >
-                <Decrement count={count} setCount={setCount} />
+                <Stack
+                  onClick={() => count > 1 && setCount((prev) => prev - 1)}
+                >
+                  <Decrement />
+                </Stack>
                 <ViewCount count={count} />
-                <Increment count={count} setCount={setCount} />
+                <Stack
+                  onClick={() => count < 20 && setCount((prev) => prev + 1)}
+                >
+                  <Increment />
+                </Stack>
               </Stack>
               <Typography
                 variant="h4"
@@ -238,7 +247,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                 sx={{
                   cursor: "pointer",
                   border: "2px solid #DC9DB3",
-                  width: "130px",
+                  width: "150px",
                   height: "50px",
                   background: "none",
                   outline: "none",
@@ -247,7 +256,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                 onClick={handleAdd}
               >
                 <Typography variant="SmallRoboto" sx={{ color: "#DC9DB3" }}>
-                  add to cart
+                  {translate("cards.add", lang)}
                 </Typography>
               </Box>
             </Stack>

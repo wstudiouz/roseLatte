@@ -28,7 +28,7 @@
     "contact":{
         "contact": "Contact us",
         "address": "Address",
-        "addressText": "Bělehradská 440/59, 120 00 Nusle",
+        "addressText": "Belehradská 440/59, 120 00 Nusle",
         "call": "Call us",
         "callText": "+420 987 987 433",
         "socialMedia": "Social media",
@@ -66,6 +66,15 @@
             "facebook": "Facebook",
             "twitter": "Twitter"
           }
+      },
+      "cards":{
+        "sizes":"Sizes",
+        "add":"Add to card",
+        "remove":"Remove",
+        "allprice":"All",
+        "empty":"Card is empty",
+        "buy":"Buy",
+        "success":"Your order has been successfully received, we will contact you soon",
+        "error":"A problem occurred. Please try again later"
       }
-      
 }

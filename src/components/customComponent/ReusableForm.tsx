@@ -1,110 +1,41 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {
-  Box,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SxProps,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import CustomImage from "./CustomImage";
-import { theme } from "@/config/theme";
-import { COLORS } from "@/ts/Consts";
+import {
+  COLORS,
+  FormValues,
+  formValidateSchema,
+  inputStyle,
+} from "@/ts/Consts";
 import translate from "@/ts/utils/translate";
 import { HeaderContext } from "@/context/headerContext";
+import { sendMessage } from "@/ts/utils/Fetcher";
 
 interface ComponentProps {
-  isFlowerShop?: boolean;
   title: string;
   bg: string;
 }
 
-export default function FormComponent({
-  isFlowerShop,
-  title,
-  bg,
-}: ComponentProps) {
-  type FormValues = {
-    name: string;
-    phone: string;
-    email: string;
-    message: string;
-    category?: string | undefined;
-  };
+export default function FormComponent({ title, bg }: ComponentProps) {
   const { lang } = useContext(HeaderContext);
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .min(3, translate("form.namelabel", lang))
-      .required(translate("form.namelabel", lang)),
-    phone: yup
-      .string()
-      .min(3, translate("form.phonelabel", lang))
-      .required(translate("form.phonelabel", lang)),
-    message: yup
-      .string()
-      .min(3, translate("form.messagelabel", lang))
-      .required(translate("form.messagelabel", lang)),
-    email: yup
-      .string()
-      .min(3, translate("form.emaillabel", lang))
-      .email(translate("form.emaillabel", lang))
-      .required(translate("form.emaillabel", lang)),
-  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(formValidateSchema(lang)),
   });
-  const [formData, setFormData] = useState<FormValues | null>(null);
 
-  const onSubmit = (data: FormValues) => {
-    setFormData(data);
-    alert(JSON.stringify(data));
+  const onSubmit = async (data: FormValues) => {
+    let telegramMessage = `New message\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nMessage: ${data.message}\n`;
+    await sendMessage(telegramMessage, lang);
   };
-  const categoryOptions = ["wedding", "boxes", "art", "composition", "mono"];
 
-  const inputStyle: SxProps = {
-    margin: 0,
-    marginBottom: "25px",
-    "& .MuiOutlinedInput-root": {
-      border: `1px solid ${COLORS.PINK}`,
-      color: `${COLORS.PINK} !important`,
-      borderRadius: "0",
-      fontWeight: "300",
-      fontSize: "18px",
-      lineHeight: "21px",
-      padding: "30px",
-      "&:focus": {
-        border: "0",
-      },
-      [theme.breakpoints.down("lg")]: {
-        fontSize: "18px",
-        lineHeight: "21px",
-      },
-      [theme.breakpoints.between("xs", "sm")]: {
-        fontSize: "16px",
-        lineHeight: "26px",
-      },
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderWidth: "0px !important",
-    },
-    width: "100%",
-    color: `${COLORS.PINK} !important`,
-    " input": {
-      p: 0,
-    },
-  };
   return (
     <Grid container sx={{ background: COLORS.WHITE_BACKGROUNDW }}>
       <Grid item xs={6}>
@@ -164,23 +95,6 @@ export default function FormComponent({
             error={!!errors.message}
             helperText={errors.message?.message}
           />
-          {/* {isFlowerShop ? (
-            <>
-              <InputLabel id="category-label">Category:</InputLabel>
-              <Select
-                {...register("category", { required: true })}
-                labelId="category-label"
-              >
-                {categoryOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </>
-          ) : (
-            <></>
-          )} */}
           <Button
             type="submit"
             variant="outlined"

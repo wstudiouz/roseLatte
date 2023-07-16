@@ -1,3 +1,5 @@
+import translate from "./translate";
+
 export const getter = async (url: string, withMeta?: boolean) => {
   const result = { ok: false, data: null, msg: "" };
 
@@ -23,4 +25,32 @@ export const getter = async (url: string, withMeta?: boolean) => {
   }
 
   return result;
+};
+
+export const sendMessage = async (message: string, lang: string) => {
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_BOT_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: process.env.NEXT_PUBLIC_CHAT_ID,
+          text: message,
+          parse_mode: "html",
+        }),
+      }
+    );
+
+    if (response.ok) {
+      alert(translate("cards.success", lang));
+    } else {
+      alert(translate("cards.error", lang));
+    }
+  } catch (error) {
+    alert(translate("cards.error", lang));
+  }
+  window.location.reload();
 };

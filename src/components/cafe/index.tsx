@@ -12,12 +12,13 @@ import Card from "./foodCard/Card";
 import FormComponent from "../customComponent/ReusableForm";
 import Reviewer from "../flowers/Reviewers";
 import { HeaderContext } from "@/context/headerContext";
+import translate from "@/ts/utils/translate";
 export default function Cafe() {
   const [page, setPage] = useState<CafePageListResponseDataItem>();
   const [data, setData] = useState<FoodCategoryListResponseDataItem[]>();
   const [reviewer, setReviewer] = useState<any[]>([]);
   const [population] = useState<string[]>(["Hero"]);
-  const [populationFoods] = useState<string[]>(["foods.img"]);
+  const [populationFoods] = useState<string[]>(["foods.img", "foods.desc"]);
 
   useEffect(() => {
     const getValues = async () => {
@@ -71,7 +72,7 @@ export default function Cafe() {
           })}
 
       <FormComponent
-        title="Create your own bouquets"
+        title={translate("form.cafepage", lang)}
         bg="/images/flowersform.png"
       />
       {reviewer && reviewer.length && <Reviewer reviewer={reviewer} />}

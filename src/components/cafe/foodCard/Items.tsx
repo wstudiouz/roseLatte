@@ -44,18 +44,14 @@ export default function Items({ title, items, sx, setImg }: ComponentProps) {
                   `title_${lang}` as keyof FoodCategoryFoodsDataInnerAttributes
                 ]
               : "";
-            const itemDesc = e.attributes
-              ? e.attributes[
-                  `desc_${lang}` as keyof FoodCategoryFoodsDataInnerAttributes
-                ]
-              : "";
+
             return (
               <Item
                 key={i}
                 title={String(itemTitle)}
                 num={i}
                 setImg={setImg}
-                desc={String(itemDesc)}
+                desc={e.attributes?.desc ?? []}
                 sum={e.attributes?.price ?? 0}
               />
             );

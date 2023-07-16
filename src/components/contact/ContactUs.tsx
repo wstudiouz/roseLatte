@@ -6,8 +6,19 @@ import { COLORS } from "@/ts/Consts";
 import translate from "@/ts/utils/translate";
 import { useContext } from "react";
 import { HeaderContext } from "@/context/headerContext";
+import {
+  FooterCallUsComponent,
+  FooterLegalAreaComponentItemsInner,
+  FooterListResponseDataItem,
+  FooterSocialMediaComponent,
+} from "@/ts/REST/api/generated";
+import Link from "next/link";
 
-export default function ContactUs() {
+type Props = {
+  data: FooterListResponseDataItem;
+};
+
+export default function ContactUs({ data }: Props) {
   const stackSx: SxProps = {
     margin: "25px 0",
   };
@@ -85,29 +96,53 @@ export default function ContactUs() {
             </Typography>
           </Stack>
 
-          <Stack sx={stackSx}>
-            <Typography variant="h4" sx={h4Sx}>
-              {translate("contact.call", lang)}
-            </Typography>
-            <Typography variant="SmallRoboto" sx={smallSx}>
-              {translate("contact.callText", lang)}
-            </Typography>
-          </Stack>
+          {data && data.attributes?.CallUs && (
+            <Stack sx={stackSx}>
+              <Typography variant="h4" sx={h4Sx}>
+                {
+                  data.attributes.CallUs[
+                    `title_${lang}` as keyof FooterCallUsComponent
+                  ]
+                }
+              </Typography>
+              <Typography variant="SmallRoboto" sx={smallSx}>
+                {data.attributes.CallUs.phone}
+              </Typography>
+            </Stack>
+          )}
 
-          <Stack sx={stackSx}>
-            <Typography variant="h4" sx={h4Sx}>
-              {translate("contact.socialMedia", lang)}
-            </Typography>
-            <Typography variant="SmallRoboto" sx={smallSx}>
-              {translate("contact.instagram", lang)}
-            </Typography>
-            <Typography variant="SmallRoboto" sx={smallSx}>
-              {translate("contact.facebook", lang)}
-            </Typography>
-            <Typography variant="SmallRoboto" sx={smallSx}>
-              {translate("contact.twitter", lang)}
-            </Typography>
-          </Stack>
+          {data && data.attributes?.SocialMedia && (
+            <Stack sx={stackSx}>
+              <Typography variant="h4" sx={h4Sx}>
+                {String(
+                  data.attributes.SocialMedia[
+                    `title_${lang}` as keyof FooterSocialMediaComponent
+                  ]
+                )}
+              </Typography>
+              {data.attributes.SocialMedia.Items?.map((e, ind) => (
+                <Typography
+                  key={ind}
+                  variant="SmallRoboto"
+                  sx={{
+                    ...smallSx,
+                    "& a": {
+                      textDecoration: "none",
+                      color: COLORS.PINK,
+                    },
+                  }}
+                >
+                  <Link href={e.url ?? ""} passHref>
+                    {
+                      e[
+                        `text_${lang}` as keyof FooterLegalAreaComponentItemsInner
+                      ]
+                    }
+                  </Link>
+                </Typography>
+              ))}
+            </Stack>
+          )}
 
           <Stack sx={stackSx}>
             <Typography variant="h4" sx={h4Sx}>

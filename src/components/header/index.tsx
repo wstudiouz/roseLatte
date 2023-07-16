@@ -13,6 +13,8 @@ import Link from "next/link";
 import { Badge, Box, IconButton } from "@mui/material";
 import translate from "@/ts/utils/translate";
 import { useRouter } from "next/router";
+import CardsDrawer from "../cards/Drawer";
+import { ShoppingBag } from "../cards";
 
 const Header = () => {
   const { openHeader, setOpenHeader, lang, setLang, cards } =
@@ -37,7 +39,8 @@ const Header = () => {
     marginTop: openHeader ? 0 : "-5px",
   };
   const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState<boolean>(false);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const update = useCallback(() => {
     if (scrollY.get() > scrollY.getPrevious()) {
@@ -209,7 +212,7 @@ const Header = () => {
                 </Box>
               </Box>
             )}
-            <IconButton aria-label="cart" onClick={() => router.push("/cards")}>
+            <IconButton aria-label="cart" onClick={() => setDrawerOpen(true)}>
               <Badge
                 badgeContent={cards.length}
                 color="info"
@@ -231,6 +234,7 @@ const Header = () => {
         </Stack>
       </Stack>
       <HeaderBottom active={openHeader} setActive={setOpenHeader} />
+      <ShoppingBag drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
     </Stack>
   );
 };

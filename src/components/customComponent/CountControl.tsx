@@ -2,15 +2,10 @@ import { theme } from "@/config/theme";
 import { Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
-type CounterProps = {
-  count: number;
-  setCount: Dispatch<SetStateAction<number>>;
-};
-
 type CountProps = {
   count: number;
 };
-export function Decrement({ count, setCount }: CounterProps) {
+export function Decrement() {
   return (
     <Typography
       variant="h4"
@@ -19,14 +14,13 @@ export function Decrement({ count, setCount }: CounterProps) {
         margin: "0 3px",
         cursor: "pointer",
       }}
-      onClick={() => count > 1 && setCount((prev) => prev - 1)}
     >
       -
     </Typography>
   );
 }
 
-export function Increment({ count, setCount }: CounterProps) {
+export function Increment() {
   return (
     <Typography
       variant="h4"
@@ -35,7 +29,6 @@ export function Increment({ count, setCount }: CounterProps) {
         margin: "0 3px",
         cursor: "pointer",
       }}
-      onClick={() => count < 20 && setCount((prev) => prev + 1)}
     >
       +
     </Typography>

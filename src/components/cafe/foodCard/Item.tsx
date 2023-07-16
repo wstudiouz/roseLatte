@@ -1,12 +1,14 @@
 import { theme } from "@/config/theme";
+import { HeaderContext } from "@/context/headerContext";
 import { COLORS } from "@/ts/Consts";
+import { FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner } from "@/ts/REST/api/generated";
 import { Stack, SxProps, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 
 interface ComponentProps {
   title: string;
-  desc: string;
+  desc: FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner[];
   sum: number;
   sx?: SxProps;
   num: number;
@@ -21,6 +23,7 @@ export default function Item({
   num,
   setImg,
 }: ComponentProps) {
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       onMouseEnter={() => setImg(num)}
@@ -52,16 +55,33 @@ export default function Item({
         </Typography>
 
         <Stack>
-          <Typography
-            variant="SmallRoboto"
-            sx={{
-              display: "flex",
-              justifyContent: "left",
-              alignItems: "center",
-              fontFamily: "'Roboto'",
-            }}
-            dangerouslySetInnerHTML={{ __html: desc }}
-          />
+          {desc.map((e, ind) => (
+            <Typography
+              key={ind}
+              variant="SmallRoboto"
+              sx={{
+                display: "flex",
+                justifyContent: "left",
+                alignItems: "center",
+                fontFamily: "'Roboto'",
+                "&:before": {
+                  content: "''",
+                  display: "block",
+                  width: "4px",
+                  height: "4px",
+                  background: theme.palette.text.secondary,
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                },
+              }}
+            >
+              {
+                e[
+                  `text_${lang}` as keyof FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+                ]
+              }
+            </Typography>
+          ))}
         </Stack>
       </Stack>
       <Typography
