@@ -24,7 +24,7 @@ interface ComponentProps {
   title_cz: string;
   active?: boolean;
   setPopup: Dispatch<SetStateAction<number>>;
-  setActive?: Dispatch<SetStateAction<number>>;
+  setActive?: (id: number) => void;
   sizes: FlowerCatalogueDataAttributesFlowersDataInnerAttributesPricesInner[];
 }
 
@@ -93,7 +93,10 @@ export default function SliderItem({
         cursor?.removeImg();
       }}
       onClick={() => {
-        if (setActive && itemId) setActive(itemId);
+        if (setActive && itemId) {
+          setActive(itemId);
+          console.log(itemId);
+        }
       }}
       sx={{
         transform: active ? "scale(1.135)" : undefined,

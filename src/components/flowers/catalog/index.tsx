@@ -38,34 +38,7 @@ export default function Catalog({
   setActiveCatalog,
 }: Props) {
   const [popup, setPopup] = useState<number>(0);
-  const flowers2: any[] = [
-    {
-      title: "spring bouquet",
-      id: 1,
-      video: "/video/slider.mp4",
-      sizes: [{ id: 1, size: "S", price: 1232 }],
-    },
-    {
-      video: "/video/slider1.mp4",
-      title: "wedding with peony",
-      id: 2,
-      sizes: [{ id: 1, size: "S", price: 1232 }],
-    },
-    {
-      video: "/video/slider2.mp4",
-      title: "wedding with peony",
-      id: 3,
-      sizes: [{ id: 1, size: "S", price: 1232 }],
-    },
-    {
-      video: "/video/slider1.mp4",
-      title: "wedding with peony",
-      id: 4,
-      img: "",
-      sizes: [{ id: 1, size: "S", price: 1232 }],
-    },
-  ];
-  const [currentSlide, setCurrentSlide] = useState<number>(flowers[0].id);
+  const [currentSlide, setCurrentSlide] = useState<number>(flowers[0]?.id);
   const url = useBaseUrl();
   const { lang } = useContext(HeaderContext);
   const {
@@ -73,61 +46,42 @@ export default function Catalog({
     slideToPrevItem, // go back to previous slide
     slideToNextItem, // move to next slide
     useListenToCustomEvent, //custom hook to listen event when the slide changes
-    slideToItem,
+    // slideToItem
   } = useSpringCarousel({
     itemsPerSlide: 3, // number of slides per view
     withLoop: true, // will loop
-    disableGestures: true,
+    disableGestures: false,
     initialStartingPosition: "center", // the active slide will be at the center
-    items: flowers2.map((item) => {
+    items: flowers.map((item) => {
       return {
         ...item,
         renderItem: (
           <SliderItem
-            bgImg={item.img}
-            video={item.video}
-            title_en={item.title}
-            title_cz={item.title}
+            bgImg={`${url}${item.attributes?.img?.data?.attributes?.url}`}
+            video={`${url}${item.attributes?.video?.data?.attributes?.url}`}
+            title_en={item.attributes.title_en}
+            title_cz={item.attributes.title_cz}
             active={currentSlide === item.id}
-            setActive={currentSlide !== item.id ? setCurrentSlide : undefined}
+            // setActive={currentSlide !== item.id ? setCurrentSlide : undefined}
             itemId={item.id}
             setPopup={setPopup}
-            sizes={item.sizes}
+            sizes={item.attributes?.Prices}
           />
         ),
       };
     }),
-    // items: flowers.map((item) => {
-    //   return {
-    //     ...item,
-    //     renderItem: (
-    //       <SliderItem
-    //         bgImg={`${url}${item.attributes?.img?.data?.attributes?.url}`}
-    //         video={`${url}${item.attributes?.video?.data?.attributes?.url}`}
-    //         title_en={item.attributes.title_en}
-    //         title_cz={item.attributes.title_cz}
-    //         active={currentSlide === item.id}
-    //         setActive={currentSlide !== item.id ? setCurrentSlide : undefined}
-    //         itemId={item.id}
-    //         setPopup={setPopup}
-    //         sizes={item.attributes?.Prices}
-    //       />
-    //     ),
-    //   };
-    // }),
   });
 
-  useEffect(() => {
-    if (flowers.length > 1) {
-      slideToItem(currentSlide);
-    }
-  }, [currentSlide, slideToItem, flowers]);
+  // useEffect(() => {
+  //   console.log(currentSlide);
+  //   if (flowers.some((el) => el.id == currentSlide)) slideToItem(currentSlide);
+  // }, [currentSlide, flowers, slideToItem]);
+
   useListenToCustomEvent((event) => {
     if (event.eventName === "onSlideStartChange") {
       setCurrentSlide(Number(event?.nextItem?.id));
     }
   });
-
   const findCurrentItem = (id: number): FlowerCatalogueFlowersDataInner => {
     const find = flowers.find(
       (item: FlowerCatalogueFlowersDataInner) => item.id == id
