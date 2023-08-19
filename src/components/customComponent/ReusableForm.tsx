@@ -38,10 +38,22 @@ export default function FormComponent({ title, bg }: ComponentProps) {
 
   return (
     <Grid container sx={{ background: COLORS.WHITE_BACKGROUNDW }}>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <CustomImage src={bg} sx={{ width: "100%", height: "100%" }} />
       </Grid>
-      <Grid item xs={6} sx={{ padding: "100px 75px" }}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          padding: {
+            xs: "10px 20px",
+            sm: "20px 30px",
+            md: "30px 40px",
+            lg: "100px 75px",
+          },
+        }}
+      >
         <Typography
           variant="h2"
           sx={{
@@ -103,7 +115,12 @@ export default function FormComponent({ title, bg }: ComponentProps) {
               border: `1px solid ${COLORS.PINK}`,
               borderRadius: 0,
               outline: "none",
-              padding: "30px 45px",
+              padding: {
+                xs: "10px 15px",
+                sm: "15px 20px",
+                md: "20px 25px",
+                lg: "30px 45px",
+              },
               "&:hover": {
                 border: `1px solid ${COLORS.PINK}`,
               },

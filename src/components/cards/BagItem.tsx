@@ -3,13 +3,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import CustomImage from "../customComponent/CustomImage";
-import { theme } from "@/config/theme";
 import {
   Decrement,
   Increment,
   ViewCount,
 } from "../customComponent/CountControl";
 import translate from "@/ts/utils/translate";
+import { COLORS, FlexBox } from "@/ts/Consts";
 
 type Props = {
   itemId: number;
@@ -83,8 +83,7 @@ export default function BagItem({ itemId }: Props) {
       sx={{
         width: "100%",
         height: "250px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        background: COLORS.BG,
         flexDirection: "row",
         justifyContent: "space-between",
         margin: "15px 0",
@@ -101,7 +100,7 @@ export default function BagItem({ itemId }: Props) {
           />
         )}
       </Grid>
-      <Grid item xs={8} sx={{ padding: "20px 30px" }}>
+      <Grid item xs={8} sx={{ padding: { xs: "7px 10px", md: "20px 30px" } }}>
         <Typography variant="h4">{String(title)}</Typography>
         <Stack
           sx={{
@@ -122,12 +121,9 @@ export default function BagItem({ itemId }: Props) {
                   textTransform: "uppercase",
                   margin: "0 12px",
                   cursor: "pointer",
-                  color:
-                    card.priceId == e.id
-                      ? theme.palette.text.secondary
-                      : theme.palette.background.default,
+                  color: card.priceId == e.id ? COLORS.SECONDARY : COLORS.WHITE,
                   "&:hover": {
-                    color: theme.palette.text.secondary,
+                    color: COLORS.SECONDARY,
                   },
                 }}
                 onClick={() => handleResize(e.id)}
@@ -138,9 +134,8 @@ export default function BagItem({ itemId }: Props) {
         </Stack>
         <Stack
           sx={{
+            ...FlexBox,
             flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
             marginTop: "15px",
           }}
         >
@@ -167,7 +162,7 @@ export default function BagItem({ itemId }: Props) {
             <Typography
               variant="h4"
               sx={{
-                color: theme.palette.text.secondary,
+                color: COLORS.SECONDARY,
                 marginLeft: "20px",
               }}
             >

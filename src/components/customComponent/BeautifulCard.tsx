@@ -1,8 +1,7 @@
-import { theme } from "@/config/theme";
 import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "./CustomImage";
-import { COLORS } from "@/ts/Consts";
+import { COLORS, FlexBox } from "@/ts/Consts";
 import { AboutGetIdeasComponent } from "@/ts/REST/api/generated";
 import { useBaseUrl } from "@/ts/utils/Hooks";
 import { useContext } from "react";
@@ -43,29 +42,42 @@ export default function BeautifulCard({ right, data }: ComponentProps) {
       />
       <Grid
         container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={"55px"}
+        sx={{
+          ...FlexBox,
+          flexDirection: { xs: "column", md: "row" },
+        }}
       >
-        <Grid item xs={12} sm={9} md={4} lg={5}>
-          {data?.img?.data?.attributes?.url && (
-            <CustomImage
-              src={`${url}${data.img.data.attributes.url}`}
-              sx={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          )}
+        <Grid item xs={12} sm={9} md={5.6}>
+          <Stack sx={{ width: "100%" }}>
+            {data?.img?.data?.attributes?.url && (
+              <CustomImage
+                src={`${url}${data.img.data.attributes.url}`}
+                sx={{
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+            )}
+          </Stack>
         </Grid>
-        <Grid item xs={12} sm={10} md={8} lg={7} sx={{ position: "relative" }}>
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={6}
+          sx={{
+            position: "relative",
+            paddingLeft: { md: "30px" },
+            marginTop: { xs: "30px", md: 0 },
+          }}
+        >
           {data && title && (
             <Typography
               variant="h2"
               sx={{
-                color: theme.palette.text.secondary,
+                color: COLORS.SECONDARY,
                 textTransform: "capitalize",
+                textAlign: "center",
               }}
             >
               {String(title)}
@@ -85,7 +97,7 @@ export default function BeautifulCard({ right, data }: ComponentProps) {
               <Typography
                 variant="SmallRoboto"
                 sx={{
-                  color: theme.palette.text.secondary,
+                  color: COLORS.SECONDARY,
                 }}
               >
                 {String(desc)}

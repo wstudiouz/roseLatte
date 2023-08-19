@@ -45,7 +45,7 @@ export const HeaderProvider = ({ children }: HeaderContextType) => {
 
   useEffect(() => {
     const storedLang = localStorage.getItem("lang");
-    if (storedLang) {
+    if (storedLang && ["en", "cz"].some((e) => e == storedLang)) {
       setLang(storedLang);
     }
 

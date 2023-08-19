@@ -25,7 +25,7 @@ export default function Catalogs({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        overflowX: "auto",
+        flexWrap: "wrap",
         marginTop: "25px",
       }}
     >

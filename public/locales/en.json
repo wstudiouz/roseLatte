@@ -75,6 +75,11 @@
         "empty":"Card is empty",
         "buy":"Buy",
         "success":"Your order has been successfully received, we will contact you soon",
-        "error":"A problem occurred. Please try again later"
+        "error":"A problem occurred. Please try again later",
+        "price":"Prices",
+        "more":"Read more",
+        "close":"Close",
+        "confirm": "Confirm",
+        "catalogue":"Catalog Of Bouquets"
       }
 }

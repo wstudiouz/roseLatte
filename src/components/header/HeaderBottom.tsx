@@ -1,7 +1,7 @@
 import { HeaderContext } from "@/context/headerContext";
 import { COLORS, Z_INDEX } from "@/ts/Consts";
 import translate from "@/ts/utils/translate";
-import { Box, Stack, SxProps, Typography } from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext } from "react";

@@ -6,6 +6,7 @@ import { AboutHeroBottomComponent } from "@/ts/REST/api/generated";
 import { useBaseUrl } from "@/ts/utils/Hooks";
 import { useContext } from "react";
 import { HeaderContext } from "@/context/headerContext";
+import { COLORS, FlexBox } from "@/ts/Consts";
 
 type Props = {
   data: AboutHeroBottomComponent;
@@ -22,8 +23,7 @@ export default function Info({ data }: Props) {
         height: { lg: "100vh" },
         minHeight: { md: "750px" },
         padding: "50px 30px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        background: COLORS.BG,
         position: "relative",
       }}
     >
@@ -39,54 +39,41 @@ export default function Info({ data }: Props) {
       />
       <Grid
         container
-        spacing={2}
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
+        sx={{
+          ...FlexBox,
+          flexDirection: { xs: "column", lg: "row" },
+        }}
       >
-        <Grid item xs={8} sm={6} md={5} lg={3} sx={{ marginTop: "70px" }}>
-          <ScrollParallax strength={0.04}>
-            {data && data?.img1?.data?.attributes?.url && (
-              <CustomImage
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  position: "absolute",
-                  left: 0,
-                  top: "-130px",
-                  height: "400px",
-                  width: "350px",
-                }}
-                src={`${url}${data.img1.data.attributes.url}`}
-              />
-            )}
-          </ScrollParallax>
+        <Grid item xs={12} lg={7.5} sx={FlexBox}>
+          {data && data?.img1?.data?.attributes?.url && (
+            <Stack sx={{ marginTop: "70px", width: "45%" }}>
+              <ScrollParallax strength={0.04}>
+                <CustomImage
+                  sx={{
+                    width: "100%",
+                  }}
+                  src={`${url}${data.img1.data.attributes.url}`}
+                />
+              </ScrollParallax>
+            </Stack>
+          )}
+          {data && data?.img2?.data?.attributes?.url && (
+            <Stack sx={{ marginTop: { xs: "50px", sm: "0" }, width: "48%" }}>
+              <ScrollParallax strength={0.04}>
+                <CustomImage
+                  sx={{
+                    width: "100%",
+                  }}
+                  src={`${url}${data.img2.data.attributes.url}`}
+                />
+              </ScrollParallax>
+            </Stack>
+          )}
         </Grid>
-        <Grid
-          item
-          xs={8}
-          sm={6}
-          md={5}
-          lg={3}
-          sx={{ marginTop: { xs: "50px", sm: "0" } }}
-        >
-          <ScrollParallax strength={0.04}>
-            {data && data?.img2?.data?.attributes?.url && (
-              <CustomImage
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  position: "absolute",
-                  left: 0,
-                  top: "-130px",
-                  width: "400",
-                  height: "450px",
-                }}
-                src={`${url}${data.img2.data.attributes.url}`}
-              />
-            )}
-          </ScrollParallax>
-        </Grid>
-        <Grid item xs={12} sm={10} md={8} lg={3.5} sx={{ marginTop: "70px" }}>
-          <Typography variant="SmallRoboto">{String(text)}</Typography>
+        <Grid item xs={12} lg={3.5} sx={{ marginTop: "70px" }}>
+          <Typography variant="SmallRoboto" sx={{ textAlign: "justify" }}>
+            {String(text)}
+          </Typography>
         </Grid>
       </Grid>
     </Stack>

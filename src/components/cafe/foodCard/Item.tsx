@@ -1,4 +1,3 @@
-import { theme } from "@/config/theme";
 import { HeaderContext } from "@/context/headerContext";
 import { COLORS } from "@/ts/Consts";
 import { FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner } from "@/ts/REST/api/generated";
@@ -30,6 +29,7 @@ export default function Item({
       component={motion.div}
       whileHover={{ x: 10, transition: { duration: 0.5 } }}
       sx={{
+        width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
@@ -69,7 +69,7 @@ export default function Item({
                   display: "block",
                   width: "4px",
                   height: "4px",
-                  background: theme.palette.text.secondary,
+                  background: COLORS.SECONDARY,
                   borderRadius: "50%",
                   marginRight: "10px",
                 },
@@ -87,7 +87,7 @@ export default function Item({
       <Typography
         variant="h4"
         sx={{
-          color: theme.palette.background.default,
+          color: COLORS.WHITE,
           textTransform: "capitalize",
         }}
       >

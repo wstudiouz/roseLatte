@@ -1,4 +1,3 @@
-import { theme } from "@/config/theme";
 import { Box, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
@@ -6,6 +5,7 @@ import { motion } from "framer-motion";
 import { CustomComponentsHeroComponent } from "@/ts/REST/api/generated";
 import { useContext } from "react";
 import { HeaderContext } from "@/context/headerContext";
+import { COLORS, FlexBox } from "@/ts/Consts";
 
 interface HeroProps {
   bgImg: string;
@@ -32,6 +32,7 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
         display: "flex",
         justifyContent: { xs: "center", md: "end" },
         position: "relative",
+        overflow: "hidden",
       }}
     >
       <CustomImage
@@ -59,14 +60,11 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
         container
         sx={{
           width: "100%",
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          justifyContent: "space-between",
-          alignItems: "center",
+          ...FlexBox,
           zIndex: 1,
         }}
       >
-        <Grid item xs={10} sm={7} md={6}>
+        <Grid item xs={12} sm={10} md={6}>
           <Typography
             component={motion.h1}
             initial={{ y: "50px", opacity: 0 }}
@@ -81,26 +79,26 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
             sx={{
               fontFamily: "'Athena'",
               textTransform: "uppercase",
-              color: theme.palette.background.default,
+              color: COLORS.WHITE,
             }}
           >
             {text}
           </Typography>
         </Grid>
-        {right ? (
+        {right && (
           <Grid
             item
-            xs={9}
-            sm={7}
+            xs={12}
             md={5}
             sx={{
               display: "flex",
               justifyContent: "left",
               alignItems: "center",
+              margin: { xs: "40px 0 0 auto", md: 0 },
             }}
           >
             {desc && (
-              <Grid item xs={3}>
+              <Grid item xs={2} md={3}>
                 <Box
                   component={motion.hr}
                   initial={{ opacity: 0, width: "0%" }}
@@ -113,7 +111,7 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
                   sx={{
                     width: "100%",
                     height: "2px",
-                    background: theme.palette.background.default,
+                    background: COLORS.WHITE,
                   }}
                 ></Box>
               </Grid>
@@ -130,34 +128,31 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
                   stiffness: 100,
                 }}
                 variant="H4Roboto"
-                sx={{ color: theme.palette.background.default }}
+                sx={{ color: COLORS.WHITE }}
               >
                 {desc}
               </Typography>
             </Grid>
           </Grid>
-        ) : (
-          <>
-            <CustomImage
-              sx={{
-                display: { xs: "none", md: "flex" },
-                position: "absolute",
-                right: 0,
-                top: "-30px",
-              }}
-              src="/images/aboutheroelips1.png"
-            />
-            <CustomImage
-              sx={{
-                display: { xs: "none", md: "flex" },
-                position: "absolute",
-                right: 0,
-                top: 130,
-              }}
-              src="/images/aboutheroelips2.png"
-            />
-          </>
         )}
+        <CustomImage
+          sx={{
+            display: { xs: "none", md: "flex" },
+            position: "absolute",
+            right: 0,
+            top: "-30px",
+          }}
+          src="/images/aboutheroelips1.png"
+        />
+        <CustomImage
+          sx={{
+            display: { xs: "none", md: "flex" },
+            position: "absolute",
+            right: 0,
+            top: 130,
+          }}
+          src="/images/aboutheroelips2.png"
+        />
       </Grid>
     </Stack>
   );

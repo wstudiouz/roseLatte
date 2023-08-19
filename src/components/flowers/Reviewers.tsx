@@ -1,16 +1,14 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import Reviewer from "../reviewer";
 import { theme } from "@/config/theme";
 import { useContext, useState } from "react";
 import { useSpringCarousel } from "react-spring-carousel";
 import { useBaseUrl } from "@/ts/utils/Hooks";
 import translate from "@/ts/utils/translate";
-import {
-  BorderButtons,
-  NextButton,
-  PrevButton,
-} from "../customComponent/SliderControll";
+
 import { HeaderContext } from "@/context/headerContext";
+import SliderControl from "../customComponent/SliderControll";
+import { COLORS } from "@/ts/Consts";
 
 type Props = {
   reviewer: any[];
@@ -20,15 +18,24 @@ export default function Reviewers({ reviewer }: Props) {
   const url = useBaseUrl();
   const { lang } = useContext(HeaderContext);
   const [currentSlide, setCurrentSlide] = useState(reviewer[0]?.id);
+  const itemsCount: number = reviewer.length;
+  const xs = useMediaQuery(theme.breakpoints.between(0, 900));
+  const md = useMediaQuery(theme.breakpoints.between(900, 1200));
+  const generateItemsPerSlide = (): number => {
+    if (itemsCount > 2) {
+      return xs ? 1 : md ? 2 : 3;
+    }
+    return itemsCount;
+  };
   const {
     carouselFragment,
-    slideToPrevItem, // go back to previous slide
-    slideToNextItem, // move to next slide
-    useListenToCustomEvent, //custom hook to listen event when the slide changes
+    slideToPrevItem,
+    slideToNextItem,
+    useListenToCustomEvent,
   } = useSpringCarousel({
-    itemsPerSlide: 3, // number of slides per view
-    withLoop: true, // will loop
-    initialStartingPosition: "center", // the active slide will be at the center
+    itemsPerSlide: generateItemsPerSlide(),
+    withLoop: true,
+    initialStartingPosition: generateItemsPerSlide() > 2 ? "center" : undefined,
     items: reviewer.map((item) => {
       const comment = item.attributes[`comment_${lang}`];
       return {
@@ -55,7 +62,13 @@ export default function Reviewers({ reviewer }: Props) {
       sx={{
         width: "100%",
         height: "auto",
-        padding: "100px",
+        padding: {
+          xs: "30px 20px",
+          sm: "40px 30px",
+          md: "50px 40px",
+          lg: "60px 50px",
+          xl: "100px",
+        },
       }}
     >
       <Typography
@@ -63,7 +76,7 @@ export default function Reviewers({ reviewer }: Props) {
         sx={{
           margin: "0 auto",
           textTransform: "capitalize",
-          color: theme.palette.background.default,
+          color: COLORS.WHITE,
         }}
       >
         {translate("reviews.title", lang)}
@@ -85,18 +98,12 @@ export default function Reviewers({ reviewer }: Props) {
         >
           {carouselFragment}
         </Stack>
-        <Stack
-          sx={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: "50px",
-          }}
-        >
-          <PrevButton slideToPrevItem={slideToPrevItem} />
-          <BorderButtons items={reviewer} current={currentSlide} />
-          <NextButton slideToNextItem={slideToNextItem} />
-        </Stack>
+        <SliderControl
+          slideToPrevItem={slideToPrevItem}
+          slideToNextItem={slideToNextItem}
+          items={reviewer}
+          current={currentSlide}
+        />
       </Stack>
     </Stack>
   );

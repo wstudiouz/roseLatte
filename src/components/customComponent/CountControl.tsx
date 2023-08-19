@@ -1,6 +1,5 @@
-import { theme } from "@/config/theme";
+import { COLORS } from "@/ts/Consts";
 import { Typography } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
 
 type CountProps = {
   count: number;
@@ -10,7 +9,7 @@ export function Decrement() {
     <Typography
       variant="h4"
       sx={{
-        color: theme.palette.background.default,
+        color: COLORS.WHITE,
         margin: "0 3px",
         cursor: "pointer",
       }}
@@ -25,7 +24,7 @@ export function Increment() {
     <Typography
       variant="h4"
       sx={{
-        color: theme.palette.background.default,
+        color: COLORS.WHITE,
         margin: "0 3px",
         cursor: "pointer",
       }}
@@ -40,7 +39,7 @@ export function ViewCount({ count }: CountProps) {
     <Typography
       variant="h4"
       sx={{
-        color: theme.palette.background.default,
+        color: COLORS.WHITE,
         margin: "0 3px",
       }}
     >

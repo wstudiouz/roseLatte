@@ -77,7 +77,6 @@ export default function Flowers() {
       <FormComponent
         title={translate("form.flowerpage", lang)}
         bg="/images/flowersform.png"
-        isFlowerShop
       />
       {reviewer && reviewer.length && <Reviewer reviewer={reviewer} />}
     </Stack>

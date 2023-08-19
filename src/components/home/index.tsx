@@ -1,18 +1,17 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import React, { useContext } from "react";
 import Hero from "./Hero";
 import { HeaderContext } from "@/context/headerContext";
 import translate from "@/ts/utils/translate";
+import { FlexBox } from "@/ts/Consts";
 export default function Home() {
   const { openHeader, lang } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
         height: { xs: "372px", sm: "100vh" },
-        display: "flex",
         color: "#fff",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        ...FlexBox,
       }}
     >
       <Hero

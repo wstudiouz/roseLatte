@@ -1,8 +1,7 @@
-import { theme } from "@/config/theme";
 import { Grid, Typography, SxProps } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
-import { COLORS } from "@/ts/Consts";
+import { COLORS, FlexBox } from "@/ts/Consts";
 import translate from "@/ts/utils/translate";
 import { useContext } from "react";
 import { HeaderContext } from "@/context/headerContext";
@@ -62,11 +61,12 @@ export default function ContactUs({ data }: Props) {
       />
       <Grid
         container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
+        sx={{
+          ...FlexBox,
+          flexDirection: { xs: "column", md: "row" },
+        }}
       >
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6} sx={{ display: { xs: "none", md: "block" } }}>
           <CustomImage
             src={"/images/bouquet1.png"}
             sx={{
@@ -75,11 +75,11 @@ export default function ContactUs({ data }: Props) {
             }}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "40px" }}>
+        <Grid item xs={12} md={6} sx={{ padding: "40px", width: "100%" }}>
           <Typography
             variant="h2"
             sx={{
-              color: theme.palette.text.secondary,
+              color: COLORS.SECONDARY,
               textTransform: "capitalize",
               fontSize: "80px",
               fontWeight: "400",

@@ -1,7 +1,7 @@
-import { theme } from "@/config/theme";
-import { Box } from "@mui/material";
-import { Stack, SxProps } from "@mui/system";
-import Image from "next/image";
+import { COLORS } from "@/ts/Consts";
+import { Box, SxProps } from "@mui/material";
+import { Stack } from "@mui/system";
+import { ReactElement } from "react";
 
 interface PrevButtonProps {
   slideToPrevItem: () => void;
@@ -14,14 +14,12 @@ interface NextButtonProps {
 interface BorderButtonsProps {
   current: number;
   items: any[];
+  withIndex?: number;
 }
 
-export function PrevButton({ slideToPrevItem }: PrevButtonProps) {
+function PrevButton({ slideToPrevItem }: PrevButtonProps) {
   return (
-    <Stack
-      onClick={slideToPrevItem}
-      sx={{ width: "80px", marginLeft: "24px", cursor: "pointer" }}
-    >
+    <Stack onClick={slideToPrevItem} sx={{ width: "80px", cursor: "pointer" }}>
       <Box
         component="svg"
         width="81"
@@ -40,13 +38,12 @@ export function PrevButton({ slideToPrevItem }: PrevButtonProps) {
   );
 }
 
-export function NextButton({ slideToNextItem }: NextButtonProps) {
+function NextButton({ slideToNextItem }: NextButtonProps) {
   return (
     <Stack
       onClick={slideToNextItem}
       sx={{
         width: "80px",
-        marginRight: "24px",
         cursor: "pointer",
       }}
     >
@@ -68,7 +65,18 @@ export function NextButton({ slideToNextItem }: NextButtonProps) {
   );
 }
 
-export function BorderButtons({ current, items }: BorderButtonsProps) {
+function BorderButtons({ current, items, withIndex }: BorderButtonsProps) {
+  const ItemBg = (i: any, ind: number): SxProps => {
+    const result = {
+      background:
+        typeof withIndex !== "undefined" && withIndex == ind
+          ? COLORS.SECONDARY
+          : current == i.id
+          ? COLORS.SECONDARY
+          : COLORS.WHITE,
+    };
+    return result;
+  };
   return (
     <Stack
       sx={{
@@ -86,12 +94,9 @@ export function BorderButtons({ current, items }: BorderButtonsProps) {
             width: "10px",
             height: "10px",
             borderRadius: "50%",
-            background:
-              current == i.id
-                ? theme.palette.text.secondary
-                : theme.palette.background.default,
+            ...ItemBg(i, ind),
             "&:hover": {
-              background: theme.palette.text.secondary,
+              background: COLORS.SECONDARY,
             },
           }}
         ></Box>
@@ -99,3 +104,43 @@ export function BorderButtons({ current, items }: BorderButtonsProps) {
     </Stack>
   );
 }
+
+interface SliderControlProps {
+  current?: number;
+  items?: any[];
+  withIndex?: number;
+  slideToPrevItem: () => void;
+  slideToNextItem: () => void;
+  sx?: SxProps;
+}
+
+const SliderControl = ({
+  current,
+  items,
+  withIndex,
+  slideToPrevItem,
+  slideToNextItem,
+  sx,
+}: SliderControlProps): ReactElement => {
+  return (
+    <Stack
+      sx={{
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: "50px",
+        ...sx,
+      }}
+    >
+      <PrevButton slideToPrevItem={slideToPrevItem} />
+      {items && typeof current !== "undefined" ? (
+        <BorderButtons items={items} current={current} withIndex={withIndex} />
+      ) : (
+        <></>
+      )}
+      <NextButton slideToNextItem={slideToNextItem} />
+    </Stack>
+  );
+};
+
+export default SliderControl;

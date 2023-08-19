@@ -1,20 +1,14 @@
 import { theme } from "@/config/theme";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery, SxProps } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
-import {
-  AboutHeroBottomComponentImg2Data,
-  AboutKitchenComponent,
-} from "@/ts/REST/api/generated";
+import { AboutKitchenComponent } from "@/ts/REST/api/generated";
 import { useBaseUrl } from "@/ts/utils/Hooks";
-import { useSpringCarousel } from "react-spring-carousel";
-import {
-  BorderButtons,
-  NextButton,
-  PrevButton,
-} from "../customComponent/SliderControll";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { HeaderContext } from "@/context/headerContext";
+import { useSpringCarousel } from "react-spring-carousel";
+import SliderControl from "../customComponent/SliderControll";
+import { COLORS, FlexBox } from "@/ts/Consts";
 
 type Props = {
   data: AboutKitchenComponent;
@@ -22,30 +16,55 @@ type Props = {
 };
 
 export default function Kitchen({ data, images }: Props) {
-  const [currentSlide, setCurrentSlide] = useState<number>(images[0]?.id);
   const { lang } = useContext(HeaderContext);
   const title = data && data[`title_${lang}` as keyof AboutKitchenComponent];
   const rightText =
     data && data[`rightText_${lang}` as keyof AboutKitchenComponent];
   const url = useBaseUrl();
-  // const {
-  //   carouselFragment,
-  //   slideToPrevItem,
-  //   slideToNextItem,
-  //   useListenToCustomEvent,
-  // } = useSpringCarousel({
-  //   itemsPerSlide: 2,
-  //   withLoop: true,
-  //   initialStartingPosition: "center",
-  //   items: images.map((item) => {
-  //     return {
-  //       ...item,
-  //       renderItem: (
-  //         <CustomImage src={`${url}${item.attributes?.url}`} sx={{}} />
-  //       ),
-  //     };
-  //   }),
-  // });
+  const xs = useMediaQuery(theme.breakpoints.between(0, 600));
+
+  const generateItemsPerSlide = (): number => {
+    return xs ? 1 : 2;
+  };
+
+  const CardStyle: SxProps = {
+    width: {
+      xs: "300px",
+      sm: "250px",
+      md: "400px",
+      lg: "350px",
+      xl: "400px",
+    },
+    height: {
+      xs: "320px",
+      sm: "270px",
+      md: "420px",
+      lg: "370px",
+      xl: "420px",
+    },
+    margin: "0 auto",
+  };
+  const { carouselFragment, slideToPrevItem, slideToNextItem } =
+    useSpringCarousel({
+      itemsPerSlide: generateItemsPerSlide(),
+      withLoop: true,
+      initialStartingPosition:
+        generateItemsPerSlide() > 2 ? "center" : undefined,
+      items: images.map((item) => {
+        return {
+          ...item,
+          renderItem: (
+            <Stack sx={CardStyle}>
+              <CustomImage
+                src={`${url}${item?.attributes?.url ?? ""}`}
+                sx={CardStyle}
+              />
+            </Stack>
+          ),
+        };
+      }),
+    });
+
   return (
     <Stack
       sx={{
@@ -53,8 +72,7 @@ export default function Kitchen({ data, images }: Props) {
         height: { lg: "100vh" },
         minHeight: { md: "750px" },
         padding: "50px 30px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        background: COLORS.BG,
         position: "relative",
       }}
     >
@@ -66,28 +84,34 @@ export default function Kitchen({ data, images }: Props) {
           {String(title)}
         </Typography>
       )}
-      <Grid container spacing={3} sx={{ marginTop: "45px", zIndex: 1 }}>
-        <Grid item xs={8}>
-          <Stack>{/* carousel fragment here */}</Stack>
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          marginTop: "45px",
+          zIndex: 1,
+          ...FlexBox,
+        }}
+      >
+        <Grid item xs={12} lg={8}>
           <Stack
             sx={{
+              overflowX: "clip",
               width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: "55px",
+              marginX: "auto",
+              position: "relative",
             }}
           >
-            {/* <PrevButton slideToPrevItem={slideToPrevItem} /> */}
-            {/* <BorderButtons items={images} current={currentSlide} /> */}
-            {/* <NextButton slideToNextItem={slideToNextItem} /> */}
+            {carouselFragment}
           </Stack>
+          <SliderControl
+            slideToPrevItem={slideToPrevItem}
+            slideToNextItem={slideToNextItem}
+          />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4}>
           {data && rightText && (
-            <Typography
-              variant="SmallRoboto"
-              sx={{ color: theme.palette.text.primary }}
-            >
+            <Typography variant="SmallRoboto" sx={{ color: COLORS.PINK }}>
               {String(rightText)}
             </Typography>
           )}

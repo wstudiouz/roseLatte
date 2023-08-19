@@ -75,8 +75,13 @@
           "allprice": "Celková cena",
           "empty": "Košík je prázdný",
           "buy": "Koupit",
-  "success": "Vaše objednávka byla úspěšně přijata. Brzy vás budeme kontaktovat.",
-  "error": "Došlo k problému. Prosím, zkuste to znovu později."
+          "success": "Vaše objednávka byla úspěšně přijata. Brzy vás budeme kontaktovat.",
+          "error": "Došlo k problému. Prosím, zkuste to znovu později.",
+          "price":"Ceny",
+          "more":"Přečíst více",
+          "close": "Zavřít",
+          "confirm":"Potvrdit",
+          "catalogue":"Katalog Květinových Kytic"
       }
       
 }

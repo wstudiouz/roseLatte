@@ -1,13 +1,11 @@
 import { Box, Stack, keyframes } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getter } from "@/ts/utils/Fetcher";
-import FormComponent from "../customComponent/ReusableForm";
 import TopHero from "../topHero";
 import {
   ContactPageListResponseDataItem,
   FooterListResponseDataItem,
 } from "@/ts/REST/api/generated";
-import BeautifulCard from "../customComponent/BeautifulCard";
 import ContactUs from "./ContactUs";
 export default function Contact() {
   const [data, setData] = useState<ContactPageListResponseDataItem>();

@@ -5,7 +5,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ["picsum.photos", "localhost"],
+    domains: ["picsum.photos", "localhost", "api.technostudio.uz"],
   },
 };
 

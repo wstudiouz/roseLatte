@@ -1,7 +1,5 @@
-import { theme } from "@/config/theme";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import CustomImage from "../customComponent/CustomImage";
-import translate from "@/ts/utils/translate";
 import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@/context/headerContext";
 import {
@@ -21,7 +19,7 @@ export default function Footer() {
     flexDirection: "column",
     fontFamily: "'Athena'",
     textTransform: "capitalize",
-    color: theme.palette.background.default,
+    color: COLORS.WHITE,
     marginTop: { xs: "20px", md: 0 },
     " span": {
       marginTop: "20px",
@@ -91,7 +89,7 @@ export default function Footer() {
         component="hr"
         sx={{
           width: "100%",
-          background: theme.palette.text.primary,
+          background: COLORS.PINK,
         }}
       />
 
@@ -183,7 +181,7 @@ export default function Footer() {
         component="hr"
         sx={{
           width: "100%",
-          background: theme.palette.text.primary,
+          background: COLORS.PINK,
         }}
       />
     </Stack>

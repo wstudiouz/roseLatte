@@ -29,6 +29,7 @@ import {
   ViewCount,
 } from "@/components/customComponent/CountControl";
 import translate from "@/ts/utils/translate";
+import { COLORS } from "@/ts/Consts";
 
 interface ComponentProps {
   setPopup: Dispatch<SetStateAction<number>>;
@@ -105,14 +106,32 @@ export default function Popup({ setPopup, item }: ComponentProps) {
       fullScreen={fullScreen}
       PaperProps={{
         sx: {
-          background:
-            "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
-          padding: "45px 50px",
+          background: COLORS.BG,
+          padding: {
+            xs: "10px",
+            sm: "20px 25px",
+            md: "30px 35px",
+            lg: "45px 50px",
+          },
           position: "relative",
         },
       }}
     >
-      <DialogContent>
+      <DialogContent
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px",
+          },
+        }}
+      >
         <Stack
           onClick={handleClose}
           sx={{
@@ -132,20 +151,23 @@ export default function Popup({ setPopup, item }: ComponentProps) {
             },
           }}
         ></Stack>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Grid item xs={12} md={5.9}>
             {item && item.attributes?.img?.data?.attributes?.url && (
               <CustomImage
                 src={`${url}${item.attributes.img.data.attributes.url}`}
               />
             )}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={5.9}>
             {title && (
               <Typography
                 variant="h3"
                 sx={{
-                  color: theme.palette.background.default,
+                  color: COLORS.WHITE,
                   textTransform: "capitalize",
                 }}
               >
@@ -159,10 +181,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                 marginTop: "20px",
               }}
             >
-              <Typography
-                variant="h4"
-                sx={{ color: theme.palette.background.default }}
-              >
+              <Typography variant="h4" sx={{ color: COLORS.WHITE }}>
                 {translate("cards.sizes", lang)}:
               </Typography>
               {item &&
@@ -176,11 +195,9 @@ export default function Popup({ setPopup, item }: ComponentProps) {
                       margin: "0 12px",
                       cursor: "pointer",
                       color:
-                        currentSize == ind
-                          ? theme.palette.text.secondary
-                          : theme.palette.background.default,
+                        currentSize == ind ? COLORS.SECONDARY : COLORS.WHITE,
                       "&:hover": {
-                        color: theme.palette.text.secondary,
+                        color: COLORS.SECONDARY,
                       },
                     }}
                     onClick={() => setCurrentSize(ind)}
@@ -217,7 +234,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
               <Typography
                 variant="h4"
                 sx={{
-                  color: theme.palette.text.secondary,
+                  color: COLORS.SECONDARY,
                   marginLeft: "20px",
                 }}
               >
@@ -228,7 +245,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
               <Typography
                 variant="SmallRoboto"
                 sx={{
-                  color: theme.palette.background.default,
+                  color: COLORS.WHITE,
                   display: "block",
                   marginTop: "30px",
                 }}

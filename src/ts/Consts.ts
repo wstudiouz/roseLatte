@@ -18,6 +18,8 @@ export const COLORS = {
   BLACK: "#000",
   WHITE: "#FFFFFF",
   WHITE_BACKGROUNDW: "#fffbf4",
+  SECONDARY: "#DC9DB3",
+  BG: "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
 };
 export type FormValues = {
   name: string;
@@ -60,7 +62,12 @@ export const inputStyle: SxProps = {
     fontWeight: "300",
     fontSize: "18px",
     lineHeight: "21px",
-    padding: "30px",
+    padding: {
+      xs: "10px 15px",
+      sm: "15px 20px",
+      md: "20px 25px",
+      lg: "30px 45px",
+    },
     "&:focus": {
       border: "0",
     },
@@ -84,3 +91,19 @@ export const inputStyle: SxProps = {
 };
 
 export const DEFAULT_CURSOR_SPEED = 0.9;
+
+export type SliderResponsive = {
+  breakpoint: number;
+  settings: {
+    slidesToShow: number;
+    slidesToScroll?: number;
+    infinite?: boolean;
+    dots?: boolean;
+  };
+};
+
+export const FlexBox: SxProps = {
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+};

@@ -1,28 +1,19 @@
-import React, {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import {
   Drawer,
   Typography,
   Stack,
   Box,
-  Button,
   TextField,
   SxProps,
 } from "@mui/material";
-import { getter, sendMessage } from "@/ts/utils/Fetcher";
-import { useBaseUrl } from "@/ts/utils/Hooks";
+import { sendMessage } from "@/ts/utils/Fetcher";
 import { Card, HeaderContext } from "@/context/headerContext";
 import BagItem from "./BagItem";
 import translate from "@/ts/utils/translate";
-import { FlowerListResponseDataItem } from "@/ts/REST/api/generated";
 import {
   COLORS,
+  FlexBox,
   FormValues,
   formValidateSchema,
   inputStyle,
@@ -38,34 +29,8 @@ type Props = {
 };
 
 const CardsDrawer = ({ drawerOpen, setDrawerOpen, cards, setCards }: Props) => {
-  const url = useBaseUrl();
+  const [formOpen, setFormOpen] = useState<boolean>();
   const { lang } = useContext(HeaderContext);
-
-  // useEffect(() => {
-  //   const filteredCards = (myData: FlowerListResponseDataItem[]): Card[] => {
-  //     const filteredItems = cards.filter((card: Card) => {
-  //       const matchingItem = myData.find((item) => item.id === card.id);
-  //       if (matchingItem) {
-  //         card.title_en = matchingItem.attributes?.title_en;
-  //         card.title_cz = matchingItem.attributes?.title_cz;
-  //         card.img = url + matchingItem.attributes?.img.data?.attributes?.url;
-  //         card.prices = matchingItem.attributes?.Prices;
-  //       }
-  //       return matchingItem;
-  //     });
-
-  //     return filteredItems;
-  //   };
-
-  //   const getValues = async () => {
-  //     const getFlower = await getter("flowers?populate=img,Prices");
-  //     if (getFlower.ok && getFlower.data) {
-  //       const data = filteredCards(getFlower.data);
-  //       setCards(data as Card[]);
-  //     }
-  //   };
-  //   getValues();
-  // }, [url, drawerOpen]);
   const allPrice = () => {
     let total = 0;
     cards.map((i: Card) => {
@@ -116,6 +81,7 @@ const CardsDrawer = ({ drawerOpen, setDrawerOpen, cards, setCards }: Props) => {
     <Drawer
       anchor="right"
       open={drawerOpen}
+      transitionDuration={600}
       onClose={() => setDrawerOpen(false)}
       sx={{
         display: "block",
@@ -126,100 +92,137 @@ const CardsDrawer = ({ drawerOpen, setDrawerOpen, cards, setCards }: Props) => {
         },
       }}
     >
-      <Stack>
+      <Stack
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+        }}
+      >
         {cards.length ? (
-          cards.map((e, index) => <BagItem itemId={e.id} key={index} />)
-        ) : (
-          <Typography>{translate("cards.empty", lang)}</Typography>
-        )}
-      </Stack>
-      {cards.length ? (
-        <Stack
-          sx={{
-            width: "700",
-            position: "sticky",
-            bottom: 30,
-            padding: "10px 15px",
-            borderRadius: "6px",
-            border: "1px solid var(--black-300, #CBCBCB)",
-            background: "var(--white, #FFF)",
-            marginTop: "40px",
-          }}
-        >
-          <Typography variant="h6">
-            {translate("cards.allprice", lang)}: ${allPrice()}
-          </Typography>
-
-          <Box
-            component="form"
-            sx={{ width: "100%" }}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <TextField
-              placeholder={translate("form.name", lang)}
-              margin="normal"
-              variant="outlined"
-              sx={drawerInputStyles}
-              {...register("name")}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
-            <TextField
-              placeholder={translate("form.phone", lang)}
-              variant="outlined"
-              margin="normal"
-              sx={drawerInputStyles}
-              {...register("phone")}
-              error={!!errors.phone}
-              helperText={errors.phone?.message}
-            />
-            <TextField
-              placeholder={translate("form.email", lang)}
-              variant="outlined"
-              margin="normal"
-              sx={drawerInputStyles}
-              {...register("email")}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-            />
-            <TextField
-              placeholder={translate("form.message", lang)}
-              variant="outlined"
-              margin="normal"
-              multiline
-              rows={3}
-              sx={drawerInputStyles}
-              {...register("message")}
-              error={!!errors.message}
-              helperText={errors.message?.message}
-            />
-            <Box
-              component="button"
-              type="submit"
+          <Stack sx={{ height: "100%" }}>
+            <Stack sx={{ height: "100%" }}>
+              <Typography variant="h6" onClick={() => setDrawerOpen(false)}>
+                {translate("cards.close", lang)}
+              </Typography>
+              {cards.map((e, index) => (
+                <BagItem itemId={e.id} key={index} />
+              ))}
+            </Stack>
+            <Stack
               sx={{
                 width: "100%",
-                display: "flex",
-                padding: "10px 26px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "4px",
-                alignSelf: "stretch",
+                position: "sticky",
+                bottom: 0,
+                padding: "10px 15px",
                 borderRadius: "6px",
-                background:
-                  "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
-                outline: "none",
-                border: "none",
-                color: COLORS.WHITE,
-                cursor: "pointer",
+                border: "1px solid var(--black-300, #CBCBCB)",
+                background: "var(--white, #FFF)",
+                marginTop: "30px",
               }}
             >
-              {translate("cards.buy", lang)}
-            </Box>
-          </Box>
-        </Stack>
-      ) : (
-        <></>
-      )}
+              <Stack
+                sx={{
+                  ...FlexBox,
+                  flexDirection: "row",
+                }}
+              >
+                <Typography variant="h6">
+                  {translate("cards.allprice", lang)}: ${allPrice()}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  onClick={() => setFormOpen((prev) => !prev)}
+                >
+                  {formOpen
+                    ? translate("cards.close", lang)
+                    : translate("cards.confirm", lang)}
+                </Typography>
+              </Stack>
+
+              {formOpen && (
+                <Box
+                  component="form"
+                  sx={{ width: "100%" }}
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <TextField
+                    placeholder={translate("form.name", lang)}
+                    margin="normal"
+                    variant="outlined"
+                    sx={drawerInputStyles}
+                    {...register("name")}
+                    error={!!errors.name}
+                    helperText={errors.name?.message}
+                  />
+                  <TextField
+                    placeholder={translate("form.phone", lang)}
+                    variant="outlined"
+                    margin="normal"
+                    sx={drawerInputStyles}
+                    {...register("phone")}
+                    error={!!errors.phone}
+                    helperText={errors.phone?.message}
+                  />
+                  <TextField
+                    placeholder={translate("form.email", lang)}
+                    variant="outlined"
+                    margin="normal"
+                    sx={drawerInputStyles}
+                    {...register("email")}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                  />
+                  <TextField
+                    placeholder={translate("form.message", lang)}
+                    variant="outlined"
+                    margin="normal"
+                    multiline
+                    rows={3}
+                    sx={drawerInputStyles}
+                    {...register("message")}
+                    error={!!errors.message}
+                    helperText={errors.message?.message}
+                  />
+                  <Box
+                    component="button"
+                    type="submit"
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      padding: "10px 26px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      alignSelf: "stretch",
+                      borderRadius: "6px",
+                      background: COLORS.BG,
+                      outline: "none",
+                      border: "none",
+                      color: COLORS.WHITE,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {translate("cards.buy", lang)}
+                  </Box>
+                </Box>
+              )}
+            </Stack>
+          </Stack>
+        ) : (
+          <Stack
+            sx={{
+              ...FlexBox,
+              flexDirection: "row",
+            }}
+          >
+            <Typography>{translate("cards.empty", lang)}</Typography>
+            <Typography onClick={() => setDrawerOpen(false)}>
+              {translate("cards.close", lang)}
+            </Typography>
+          </Stack>
+        )}
+      </Stack>
     </Drawer>
   );
 };

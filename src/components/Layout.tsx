@@ -1,10 +1,10 @@
-import Navbar from "./header";
 import { useRouter } from "next/router";
 import { CursorManager } from "@/ts/CursorManager";
 import { useEffect } from "react";
 import { Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import Footer from "./footer";
+import { COLORS } from "@/ts/Consts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -38,8 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         component={"main"}
         sx={{
           minHeight: "100vh",
-          background:
-            "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+          background: COLORS.BG,
         }}
       >
         {children}

@@ -1,7 +1,7 @@
-import { theme } from "@/config/theme";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
+import { COLORS } from "@/ts/Consts";
 
 interface HeroProps {
   bgImg: string;
@@ -25,9 +25,8 @@ export default function Reviewer({
       sx={{
         border: "2px solid rgba(236, 159, 182, 0.35)",
         padding: "12px 22px 25px 22px",
-        transform: active ? "scale(1.135)" : undefined,
-        transition: "all 1s ease",
-        margin: "24px",
+        transform: active ? "scale(1)" : "scale(0.9)",
+        transition: "all 0.7s ease",
       }}
     >
       <Grid
@@ -52,9 +51,7 @@ export default function Reviewer({
       <Typography
         variant="SmallRoboto"
         sx={{
-          color: active
-            ? theme.palette.text.secondary
-            : theme.palette.text.primary,
+          color: active ? COLORS.SECONDARY : COLORS.PINK,
           marginTop: "20px",
         }}
       >
@@ -84,7 +81,7 @@ export default function Reviewer({
             fontFamily: "'Athena'",
             textTransform: "capitalize",
             marginLeft: "20px",
-            color: theme.palette.background.default,
+            color: COLORS.WHITE,
           }}
         >
           {name}
