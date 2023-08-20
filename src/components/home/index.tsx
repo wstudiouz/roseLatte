@@ -10,8 +10,10 @@ export default function Home() {
     <Stack
       sx={{
         height: { xs: "372px", sm: "100vh" },
+        display: "flex",
         color: "#fff",
-        ...FlexBox,
+        flexDirection: "row",
+        justifyContent: "space-between",
       }}
     >
       <Hero
