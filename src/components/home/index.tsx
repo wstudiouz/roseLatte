@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import Hero from "./Hero";
 import { HeaderContext } from "@/context/headerContext";
 import translate from "@/ts/utils/translate";
-import { FlexBox } from "@/ts/Consts";
 export default function Home() {
   const { openHeader, lang } = useContext(HeaderContext);
   return (
