@@ -1,68 +1,111 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import Catalogs from "./Catalogs";
 import { theme } from "@/config/theme";
 import SliderItem from "./SliderItem";
-import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Popup from "./Popup";
 import { useSpringCarousel } from "react-spring-carousel";
-import { COLORS, Z_INDEX } from "@/ts/Consts";
-export default function Catalog() {
-  const [popup, setPopup] = useState<boolean>(false);
-  const flowers = [
-    { title: "spring bouquet", id: "item-1", video: "/video/slider.mp4" },
-    { video: "/video/slider1.mp4", title: "wedding with peony", id: "item-2" },
-    { video: "/video/slider2.mp4", title: "wedding with peony", id: "item-3" },
-    {
-      video: "/video/slider1.mp4",
-      title: "wedding with peony",
-      id: "item-4",
-      img: "",
-    },
-  ];
-  const [currentSlide, setCurrentSlide] = useState(flowers[0].id);
+import { COLORS } from "@/ts/Consts";
+import {
+  FlowerCatalogueData,
+  FlowerCatalogueFlowersDataInner,
+} from "@/ts/REST/api/generated";
+import { useBaseUrl } from "@/ts/utils/Hooks";
+import SliderControl from "@/components/customComponent/SliderControll";
+import translate from "@/ts/utils/translate";
+import { HeaderContext } from "@/context/headerContext";
+
+type Props = {
+  catalogues: FlowerCatalogueData[];
+  flowers: any[];
+  activeCatalog: number;
+  setActiveCatalog: Dispatch<SetStateAction<number>>;
+};
+
+export default function Catalog({
+  catalogues,
+  flowers,
+  activeCatalog,
+  setActiveCatalog,
+}: Props) {
+  const [popup, setPopup] = useState<number>(0);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  useEffect(() => {
+    setCurrentSlide(flowers[0]?.id);
+  }, [flowers]);
+  const url = useBaseUrl();
+  const { lang } = useContext(HeaderContext);
+  const itemsCount: number = flowers.length;
+  const xs = useMediaQuery(theme.breakpoints.between(0, 900));
+  const md = useMediaQuery(theme.breakpoints.between(900, 1450));
+
+  const generateItemsPerSlide = (): number => {
+    if (itemsCount > 2) {
+      return xs ? 1 : md ? 2 : 3;
+    }
+    return itemsCount;
+  };
   const {
     carouselFragment,
     slideToPrevItem, // go back to previous slide
     slideToNextItem, // move to next slide
     useListenToCustomEvent, //custom hook to listen event when the slide changes
-    slideToItem,
+    // slideToItem
   } = useSpringCarousel({
-    itemsPerSlide: 3, // number of slides per view
-    withLoop: true, // will loop
-    disableGestures: true,
-    initialStartingPosition: "center", // the active slide will be at the center
+    itemsPerSlide: generateItemsPerSlide(),
+    withLoop: true,
+    disableGestures: false,
+    initialStartingPosition: generateItemsPerSlide() > 2 ? "center" : undefined,
     items: flowers.map((item) => {
       return {
         ...item,
         renderItem: (
           <SliderItem
-            bgImg={item.img}
-            video={item.video}
-            title={item.title}
+            bgImg={`${url}${item.attributes?.img?.data?.attributes?.url}`}
+            video={`${url}${item.attributes?.video?.data?.attributes?.url}`}
+            title_en={item.attributes.title_en}
+            title_cz={item.attributes.title_cz}
             active={currentSlide === item.id}
-            setActive={currentSlide !== item.id ? setCurrentSlide : undefined}
+            setActive={
+              generateItemsPerSlide() < 3 ? setCurrentSlide : undefined
+            }
             itemId={item.id}
             setPopup={setPopup}
+            sizes={item.attributes?.Prices}
           />
         ),
       };
     }),
   });
 
-  useEffect(() => {
-    slideToItem(currentSlide);
-  }, [currentSlide, slideToItem]);
   useListenToCustomEvent((event) => {
     if (event.eventName === "onSlideStartChange") {
-      setCurrentSlide(event?.nextItem?.id);
+      setCurrentSlide(Number(event?.nextItem?.id));
     }
   });
+  const findCurrentItem = (id: number): FlowerCatalogueFlowersDataInner => {
+    const find = flowers.find(
+      (item: FlowerCatalogueFlowersDataInner) => item.id == id
+    );
+    return find;
+  };
   return (
     <Stack
       sx={{
-        padding: "100px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        padding: {
+          xs: "30px 20px",
+          sm: "40px 30px",
+          md: "50px 40px",
+          lg: "60px 50px",
+          xl: "100px",
+        },
+        background: COLORS.BG,
       }}
     >
       <Typography
@@ -73,9 +116,13 @@ export default function Catalog() {
           textAlign: "center",
         }}
       >
-        catalog of bouquets
+        {translate("cards.catalogue", lang)}
       </Typography>
-      <Catalogs />
+      <Catalogs
+        catalogues={catalogues}
+        activeCatalog={activeCatalog}
+        setActiveCatalog={setActiveCatalog}
+      />
       <Stack sx={{ marginTop: "75px", flexDirection: "column" }}>
         <Stack
           sx={{
@@ -87,87 +134,14 @@ export default function Catalog() {
         >
           {carouselFragment}
         </Stack>
-        <Stack
-          sx={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: "80px",
-          }}
-        >
-          <Stack
-            onClick={slideToPrevItem}
-            sx={{ width: "80px", marginLeft: "24px", cursor: "pointer" }}
-          >
-            <Box
-              component="svg"
-              width="81"
-              height="16"
-              viewBox="0 0 81 16"
-              fill="red"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Box
-                component="path"
-                d="M0.292892 7.29289C-0.0976334 7.68342 -0.0976334 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41422 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM81 7L1 7V9L81 9V7Z"
-                fill="white"
-              />
-            </Box>
-          </Stack>
-          <Stack
-            sx={{
-              width: "50%",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            {flowers.map((i, ind) => (
-              <Box
-                component="span"
-                key={ind}
-                sx={{
-                  margin: "0 15px",
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  background:
-                    currentSlide === i.id
-                      ? theme.palette.text.secondary
-                      : theme.palette.background.default,
-                  "&:hover": {
-                    background: theme.palette.text.secondary,
-                  },
-                }}
-              ></Box>
-            ))}
-          </Stack>
-          <Stack
-            onClick={slideToNextItem}
-            sx={{
-              width: "80px",
-              marginRight: "24px",
-              cursor: "pointer",
-              zIndex: Z_INDEX.homeText,
-            }}
-          >
-            <Box
-              component="svg"
-              width="81"
-              height="16"
-              viewBox="0 0 81 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Box
-                component="path"
-                d="M80.7071 8.70711C81.0976 8.31658 81.0976 7.68342 80.7071 7.29289L74.3431 0.928932C73.9526 0.538408 73.3195 0.538408 72.9289 0.928932C72.5384 1.31946 72.5384 1.95262 72.9289 2.34315L78.5858 8L72.9289 13.6569C72.5384 14.0474 72.5384 14.6805 72.9289 15.0711C73.3195 15.4616 73.9526 15.4616 74.3431 15.0711L80.7071 8.70711ZM0 9H80V7H0V9Z"
-                fill="white"
-              />
-            </Box>
-          </Stack>
-        </Stack>
+        <SliderControl
+          slideToNextItem={slideToNextItem}
+          slideToPrevItem={slideToPrevItem}
+          items={flowers}
+          current={currentSlide}
+        />
       </Stack>
-      {popup ? <Popup setPopup={setPopup} /> : <></>}
+      {popup > 0 && <Popup setPopup={setPopup} item={findCurrentItem(popup)} />}
     </Stack>
   );
 }

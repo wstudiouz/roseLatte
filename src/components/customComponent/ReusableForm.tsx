@@ -1,101 +1,59 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {
-  Box,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SxProps,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import CustomImage from "./CustomImage";
-import { theme } from "@/config/theme";
-import { COLORS } from "@/ts/Consts";
+import {
+  COLORS,
+  FormValues,
+  formValidateSchema,
+  inputStyle,
+} from "@/ts/Consts";
+import translate from "@/ts/utils/translate";
+import { HeaderContext } from "@/context/headerContext";
+import { sendMessage } from "@/ts/utils/Fetcher";
 
 interface ComponentProps {
-  isFlowerShop?: boolean;
   title: string;
   bg: string;
 }
 
-export default function FormComponent({
-  isFlowerShop,
-  title,
-  bg,
-}: ComponentProps) {
-  type FormValues = {
-    name: string;
-    phone: string;
-    email: string;
-    message: string;
-    category?: string | undefined;
-  };
-
-  const schema = yup.object().shape({
-    name: yup.string().min(3).required(),
-    phone: yup.string().min(3).required(),
-    message: yup.string().min(3).required(),
-    email: yup.string().min(3).email().required(),
-  });
+export default function FormComponent({ title, bg }: ComponentProps) {
+  const { lang } = useContext(HeaderContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(formValidateSchema(lang)),
   });
-  const [formData, setFormData] = useState<FormValues | null>(null);
 
-  const onSubmit = (data: FormValues) => {
-    setFormData(data);
-    alert(JSON.stringify(data));
+  const onSubmit = async (data: FormValues) => {
+    let telegramMessage = `New message\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nMessage: ${data.message}\n`;
+    await sendMessage(telegramMessage, lang);
   };
-  const categoryOptions = ["wedding", "boxes", "art", "composition", "mono"];
 
-  const inputStyle: SxProps = {
-    margin: 0,
-    "& .MuiOutlinedInput-root": {
-      border: `1px solid ${COLORS.PINK}`,
-      color: `${COLORS.PINK} !important`,
-      borderRadius: "0",
-      fontWeight: "300",
-      fontSize: "18px",
-      lineHeight: "21px",
-      padding: "30px",
-      marginBottom: "25px",
-      "&:focus": {
-        border: "0",
-      },
-      [theme.breakpoints.down("lg")]: {
-        fontSize: "18px",
-        lineHeight: "21px",
-      },
-      [theme.breakpoints.between("xs", "sm")]: {
-        fontSize: "16px",
-        lineHeight: "26px",
-      },
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderWidth: "0px !important",
-    },
-    width: "100%",
-    color: `${COLORS.PINK} !important`,
-    " input": {
-      p: 0,
-    },
-  };
   return (
     <Grid container sx={{ background: COLORS.WHITE_BACKGROUNDW }}>
-      <Grid item xs={6}>
-        <CustomImage src={bg} sx={{ width: "100%", height: "100vh" }} />
+      <Grid item xs={12} md={6}>
+        <CustomImage src={bg} sx={{ width: "100%", height: "100%" }} />
       </Grid>
-      <Grid item xs={6} sx={{ padding: "100px 75px" }}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          padding: {
+            xs: "10px 20px",
+            sm: "20px 30px",
+            md: "30px 40px",
+            lg: "100px 75px",
+          },
+        }}
+      >
         <Typography
           variant="h2"
           sx={{
@@ -112,68 +70,43 @@ export default function FormComponent({
           sx={{ display: "flex", flexDirection: "column" }}
         >
           <TextField
-            placeholder="Name"
+            placeholder={translate("form.name", lang)}
             margin="normal"
             variant="outlined"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("name")}
             error={!!errors.name}
             helperText={errors.name?.message}
           />
           <TextField
-            placeholder="Phone"
+            placeholder={translate("form.phone", lang)}
             variant="outlined"
             margin="normal"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("phone")}
             error={!!errors.phone}
             helperText={errors.phone?.message}
           />
           <TextField
-            placeholder="Email"
+            placeholder={translate("form.email", lang)}
             variant="outlined"
             margin="normal"
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
           <TextField
-            placeholder="Message"
+            placeholder={translate("form.message", lang)}
             variant="outlined"
             margin="normal"
             multiline
             rows={3}
-            sx={{
-              ...inputStyle,
-            }}
+            sx={inputStyle}
             {...register("message")}
             error={!!errors.message}
             helperText={errors.message?.message}
           />
-          {/* {isFlowerShop ? (
-            <>
-              <InputLabel id="category-label">Category:</InputLabel>
-              <Select
-                {...register("category", { required: true })}
-                labelId="category-label"
-              >
-                {categoryOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </>
-          ) : (
-            <></>
-          )} */}
           <Button
             type="submit"
             variant="outlined"
@@ -182,14 +115,19 @@ export default function FormComponent({
               border: `1px solid ${COLORS.PINK}`,
               borderRadius: 0,
               outline: "none",
-              padding: "30px 45px",
+              padding: {
+                xs: "10px 15px",
+                sm: "15px 20px",
+                md: "20px 25px",
+                lg: "30px 45px",
+              },
               "&:hover": {
                 border: `1px solid ${COLORS.PINK}`,
               },
               width: "fit-content",
             }}
           >
-            Send message
+            {translate("form.send", lang)}
           </Button>
         </Box>
       </Grid>

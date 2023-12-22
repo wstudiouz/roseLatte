@@ -1,22 +1,25 @@
-import { theme } from "@/config/theme";
 import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "./CustomImage";
-import { COLORS } from "@/ts/Consts";
+import { COLORS, FlexBox } from "@/ts/Consts";
+import { AboutGetIdeasComponent } from "@/ts/REST/api/generated";
+import { useBaseUrl } from "@/ts/utils/Hooks";
+import { useContext } from "react";
+import { HeaderContext } from "@/context/headerContext";
 
 interface ComponentProps {
-  bgImg: string;
-  title: string;
+  bgImg?: string;
+  title?: string;
   desc?: string;
   right?: boolean;
+  data?: AboutGetIdeasComponent;
 }
 
-export default function BeautifulCard({
-  bgImg,
-  title,
-  desc,
-  right,
-}: ComponentProps) {
+export default function BeautifulCard({ right, data }: ComponentProps) {
+  const url = useBaseUrl();
+  const { lang } = useContext(HeaderContext);
+  const title = data && data[`title_${lang}` as keyof AboutGetIdeasComponent];
+  const desc = data && data[`desc_${lang}` as keyof AboutGetIdeasComponent];
   return (
     <Stack
       sx={{
@@ -39,30 +42,47 @@ export default function BeautifulCard({
       />
       <Grid
         container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={"55px"}
+        sx={{
+          ...FlexBox,
+          flexDirection: { xs: "column", md: "row" },
+        }}
       >
-        <Grid item xs={12} sm={9} md={4} lg={5}>
-          <CustomImage
-            src={bgImg}
-            sx={{
-              width: "100%",
-              height: "auto",
-            }}
-          />
+        <Grid item xs={12} sm={9} md={5.6}>
+          <Stack sx={{ width: "100%" }}>
+            {data?.img?.data?.attributes?.url && (
+              <CustomImage
+                src={`${url}${data.img.data.attributes.url}`}
+                sx={{
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+            )}
+          </Stack>
         </Grid>
-        <Grid item xs={12} sm={10} md={8} lg={7} sx={{ position: "relative" }}>
-          <Typography
-            variant="h2"
-            sx={{
-              color: theme.palette.text.secondary,
-              textTransform: "capitalize",
-            }}
-          >
-            {title}
-          </Typography>
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={6}
+          sx={{
+            position: "relative",
+            paddingLeft: { md: "30px" },
+            marginTop: { xs: "30px", md: 0 },
+          }}
+        >
+          {data && title && (
+            <Typography
+              variant="h2"
+              sx={{
+                color: COLORS.SECONDARY,
+                textTransform: "capitalize",
+                textAlign: "center",
+              }}
+            >
+              {String(title)}
+            </Typography>
+          )}
           <Grid
             item
             lg={12}
@@ -77,10 +97,10 @@ export default function BeautifulCard({
               <Typography
                 variant="SmallRoboto"
                 sx={{
-                  color: theme.palette.text.secondary,
+                  color: COLORS.SECONDARY,
                 }}
               >
-                {desc}
+                {String(desc)}
               </Typography>
             </Grid>
           </Grid>

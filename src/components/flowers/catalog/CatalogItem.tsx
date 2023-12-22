@@ -1,4 +1,4 @@
-import { theme } from "@/config/theme";
+import { COLORS } from "@/ts/Consts";
 import { Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
@@ -20,15 +20,15 @@ export default function CatalogItem({
       onClick={() => setActiveCatalog(index)}
       variant="h4"
       sx={{
-        height: "80px",
-        margin: "0 37px",
+        height: { xs: "40px", sm: "50px", md: "60px", lg: "70px", xl: "80px" },
+        margin: { xs: "0 10px", sm: "0 20px", md: "0 30px", lg: "0 40px" },
         border: `2px solid ${active ? "rgba(236, 159, 182, 0.35)" : "inherit"}`,
         padding: "25px 37px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textTransform: "capitalize",
-        color: theme.palette.text.primary,
+        color: COLORS.PINK,
         cursor: "pointer",
       }}
     >

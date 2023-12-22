@@ -1,0 +1,85 @@
+{
+    "header":{
+        "flower": "flowers",
+        "bar": "bar",
+        "shop":"Flower Shop",
+        "cafe":"Coffee & Bistro",
+        "about":"About Us",
+        "contact":"Contacts",
+        "more":"Learn more",
+        "first":"The 1st Floristic Cafe & Bistro in Prague"
+    },
+    "form":{
+        "flowerpage":"Create Your Own Bouquets",
+        "cafepage":"Get your Seat",
+        "name":"name",
+        "namelabel":"wrong name, please write correctly",
+        "phone":"phone",
+        "phonelabel":"wrong phone, please write correctly",
+        "message":"message",
+        "messagelabel":"wrong message, please write correctly",
+        "email":"email",
+        "emaillabel":"wrong email, please write correctly",
+        "send":"send message"
+    },
+    "reviews":{
+        "title":"reviews"
+    },
+    "contact":{
+        "contact": "Contact us",
+        "address": "Address",
+        "addressText": "Belehradská 440/59, 120 00 Nusle",
+        "call": "Call us",
+        "callText": "+420 987 987 433",
+        "socialMedia": "Social media",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "openingHours": "Opening hours",
+        "monFri": "Mon – Fri",
+        "monFriHours": "8:00 AM – 7:00 PM",
+        "satSun": "Sat – Sun",
+        "satSunHours": "8:30 AM – 7:00 PM"
+      },
+      "footer": {
+        "callUs": {
+            "title": "Call us",
+            "phoneNumber": "+420 987 987 433"
+          },
+          "customerCare": {
+            "title": "Customer Care",
+            "orderInformation": "Order Information"
+          },
+          "ourCompany": {
+            "title": "Our company",
+            "findBoutique": "Find a boutique",
+            "careers": "Careers"
+          },
+          "legalArea": {
+            "title": "Legal area",
+            "termsOfUse": "Terms of use",
+            "privacyNotice": "Privacy notice"
+          },
+          "socialMedia": {
+            "title": "Social media",
+            "instagram": "Instagram",
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+          }
+      },
+      "cards":{
+        "sizes":"Sizes",
+        "add":"Add to card",
+        "remove":"Remove",
+        "allprice":"All",
+        "empty":"Card is empty",
+        "buy":"Buy",
+        "success":"Your order has been successfully received, we will contact you soon",
+        "error":"A problem occurred. Please try again later",
+        "price":"Prices",
+        "more":"Read more",
+        "close":"Close",
+        "confirm": "Confirm",
+        "catalogue":"Catalog Of Bouquets"
+      }
+}

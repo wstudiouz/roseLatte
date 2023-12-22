@@ -1,13 +1,14 @@
-import { theme } from "@/config/theme";
+import { HeaderContext } from "@/context/headerContext";
 import { COLORS } from "@/ts/Consts";
-import { List, ListItem, Stack, SxProps, Typography } from "@mui/material";
+import { FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner } from "@/ts/REST/api/generated";
+import { Stack, SxProps, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 
 interface ComponentProps {
   title: string;
-  desc: string[];
-  sum: string;
+  desc: FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner[];
+  sum: number;
   sx?: SxProps;
   num: number;
   setImg: Dispatch<SetStateAction<number>>;
@@ -21,12 +22,14 @@ export default function Item({
   num,
   setImg,
 }: ComponentProps) {
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       onMouseEnter={() => setImg(num)}
       component={motion.div}
       whileHover={{ x: 10, transition: { duration: 0.5 } }}
       sx={{
+        width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
@@ -52,9 +55,9 @@ export default function Item({
         </Typography>
 
         <Stack>
-          {desc.map((e, i) => (
+          {desc.map((e, ind) => (
             <Typography
-              key={i}
+              key={ind}
               variant="SmallRoboto"
               sx={{
                 display: "flex",
@@ -66,13 +69,17 @@ export default function Item({
                   display: "block",
                   width: "4px",
                   height: "4px",
-                  background: theme.palette.text.secondary,
+                  background: COLORS.SECONDARY,
                   borderRadius: "50%",
                   marginRight: "10px",
                 },
               }}
             >
-              {e}
+              {
+                e[
+                  `text_${lang}` as keyof FoodFoodCategoryDataAttributesFoodsDataInnerAttributesDescInner
+                ]
+              }
             </Typography>
           ))}
         </Stack>
@@ -80,11 +87,11 @@ export default function Item({
       <Typography
         variant="h4"
         sx={{
-          color: theme.palette.background.default,
+          color: COLORS.WHITE,
           textTransform: "capitalize",
         }}
       >
-        {sum}
+        {sum}$
       </Typography>
     </Stack>
   );

@@ -1,30 +1,49 @@
 import { Stack } from "@mui/material";
 import CatalogItem from "./CatalogItem";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  FlowerCatalogueData,
+  FlowerCatalogueDataAttributes,
+} from "@/ts/REST/api/generated";
+import { HeaderContext } from "@/context/headerContext";
 
-export default function Catalogs() {
-  const catalogs = ["wedding", "boxes", "art", "composition", "mono"];
-  const [activeCatalog, setActiveCatalog] = useState(0);
+type Props = {
+  catalogues: FlowerCatalogueData[];
+  activeCatalog: number;
+  setActiveCatalog: Dispatch<SetStateAction<number>>;
+};
 
+export default function Catalogs({
+  catalogues,
+  activeCatalog,
+  setActiveCatalog,
+}: Props) {
+  const { lang } = useContext(HeaderContext);
   return (
     <Stack
       sx={{
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        overflowX: "auto",
+        flexWrap: "wrap",
         marginTop: "25px",
       }}
     >
-      {catalogs.map((e, ind) => (
-        <CatalogItem
-          key={ind}
-          title={e}
-          setActiveCatalog={setActiveCatalog}
-          index={ind}
-          active={ind === activeCatalog}
-        />
-      ))}
+      {catalogues.map((e, ind) => {
+        const title =
+          e.attributes?.[
+            `title_${lang}` as keyof FlowerCatalogueDataAttributes
+          ] ?? "";
+        return (
+          <CatalogItem
+            key={ind}
+            title={String(title)}
+            setActiveCatalog={setActiveCatalog}
+            index={ind}
+            active={ind === activeCatalog}
+          />
+        );
+      })}
     </Stack>
   );
 }

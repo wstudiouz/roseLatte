@@ -1,6 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import CustomImage from "../customComponent/CustomImage";
-import { theme } from "@/config/theme";
+import { COLORS } from "@/ts/Consts";
 
 interface ComponentProps {
   bgImg: string;
@@ -44,7 +44,7 @@ export default function TopFlowerCard({
             right: 20,
             top: 10,
             textTransform: "capitalize",
-            color: theme.palette.text.primary,
+            color: COLORS.PINK,
           }}
         >
           /{num.toString().padStart(2, "0")}
@@ -58,7 +58,7 @@ export default function TopFlowerCard({
               variant="h4"
               sx={{
                 textTransform: "capitalize",
-                color: theme.palette.background.default,
+                color: COLORS.WHITE,
               }}
             >
               {title}

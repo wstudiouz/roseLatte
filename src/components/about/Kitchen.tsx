@@ -1,10 +1,70 @@
 import { theme } from "@/config/theme";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery, SxProps } from "@mui/material";
 import { Stack } from "@mui/system";
-// import CarouselContainer from "../customComponents/CarouselContainer";
 import CustomImage from "../customComponent/CustomImage";
+import { AboutKitchenComponent } from "@/ts/REST/api/generated";
+import { useBaseUrl } from "@/ts/utils/Hooks";
+import { useContext } from "react";
+import { HeaderContext } from "@/context/headerContext";
+import { useSpringCarousel } from "react-spring-carousel";
+import SliderControl from "../customComponent/SliderControll";
+import { COLORS, FlexBox } from "@/ts/Consts";
 
-export default function Kitchen() {
+type Props = {
+  data: AboutKitchenComponent;
+  images: any[];
+};
+
+export default function Kitchen({ data, images }: Props) {
+  const { lang } = useContext(HeaderContext);
+  const title = data && data[`title_${lang}` as keyof AboutKitchenComponent];
+  const rightText =
+    data && data[`rightText_${lang}` as keyof AboutKitchenComponent];
+  const url = useBaseUrl();
+  const xs = useMediaQuery(theme.breakpoints.between(0, 600));
+
+  const generateItemsPerSlide = (): number => {
+    return xs ? 1 : 2;
+  };
+
+  const CardStyle: SxProps = {
+    width: {
+      xs: "300px",
+      sm: "250px",
+      md: "400px",
+      lg: "350px",
+      xl: "400px",
+    },
+    height: {
+      xs: "320px",
+      sm: "270px",
+      md: "420px",
+      lg: "370px",
+      xl: "420px",
+    },
+    margin: "0 auto",
+  };
+  const { carouselFragment, slideToPrevItem, slideToNextItem } =
+    useSpringCarousel({
+      itemsPerSlide: generateItemsPerSlide(),
+      withLoop: true,
+      initialStartingPosition:
+        generateItemsPerSlide() > 2 ? "center" : undefined,
+      items: images.map((item) => {
+        return {
+          ...item,
+          renderItem: (
+            <Stack sx={CardStyle}>
+              <CustomImage
+                src={`${url}${item?.attributes?.url ?? ""}`}
+                sx={CardStyle}
+              />
+            </Stack>
+          ),
+        };
+      }),
+    });
+
   return (
     <Stack
       sx={{
@@ -12,46 +72,49 @@ export default function Kitchen() {
         height: { lg: "100vh" },
         minHeight: { md: "750px" },
         padding: "50px 30px",
-        background:
-          "linear-gradient(137.15deg, #000000 37.02%, rgba(112, 80, 88, 0.844253) 72.16%, #EC9FB6 103.65%)",
+        background: COLORS.BG,
         position: "relative",
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{ textTransform: "capitalize", textAlign: "center" }}
+      {data && title && (
+        <Typography
+          variant="h2"
+          sx={{ textTransform: "capitalize", textAlign: "center" }}
+        >
+          {String(title)}
+        </Typography>
+      )}
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          marginTop: "45px",
+          zIndex: 1,
+          ...FlexBox,
+        }}
       >
-        Our kitchen
-      </Typography>
-      <Grid container spacing={3} sx={{ marginTop: "45px", zIndex: 1 }}>
-        <Grid item xs={8}>
-          {/* <CarouselContainer
-            infinite
-            activeIndex={0}
-            items={[
-              "/images/abouthero.png",
-              "/images/familyPage.jpg",
-              "/images/homeflower.png",
-            ]}
-          /> */}
-        </Grid>
-        <Grid item xs={4}>
-          <Typography
-            variant="SmallRoboto"
-            sx={{ color: theme.palette.text.primary }}
+        <Grid item xs={12} lg={8}>
+          <Stack
+            sx={{
+              overflowX: "clip",
+              width: "100%",
+              marginX: "auto",
+              position: "relative",
+            }}
           >
-            The world of plants is so unique and diverse that it can amaze even
-            connoisseurs with its diversity and number of colors. Flowers occupy
-            a special place in the plant kingdom. It is customary to give them
-            to the hero of the occasion to express feelings of love and
-            respect.Thanks to the huge assortment, each bouquet can be unique
-            and have its own zest.The world of plants is so unique and diverse
-            that it can amaze even connoisseurs with its diversity and number of
-            colors. Flowers occupy a special place in the plant kingdom. It is
-            customary to give them to the hero of the occasion to express
-            feelings of love and respect.Thanks to the huge assortment, each
-            bouquet can be unique and have its own zest.
-          </Typography>
+            {carouselFragment}
+          </Stack>
+          <SliderControl
+            slideToPrevItem={slideToPrevItem}
+            slideToNextItem={slideToNextItem}
+          />
+        </Grid>
+        <Grid item xs={12} lg={4}>
+          {data && rightText && (
+            <Typography variant="SmallRoboto" sx={{ color: COLORS.PINK }}>
+              {String(rightText)}
+            </Typography>
+          )}
         </Grid>
       </Grid>
 
