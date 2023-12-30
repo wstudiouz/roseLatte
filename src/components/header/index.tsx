@@ -151,6 +151,7 @@ const Header = () => {
                   transition: "color 0.5s ease",
                   cursor: "pointer",
                   textDecoration: "none",
+                  display: { md: "block", xs: "none" },
                 }}
                 href="/flowers"
               >
@@ -214,6 +215,7 @@ const Header = () => {
                   transition: "color 0.5s ease",
                   cursor: "pointer",
                   textDecoration: "none",
+                  display: { md: "block", xs: "none" },
                 }}
               >
                 {translate("header.bar", lang)}
@@ -234,6 +236,7 @@ const Header = () => {
                       background: "none",
                       color: COLORS.WHITE,
                       fontSize: "25px",
+                      display: { md: "block", xs: "none" },
                     }}
                     value={lang}
                     onChange={handleLanguageChange}
@@ -262,6 +265,7 @@ const Header = () => {
                       width: "25px",
                       height: "30px",
                     },
+                    display: { md: "block", xs: "none" },
                   }}
                 >
                   <CardSvg active={openHeader} />

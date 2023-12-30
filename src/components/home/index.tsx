@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <Stack
       sx={{
-        height: { xs: "372px", sm: "100vh" },
+        height: { xs: "100vh" },
         display: "flex",
         color: "#fff",
-        flexDirection: "row",
+        flexDirection: { md: "row", xs: "column-reverse" },
         justifyContent: "space-between",
       }}
     >

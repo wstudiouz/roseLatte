@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Link from "next/link";
 import { useContext, useMemo, useState } from "react";
 import CustomImage from "../customComponent/CustomImage";
@@ -25,10 +25,12 @@ export default function Hero({
   const [show, setShow] = useState<boolean>(false);
   const cursor = useMemo(() => CursorManager.instance.cursor, []);
   const { lang } = useContext(HeaderContext);
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <Stack
       onMouseEnter={() => {
-        if (isHeaderActive == false) setShow(true);
+        if (isHeaderActive == false && md) setShow(true);
         cursor?.setImg(first ? "/images/butterfly.gif" : "/images/coffee.gif");
       }}
       onMouseLeave={() => {
@@ -36,13 +38,14 @@ export default function Hero({
         cursor?.removeImg();
       }}
       sx={{
-        width: isHeaderActive ? "25vw" : show ? "65vw" : "50vw",
+        width: { md: isHeaderActive ? "25vw" : show ? "65vw" : "50vw" },
         position: "relative",
         overflow: "hidden",
         alignItems: "center",
         justifyContent: "center",
         transition: `all 1s ease ${isHeaderActive ? 0 : 0.2}s`,
         padding: "35px",
+        height: "100vh",
       }}
     >
       <CustomImage
@@ -52,7 +55,7 @@ export default function Hero({
           position: "absolute",
           top: 0,
           left: 0,
-          zIndex: Z_INDEX.homeImage,
+          zIndex: { md: Z_INDEX.homeImage },
           transform: show ? "scale(1.1)" : "scale(1)",
           transition: "transform 1s ease .2s",
         }}
@@ -71,15 +74,16 @@ export default function Hero({
           bottom: 0,
           background: show ? "rgb(0 0 0 / 0%)" : "rgb(0 0 0 / 45%)",
           transition: "background 1s ease",
-          zIndex: Z_INDEX.homeOverlay,
+          zIndex: { md: Z_INDEX.homeOverlay, xs: 1 },
         }}
       ></Stack>
-      <Stack sx={{ zIndex: Z_INDEX.homeText }}>
+      <Stack sx={{ zIndex: { md: Z_INDEX.homeText, xs: 1 } }}>
         <Typography
           variant="h2"
           sx={{
-            fontSize: isHeaderActive ? "40px" : "80px",
+            fontSize: { md: isHeaderActive ? "40px" : "80px", xs: "50px" },
             transition: `font-size 1s ease ${isHeaderActive ? 0 : 0.2}s`,
+            whiteSpace: "nowrap",
             cursor: "default",
           }}
         >
@@ -100,8 +104,8 @@ export default function Hero({
             );
           }}
           sx={{
-            width: "160px",
-            height: "80px",
+            width: { md: "160px", xs: "120px" },
+            height: { md: "80px", xs: "60px" },
             margin: "0 auto",
             border: `2px solid ${COLORS.PINK}`,
             color: COLORS.WHITE,
@@ -110,6 +114,7 @@ export default function Hero({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginTop: { xs: "20px", md: 0 },
           }}
         >
           {translate("header.more", lang)}
@@ -120,7 +125,7 @@ export default function Hero({
           variant="H4Roboto"
           sx={{
             position: "absolute",
-            zIndex: Z_INDEX.homeText,
+            zIndex: { md: Z_INDEX.homeText, xs: 2 },
             bottom: 20,
             left: 20,
             fontSize: isHeaderActive ? "15px" : "25px",

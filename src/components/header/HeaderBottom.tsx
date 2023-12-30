@@ -32,7 +32,10 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
       <Stack
         sx={{
           position: "fixed",
-          width: active ? (router.pathname === "/" ? "50%" : "100%") : 0,
+          width: {
+            md: active ? (router.pathname === "/" ? "50%" : "100%") : 0,
+            xs: active ? "100%" : 0,
+          },
           top: "0",
           left: "50%",
           bottom: "0",
@@ -70,6 +73,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
               width: "90%",
               margin: "0 auto",
               lineHeight: "80%",
+              display: { md: "block", xs: "none" },
             }}
           >
             Rose{router.pathname === "/" && <br />} Latte
