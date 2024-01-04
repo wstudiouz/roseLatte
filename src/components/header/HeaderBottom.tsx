@@ -5,6 +5,7 @@ import { Stack, SxProps, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext } from "react";
+import LangSelect from "./langSelect";
 
 interface ComponentProps {
   active: boolean;
@@ -26,7 +27,11 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
     textDecoration: "none",
   };
   const router = useRouter();
-  const { lang } = useContext(HeaderContext);
+  const { lang, setLang } = useContext(HeaderContext);
+  const handleLanguageChange = (selectedLang: string) => {
+    localStorage.setItem("lang", selectedLang);
+    setLang(selectedLang);
+  };
   return (
     <>
       <Stack
@@ -138,6 +143,22 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
         >
           {translate("header.contact", lang)}
         </Typography>
+        <Stack sx={{ display: { xs: "flex", md: "none" }, flexDirection: "row", marginTop: "10px" }}>
+          <Typography
+            variant="h4"
+            sx={{ ...NavItems, margin: "0 5px 0 5px", fontFamily: "monospace", fontSize: 40 }}
+            onClick={() => handleLanguageChange("en")}
+          >
+            En
+          </Typography>
+          <Typography
+            variant="h4"
+            sx={{ ...NavItems, margin: "0 5px 0 5px", fontFamily: "monospace", fontSize: 40 }}
+            onClick={() => handleLanguageChange("cz")}
+          >
+            Cz
+          </Typography>
+        </Stack>
       </Stack>
     </>
   );

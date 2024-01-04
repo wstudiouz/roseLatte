@@ -1,4 +1,3 @@
-const { Stack, Typography } = require("@mui/material");
 import {
   ReactElement,
   useCallback,
@@ -12,11 +11,17 @@ import { COLORS, FlexBox, Z_INDEX } from "@/ts/Consts";
 import { HeaderContext } from "@/context/headerContext";
 import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
-import { Badge, Box, IconButton } from "@mui/material";
+import { Badge, Box, Stack, Typography } from "@mui/material";
 import translate from "@/ts/utils/translate";
 import { ShoppingBag } from "../cards";
+import LangSelect from "./langSelect";
+import CardBadge from "./cardBadge";
 
-const LogoSvg = ({ active }: { active: boolean }): ReactElement => {
+type SvgProps = {
+  active: boolean
+}
+
+const LogoSvg = ({ active }: SvgProps): ReactElement => {
   return (
     <svg
       width="186"
@@ -34,7 +39,7 @@ const LogoSvg = ({ active }: { active: boolean }): ReactElement => {
   );
 };
 
-const CardSvg = ({ active }: { active: boolean }): ReactElement => {
+const CardSvg = ({ active }: SvgProps): ReactElement => {
   return (
     <svg
       width="28"
@@ -101,13 +106,7 @@ const Header = () => {
     hidden: { opacity: 0, y: -15 },
   };
 
-  const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedValue = event.target.value;
-    localStorage.setItem("lang", selectedValue);
-    setLang(selectedValue);
-  };
+
   return (
     <>
       {isClient ? (
@@ -165,6 +164,8 @@ const Header = () => {
                   md: "relative",
                 },
                 right: { xs: 30, md: 0 },
+                flexDirection: "row-reverse",
+                alignItems: "center"
               }}
             >
               <Stack
@@ -195,6 +196,12 @@ const Header = () => {
                   },
                 }}
               ></Stack>
+              <CardBadge
+                setDrawerOpen={setDrawerOpen}
+                icon={<CardSvg active={openHeader} />}
+                badgeSx={{ display: { xs: "block", md: "none" }, marginRight: "10px" }}
+                position="left"
+              />
             </Stack>
             <Stack
               sx={{
@@ -227,49 +234,10 @@ const Header = () => {
                 }}
               >
                 {lang && (
-                  <Box
-                    component="select"
-                    sx={{
-                      textTransform: "uppercase",
-                      border: "none",
-                      outline: "none",
-                      background: "none",
-                      color: COLORS.WHITE,
-                      fontSize: "25px",
-                      display: { md: "block", xs: "none" },
-                    }}
-                    value={lang}
-                    onChange={handleLanguageChange}
-                    suppressHydrationWarning
-                  >
-                    <Box component="option" value="en" sx={{ color: "black" }}>
-                      En
-                    </Box>
-                    <Box component="option" value="cz" sx={{ color: "black" }}>
-                      Cz
-                    </Box>
-                  </Box>
+                  <LangSelect />
                 )}
-                <Badge
-                  onClick={() => setDrawerOpen(true)}
-                  badgeContent={cards.length}
-                  color="info"
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      right: -3,
-                      top: 13,
-                      border: `2px solid ${COLORS.WHITE}`,
-                      padding: "0 4px",
-                    },
-                    "& svg": {
-                      width: "25px",
-                      height: "30px",
-                    },
-                    display: { md: "block", xs: "none" },
-                  }}
-                >
-                  <CardSvg active={openHeader} />
-                </Badge>
+
+                <CardBadge setDrawerOpen={setDrawerOpen} icon={<CardSvg active={openHeader} />} />
               </Stack>
             </Stack>
           </Stack>

@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Avatar, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CustomImage from "../customComponent/CustomImage";
 import { COLORS } from "@/ts/Consts";
@@ -67,14 +67,10 @@ export default function Reviewer({
           transition: "margin 0.3s ease",
         }}
       >
-        <CustomImage
-          src={bgImg}
-          sx={{
-            width: "75px",
-            height: "75px",
-            "& img": { borderRadius: "50%" },
-          }}
-        />
+        <Avatar src={bgImg} sx={{
+          width: "75px",
+          height: "75px"
+        }} />
         <Typography
           variant="h4"
           sx={{
