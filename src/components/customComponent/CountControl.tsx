@@ -7,7 +7,7 @@ type CountProps = {
 export function Decrement() {
   return (
     <Typography
-      variant="h4"
+      variant="h2"
       sx={{
         color: COLORS.WHITE,
         margin: "0 3px",
@@ -22,7 +22,7 @@ export function Decrement() {
 export function Increment() {
   return (
     <Typography
-      variant="h4"
+      variant="h2"
       sx={{
         color: COLORS.WHITE,
         margin: "0 3px",
@@ -37,7 +37,7 @@ export function Increment() {
 export function ViewCount({ count }: CountProps) {
   return (
     <Typography
-      variant="h4"
+      variant="h2"
       sx={{
         color: COLORS.WHITE,
         margin: "0 3px",

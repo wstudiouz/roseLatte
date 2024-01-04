@@ -47,9 +47,8 @@ export default function FormComponent({ title, bg }: ComponentProps) {
         md={6}
         sx={{
           padding: {
-            xs: "10px 20px",
-            sm: "20px 30px",
-            md: "30px 40px",
+            xs: "20px 30px",
+            sm: "30px 40px",
             lg: "100px 75px",
           },
         }}

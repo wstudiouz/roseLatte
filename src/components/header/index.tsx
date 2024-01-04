@@ -11,7 +11,7 @@ import { COLORS, FlexBox, Z_INDEX } from "@/ts/Consts";
 import { HeaderContext } from "@/context/headerContext";
 import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
-import { Badge, Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import translate from "@/ts/utils/translate";
 import { ShoppingBag } from "../cards";
 import LangSelect from "./langSelect";

@@ -26,7 +26,7 @@ export default function BeautifulCard({ right, data }: ComponentProps) {
         width: "100%",
         height: "auto",
         minHeight: { md: "750px" },
-        padding: { xs: "30px 15px", md: "100px 124px" },
+        padding: { xs: "40px 25px", md: "100px 124px" },
         background: COLORS.WHITE_BACKGROUNDW,
         position: "relative",
       }}
@@ -47,7 +47,7 @@ export default function BeautifulCard({ right, data }: ComponentProps) {
           flexDirection: { xs: "column", md: "row" },
         }}
       >
-        <Grid item xs={12} sm={9} md={5.6}>
+        <Grid item xs={11} sm={9} md={5.6} sx={{ width: "100%", margin: { xs: "0 auto", md: "0" } }}>
           <Stack sx={{ width: "100%" }}>
             {data?.img?.data?.attributes?.url && (
               <CustomImage
@@ -62,13 +62,12 @@ export default function BeautifulCard({ right, data }: ComponentProps) {
         </Grid>
         <Grid
           item
-          xs={12}
-          sm={10}
+          xs={11}
           md={6}
           sx={{
             position: "relative",
             paddingLeft: { md: "30px" },
-            marginTop: { xs: "30px", md: 0 },
+            margin: { xs: "30px auto 0 auto", md: "0" }
           }}
         >
           {data && title && (

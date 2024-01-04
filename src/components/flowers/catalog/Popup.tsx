@@ -67,12 +67,12 @@ export default function Popup({ setPopup, item }: ComponentProps) {
   const title =
     item &&
     item?.attributes?.[
-      `title_${lang}` as keyof FlowerCatalogueFlowersDataInnerAttributes
+    `title_${lang}` as keyof FlowerCatalogueFlowersDataInnerAttributes
     ];
   const desc =
     item &&
     item?.attributes?.[
-      `desc_${lang}` as keyof FlowerCatalogueFlowersDataInnerAttributes
+    `desc_${lang}` as keyof FlowerCatalogueFlowersDataInnerAttributes
     ];
 
   const handleAdd = () => {
@@ -96,6 +96,7 @@ export default function Popup({ setPopup, item }: ComponentProps) {
           ]);
         }
       }
+      setPopup(0)
     }
   };
   return (
