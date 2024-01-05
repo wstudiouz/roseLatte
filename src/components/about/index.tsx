@@ -31,7 +31,7 @@ export default function About() {
     <Stack>
       {aboutPage && aboutPage.attributes?.Hero && (
         <Hero
-          bgImg="/images/abouthero.png"
+          bgImg="/images/abouthero.jpg"
           right
           data={aboutPage.attributes.Hero}
         />
