@@ -42,7 +42,7 @@ export default function Reviewer({
           .map((_, ind) => (
             <Grid item xs={2} key={ind}>
               <CustomImage
-                src="/stars.svg"
+                src="/images/star.svg"
                 sx={{ width: "25px", height: "25px", margin: "0 auto" }}
               />
             </Grid>
