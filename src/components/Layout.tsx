@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Stack
         component={"main"}
         sx={{
-          minHeight: "100vh",
+          minHeight: "100dvh",
           background: COLORS.BG,
         }}
       >

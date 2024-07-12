@@ -1,3 +1,4 @@
+"use client";
 import {
   ReactElement,
   useCallback,
@@ -57,6 +58,8 @@ const CardSvg = ({ active }: SvgProps): ReactElement => {
   );
 };
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
 const Header = () => {
   const { openHeader, setOpenHeader, lang, setLang, cards } =
     useContext(HeaderContext);
@@ -96,8 +99,9 @@ const Header = () => {
     }
   }, [scrollY]);
 
-  useLayoutEffect(() => {
-    return scrollY.onChange(() => update());
+  useIsomorphicLayoutEffect(() => {
+    const unsubscribe = scrollY.on("change", update);
+    return () => unsubscribe(); // Cleanup the subscription
   }, [scrollY, update]);
 
   const variants = {

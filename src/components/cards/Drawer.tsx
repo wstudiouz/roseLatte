@@ -57,9 +57,8 @@ const CardsDrawer = ({ drawerOpen, setDrawerOpen, cards, setCards }: Props) => {
   const onSubmit = async (data: FormValues) => {
     let telegramMessage = `New client\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nMessage: ${data.message}\n`;
     cards.map((i) => {
-      telegramMessage += `\n<b>${i.title_en} - count(${i.count}) - size(${
-        i.prices?.find((e) => e.id == i.priceId)?.size
-      })</b>`;
+      telegramMessage += `\n<b>${i.title_en} - count(${i.count}) - size(${i.prices?.find((e) => e.id == i.priceId)?.size
+        })</b>`;
     });
     telegramMessage += `\n\nall price: ${allPrice()}$`;
     localStorage.setItem("cards", JSON.stringify([]));
@@ -217,7 +216,7 @@ const CardsDrawer = ({ drawerOpen, setDrawerOpen, cards, setCards }: Props) => {
             }}
           >
             <Typography>{translate("cards.empty", lang)}</Typography>
-            <Typography onClick={() => setDrawerOpen(false)}>
+            <Typography onClick={() => setDrawerOpen(false)} sx={{ cursor: "pointer" }}>
               {translate("cards.close", lang)}
             </Typography>
           </Stack>

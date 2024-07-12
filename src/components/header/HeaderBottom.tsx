@@ -100,7 +100,7 @@ export default function HeaderBottom({ active, setActive }: ComponentProps) {
           msFlexPack: "center",
           justifyContent: "center",
           width: "100vw",
-          height: "100vh",
+          height: "100dvh",
           position: "fixed",
           zIndex: Z_INDEX.botttomHeaderItem,
           top: "0",
