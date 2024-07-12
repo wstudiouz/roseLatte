@@ -4,7 +4,7 @@ import { Box, Stack, SxProps, Typography } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 const LangSelect = (): ReactElement => {
-    const { lang, setLang } = useContext(HeaderContext)
+    const { lang, setLang, openHeader } = useContext(HeaderContext)
     const handleLanguageChange = (
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
@@ -21,7 +21,7 @@ const LangSelect = (): ReactElement => {
                 border: "none",
                 outline: "none",
                 background: "none",
-                color: COLORS.WHITE,
+                color: openHeader ? COLORS.BLACK : COLORS.WHITE,
                 fontSize: "25px",
                 display: { md: "block", xs: "none" },
             }}
