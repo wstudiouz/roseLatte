@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { CursorManager } from "@/ts/CursorManager";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import Footer from "./footer";
 import { COLORS } from "@/ts/Consts";
+import Loading from "./loading";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   useEffect(() => {
     const cursor = CursorManager.instance.cursor;
@@ -23,6 +25,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    async function set() {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (children) {
+        setLoading(false);
+      } else {
+        set();
+      }
+    }
+    set();
+  }, [children]);
+
+
   return (
     <Stack
       component={motion.div}
@@ -37,11 +52,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Stack
         component={"main"}
         sx={{
-          minHeight: "100dvh",
+          minHeight: "100svh",
           background: COLORS.BG,
         }}
       >
         {children}
+        {
+          loading && <Loading />
+        }
       </Stack>
       {router.pathname !== "/" && <Footer />}
     </Stack>

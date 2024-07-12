@@ -26,7 +26,7 @@ export default function TopHero({ bgImg, right, data }: HeroProps) {
     <Stack
       sx={{
         width: "100%",
-        height: "100dvh",
+        height: "100svh",
         minHeight: "750px",
         padding: { xs: "20px 25px", lg: "70px 75px" },
         display: "flex",

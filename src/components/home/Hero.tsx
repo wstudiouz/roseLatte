@@ -45,7 +45,7 @@ export default function Hero({
         justifyContent: "center",
         transition: `all 1s ease ${isHeaderActive ? 0 : 0.2}s`,
         padding: "35px",
-        height: "100dvh",
+        height: "100svh",
       }}
     >
       <CustomImage

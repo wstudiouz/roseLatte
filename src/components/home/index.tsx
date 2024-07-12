@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <Stack
       sx={{
-        height: { xs: "100dvh" },
+        height: { xs: "100svh" },
         display: "flex",
         color: "#fff",
         flexDirection: { md: "row", xs: "column-reverse" },
