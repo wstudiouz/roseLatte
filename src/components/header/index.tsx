@@ -235,6 +235,7 @@ const Header = () => {
                 sx={{
                   ...FlexBox,
                   flexDirection: "row",
+                  alignItems: "center"
                 }}
               >
                 {lang && (

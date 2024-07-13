@@ -9,6 +9,7 @@ import createEmotionCache from "../config/createEmotionCache";
 import Layout from "@/components/Layout";
 import "../assets/scss/mouseFollower.scss";
 import "../components/loading/styles.css";
+import "../components/header/s.css";
 import { HeaderProvider } from "@/context/headerContext";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";

@@ -1,40 +1,26 @@
 import { HeaderContext } from "@/context/headerContext";
-import { COLORS } from "@/ts/Consts";
-import { Box, Stack, SxProps, Typography } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useState } from "react";
+import CustomSelect from "./select";
+import { Box } from "@mui/material";
 
 const LangSelect = (): ReactElement => {
-    const { lang, setLang, openHeader } = useContext(HeaderContext)
-    const handleLanguageChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        const selectedValue = event.target.value;
-        localStorage.setItem("lang", selectedValue);
-        setLang(selectedValue);
-    };
+    const { setLang } = useContext(HeaderContext);
+
+    const [options] = useState(["en", "cz"])
+
+    const handleChangeSelect = (e: string) => {
+        localStorage.setItem("lang", e);
+        setLang(e);
+    }
 
     return (
-        <Box
-            component="select"
-            sx={{
-                textTransform: "uppercase",
-                border: "none",
-                outline: "none",
-                background: "none",
-                color: openHeader ? COLORS.BLACK : COLORS.WHITE,
-                fontSize: "25px",
-                display: { md: "block", xs: "none" },
-            }}
-            value={lang}
-            onChange={handleLanguageChange}
-            suppressHydrationWarning
-        >
-            <Box component="option" value="en" sx={{ color: "black" }}>
-                En
-            </Box>
-            <Box component="option" value="cz" sx={{ color: "black" }}>
-                Cz
-            </Box>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <CustomSelect
+                options={options}
+                placeHolder='Lang'
+                onChange={(e: any) => handleChangeSelect(e)}
+            />
+
         </Box>
     )
 }
